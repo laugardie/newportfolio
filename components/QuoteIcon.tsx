@@ -1,8 +1,8 @@
-type QuoteProps = {
-  className: string;
+type QuoteIconProps = {
+  className?: string;
 };
 
-export default function Quote(props: QuoteProps) {
+export default function Quote(props: QuoteIconProps) {
   return (
     <svg
       className={`fill-accent w-8 h-8 ${props.className}`}

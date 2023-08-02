@@ -1,4 +1,4 @@
-import Quote from "@/components/Quote";
+import Quote from "@/components/design system/Quote";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -41,11 +41,10 @@ export default function About() {
           </a>{" "}
           project.
         </p>
-        <p className="relative font-source text-3xl font-bold italic leading-10 mt-4">
-          <Quote className="absolute -left-14" />A product designer with over 5
-          years of experience working across design systems, user experience,
-          and accessibility.
-        </p>
+        <Quote>
+          A product designer with over 5 years of experience working across
+          design systems, user experience, and accessibility.
+        </Quote>
         <Image
           className="my-4"
           src={"/assets/laura-flores.jpeg"}
