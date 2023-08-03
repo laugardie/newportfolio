@@ -51,6 +51,8 @@ export default function Avatars() {
           body parts shared a uniform size. Take a look at some examples in the
           images below for a glimpse into the process.
         </Paragraph>
+      </SectionSm>
+      <SectionMd>
         <figure className="mb-6">
           <Image
             src="/assets/avatarsblog1.png"
@@ -62,6 +64,8 @@ export default function Avatars() {
           />
           <Caption>Doodles exploration</Caption>
         </figure>
+      </SectionMd>
+      <SectionSm>
         <Paragraph>
           Once I felt satisfied with the diverse range of variations, I captured
           a photograph of all the doodles and then proceeded to vectorise them
@@ -71,6 +75,8 @@ export default function Avatars() {
           Here are the final vectorised expressions, hairstyles, and clothing
           options:
         </Paragraph>
+      </SectionSm>
+      <SectionMd>
         <figure className="mb-6">
           <Image
             src="/assets/avatarsblog2.png"
@@ -84,6 +90,8 @@ export default function Avatars() {
             Final Vectorised Expressions, Hairstyles, and Clothing
           </Caption>
         </figure>
+      </SectionMd>
+      <SectionSm>
         <Paragraph>
           As a final step, I transferred these elements into Figma, enabling the
           creation of different variants. Now, you have the freedom to combine
