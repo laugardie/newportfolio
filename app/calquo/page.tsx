@@ -6,13 +6,13 @@ import H1 from "@/components/design system/H1";
 import Quote from "@/components/design system/Quote";
 import Title from "@/components/design system/Title";
 import Image from "next/image";
-import SectionNarrow from "@/components/design system/SectionNarrow";
-import SectionMedium from "@/components/design system/SectionMedium";
+import SectionSm from "@/components/design system/SectionSm";
+import SectionMd from "@/components/design system/SectionMd";
 
 export default function Calquo() {
   return (
     <div className="relative">
-      <div className="w-full h-650 relative">
+      <div className="w-full h-864 relative">
         <Image
           src="/assets/calquo.png"
           fill
@@ -21,7 +21,7 @@ export default function Calquo() {
         />
       </div>
       <article>
-        <SectionNarrow className="relative pt-24">
+        <SectionSm className="relative pt-24">
           <aside className="absolute left-full pl-24">
             <dl className="mt-[152px]">
               <MetaProps tag="Role" description="Product Designer" />
@@ -83,8 +83,8 @@ export default function Calquo() {
             </BulletedListItem>
             <BulletedListItem>Visualization of the form.</BulletedListItem>
           </BulletedList>
-        </SectionNarrow>
-        <SectionMedium>
+        </SectionSm>
+        <SectionMd>
           <div className="relative w-full h-[280px] mt-12 mb-6">
             <Image
               src={"/assets/calquoblog1.png"}
@@ -141,7 +141,7 @@ export default function Calquo() {
               style={{ objectFit: "cover" }}
             />
           </div>
-        </SectionMedium>
+        </SectionMd>
       </article>
     </div>
   );

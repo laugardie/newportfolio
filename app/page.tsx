@@ -23,63 +23,63 @@ export default function Home() {
       <div className="grid grid-cols-2 gap-16 gap-y-24">
         <ProjectCover
           src="/assets/gumroad-cover.png"
-          href="/calquo"
+          href="/gumroad"
           name="Gumroad"
           role="Product Design"
           alt="Gumroad logo"
         />
         <ProjectCover
           src="/assets/buidlguidl-cover.png"
-          href="/calquo"
+          href="/buidlguidl"
           name="BuidlGuidl Ethereum"
           role="Web Design"
           alt="Buidlguidl logo"
         />
         <ProjectCover
           src="/assets/theatremode-cover.png"
-          href="/calquo"
+          href="/theatremode"
           name="Theatre mode"
           role="Feature Design"
           alt=""
         />
         <ProjectCover
           src="/assets/nectar-cover.png"
-          href="/calquo"
+          href="/nectar"
           name="Nectar"
           role="Design System"
           alt="Nectar logo"
         />
         <ProjectCover
           src="/assets/avatars-cover.png"
-          href="/calquo"
+          href="/avatars"
           name="Avatars"
           role="Illustration System"
           alt="Hand drawn illustration of a girl smiling"
         />
         <ProjectCover
           src="/assets/inbolt-cover.png"
-          href="/calquo"
+          href="/inbolt"
           name="Inbolt"
           role="UI Design"
           alt="A screenshot of the inbolt app dashboard"
         />
         <ProjectCover
           src="/assets/lexicon-cover.png"
-          href="/calquo"
+          href="/lexicon"
           name="Lexicon"
           role="Design System"
           alt="Lexicon logo"
         />
         <ProjectCover
           src="/assets/whatsapp-cover.png"
-          href="/calquo"
+          href="/whatsapp"
           name="Whatsapp polls"
           role="Feature Design"
           alt="Mobile showing whatsapp polls screen"
         />
         <ProjectCover
           src="/assets/goeat-cover.png"
-          href="/calquo"
+          href="/goeat"
           name="Goeat"
           role="UX/UI Design"
           alt="Hand holding a phone with goeat app"

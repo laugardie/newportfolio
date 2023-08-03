@@ -18,7 +18,7 @@ module.exports = {
         source: ['"Source Sans Pro"', "ui-sans-serif", "system-ui"],
       },
       height: {
-        650: "40rem",
+        864: "54rem",
       },
     },
   },
