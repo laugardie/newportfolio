@@ -1,20 +1,26 @@
+import BulletedList from "@/components/design system/BulletedList";
+import BulletedListItem from "@/components/design system/BulletedListItem";
+import H1 from "@/components/design system/H1";
+import Paragraph from "@/components/design system/Paragraph";
 import Quote from "@/components/design system/Quote";
+import SectionMd from "@/components/design system/SectionMd";
+import SectionSm from "@/components/design system/SectionSm";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function About() {
   return (
     <>
-      <div className="container mx-auto box-border max-w-3xl flex flex-col gap-8">
-        <h1 className="font-extrabold text-6xl mt-40">
+      <SectionSm className="pt-24">
+        <h1 className="font-extrabold text-6xl mt-40 pb-8">
           Passionate about pixels and experiences
         </h1>
-        <p className="font-source text-xl leading-7">
+        <Paragraph>
           Hola! I{"'"} m Laura, a design enthusiast on a mission to tackle real
           problems and create captivating, functional, and user-friendly
           experiences.
-        </p>
-        <p className="font-source text-xl leading-7">
+        </Paragraph>
+        <Paragraph>
           Currently, I{"'"}m rocking the remote life as a freelance Product
           Designer. Previously, I had the privilege of being part of the
           talented team at{" "}
@@ -40,19 +46,20 @@ export default function About() {
             Lexicon
           </a>{" "}
           project.
-        </p>
+        </Paragraph>
         <Quote>
           A product designer with over 5 years of experience working across
           design systems, user experience, and accessibility.
         </Quote>
         <Image
-          className="my-4"
+          className="my-4 pb-8"
           src={"/assets/laura-flores.jpeg"}
           alt={"a profile picture of Laura"}
           width={739}
           height={492}
         />
-        <p className="font-source text-xl leading-7">
+        <Paragraph>
+          {" "}
           My journey into design started from a completely different path—I
           spent four years as a Primary School Teacher. However, fueled by
           curiosity I ventured into the digital world to explore the realm of
@@ -60,18 +67,18 @@ export default function About() {
           professional growth by enrolling in Ironhack{"'"}s UX/UI Bootcamp,
           propelling my career forward and fostering an environment of
           continuous learning.
-        </p>
-        <p className="font-source text-xl leading-7">
+        </Paragraph>
+        <Paragraph>
           While design is my primary focus, I also enjoy challenging myself in
           other areas, including expanding my knowledge in front-end
           development.
-        </p>
-        <p className="font-source text-xl leading-7">
+        </Paragraph>
+        <Paragraph>
           Beyond the tech world, I{"'"}m passionate about CrossFit, yoga, cats,
           and whipping up culinary wonders in the kitchen. Food is not just
           sustenance for me; it{"'"}s my second language.
-        </p>
-        <p className="font-source text-xl leading-7 mb-10">
+        </Paragraph>
+        <Paragraph>
           Feel free to connect with me on{" "}
           <a
             className="underline hover:text-accent"
@@ -89,42 +96,42 @@ export default function About() {
           </Link>
           . Whether it{"'"}s about exciting opportunities or even just a
           friendly hello!! 😊
-        </p>
-        <h2 className="font-extrabold text-3xl">Fun facts about me</h2>
-        <ul className="list-disc list-outside marker marker:flex pl-4 flex flex-col gap-4 font-source text-xl leading-7 mb-12">
-          <li>
+        </Paragraph>
+        <H1>Fun facts about me</H1>
+        <BulletedList>
+          <BulletedListItem>
             Not only am I a designer, but I{"'"}m also a certified yoga teacher,
             spreading mindfulness and flexibility both on and off the mat.
-          </li>
-          <li>
+          </BulletedListItem>
+          <BulletedListItem>
             I{"'"}ve had the incredible opportunity to call several vibrant
             cities home, including New York, Dublin, Madrid, and my beloved
             Sevilla, each leaving an indelible mark on my journey.
-          </li>
-          <li>
+          </BulletedListItem>
+          <BulletedListItem>
             I{"'"}m completely obsessed with perfecting the art of homemade
-            pizza.{" "}
-          </li>
-          <li>
+            pizza.
+          </BulletedListItem>
+          <BulletedListItem>
             I{"'"}m a true DIY enthusiast, always eager to embark on creative
             projects and bring my imagination to life.
-          </li>
-          <li>
+          </BulletedListItem>
+          <BulletedListItem>
             Board game aficionado alert! After playing a new board game, I can
             {"'"}t resist the temptation to add it to my ever-growing
             collection.
-          </li>
-          <li>
+          </BulletedListItem>
+          <BulletedListItem>
             Music is my ultimate jam, and I can{"'"}t get enough of talented
             producers like Flume, Pluko, Vance Joy, Benny Blanco, PLÜM, and San
             Holo. Their mind-blowing melodies never fail to captivate my ears
             and ignite my creative fire.
-          </li>
-        </ul>
-      </div>
-      <div className="grid grid-rows-2 gap-2 max-w-5xl mx-auto">
+          </BulletedListItem>
+        </BulletedList>
+      </SectionSm>
+      <SectionMd className="grid grid-rows-2 gap-2 max-w-4xl mx-auto pt-8">
         <div className="grid grid-cols-3 gap-2 w-124">
-          <div className="h-80 relative">
+          <div className="h-96 relative">
             <Image
               src={"/assets/feet.png"}
               alt={"Handstand feet"}
@@ -132,7 +139,7 @@ export default function About() {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div className="h-80 relative">
+          <div className="h-96 relative">
             <Image
               src={"/assets/diy.png"}
               alt={"crafts"}
@@ -140,7 +147,7 @@ export default function About() {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div className="h-80 relative">
+          <div className="h-96 relative">
             <Image
               src={"/assets/landscape.png"}
               alt={"clouds landscape"}
@@ -150,7 +157,7 @@ export default function About() {
           </div>
         </div>
         <div className="grid grid-cols-6 gap-2 w-124">
-          <div className="h-80 col-span-1 relative">
+          <div className="h-96 col-span-1 relative">
             <Image
               src={"/assets/trees.png"}
               alt={"palm trees"}
@@ -158,7 +165,7 @@ export default function About() {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div className="h-80 col-span-2 relative">
+          <div className="h-96 col-span-2 relative">
             <Image
               src={"/assets/pizza.png"}
               alt={"pizza sign"}
@@ -166,7 +173,7 @@ export default function About() {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div className="h-80 col-span-3 relative">
+          <div className="h-96 col-span-3 relative">
             <Image
               src={"/assets/jenga.png"}
               alt={"jenga"}
@@ -175,7 +182,7 @@ export default function About() {
             />
           </div>
         </div>
-      </div>
+      </SectionMd>
     </>
   );
 }
