@@ -1,9 +1,8 @@
 import Scribble2 from "@/components/Scribble2";
-import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="flex flex-col gap-12 container mx-auto px-72 mb-32">
+    <div className="flex flex-col gap-12 container mx-auto  mb-32">
       <div className="flex items-end justify-start pt-32">
         <div className="font-inter font-extrabold text-8xl">
           Let{`'`}s work
@@ -14,9 +13,7 @@ export default function Footer() {
       </div>
       <div className="flex items-start justify-between">
         <div>
-          Designed and coded with coffee and while holding my newborn son.
-          <br></br>
-          ©2023
+          Designed and coded with coffee and while holding my newborn son. ©2023
         </div>
         <div className="flex space-x-4">
           <a
