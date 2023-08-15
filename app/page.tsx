@@ -37,7 +37,6 @@ export default function Home() {
           name="Daylight calculator"
           role="Product Design"
           alt="A screenshot of the daylight calculator app"
-          className="cursor-pointer"
         />
         <ProjectCover
           src="/assets/buidlguidl-cover.png"
@@ -87,7 +86,6 @@ export default function Home() {
           name="Calquo"
           role="Product Design"
           alt="A screenshot of the calquo app dashboard"
-          className="cursor-pointer"
         />
         <ProjectCover
           src="/assets/goeat-cover.png"
