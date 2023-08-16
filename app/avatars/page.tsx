@@ -23,7 +23,7 @@ export default function Avatars() {
         <aside className="absolute left-full pl-24">
           <dl className="mt-[152px]">
             <MetaProps tag="Role" description="Designer" />
-            <MetaProps tag="Industry" description="Illustration System" />
+            <MetaProps tag="Project Type" description="Illustration System" />
             <MetaProps tag="Date" description="March 19th, 2021" />
             <MetaProps tag="Duration" description="1 day" />
           </dl>

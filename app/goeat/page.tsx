@@ -29,7 +29,7 @@ export default function Goeat() {
         <aside className="absolute left-full pl-24">
           <dl className="mt-[152px]">
             <MetaProps tag="Role" description="Designer" />
-            <MetaProps tag="Industry" description="Travel" />
+            <MetaProps tag="Project Type" description="Travel app" />
             <MetaProps tag="Date" description="September 9th, 2019" />
             <MetaProps tag="Duration" description="10 days" />
           </dl>

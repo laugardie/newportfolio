@@ -25,7 +25,7 @@ export default function Calquo() {
           <aside className="absolute left-full pl-24">
             <dl className="mt-[152px]">
               <MetaProps tag="Role" description="Product Designer" />
-              <MetaProps tag="Industry" description="B2B, Sass" />
+              <MetaProps tag="Project Type" description="B2B, SaaS" />
               <MetaProps tag="Date" description="March 21st, 2021" />
               <MetaProps tag="Duration" description="2 days" />
             </dl>

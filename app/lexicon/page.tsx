@@ -23,7 +23,7 @@ export default function Lexicon() {
         <aside className="absolute left-full pl-24">
           <dl className="mt-[152px]">
             <MetaProps tag="Role" description="Product Designer" />
-            <MetaProps tag="Industry" description="Desing System" />
+            <MetaProps tag="Project Type" description="Desing System" />
             <MetaProps tag="Date" description="October, 2019" />
             <MetaProps tag="Duration" description="9 months" />
           </dl>
