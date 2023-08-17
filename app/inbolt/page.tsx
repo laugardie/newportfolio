@@ -57,7 +57,7 @@ export default function Inbolt() {
             style={{ objectFit: "contain", width: "100%", height: "auto" }}
             sizes="100vw"
           />
-          <Caption>Inbolt dashboard</Caption>
+          <Caption>Inbolt</Caption>
         </figure>
       </SectionLg>
     </div>
