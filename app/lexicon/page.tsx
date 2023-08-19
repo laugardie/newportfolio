@@ -34,6 +34,7 @@ export default function Lexicon() {
           <a
             className="underline hover:text-accent"
             href="https://liferay.design/lexicon/"
+            target="_blank"
           >
             Lexicon Design System
           </a>
