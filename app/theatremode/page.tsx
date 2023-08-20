@@ -242,6 +242,22 @@ export default function Theatremode() {
           as a testament to the power of user-centric design in making work not
           just efficient, but enjoyable.
         </Paragraph>
+        <Paragraph className="text-lightGray">
+          * Photos by{" "}
+          <a
+            className=" hover:text-accent underline"
+            href="https://unsplash.com/en/@mkmasdos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+          >
+            MK +2
+          </a>{" "}
+          at{" "}
+          <a
+            className=" hover:text-accent underline"
+            href="https://unsplash.com/ en/photos/7R1eUOlI24M?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+          >
+            Unsplash
+          </a>
+        </Paragraph>
       </SectionSm>
     </div>
   );

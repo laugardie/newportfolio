@@ -1,11 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import Blinks from "@/components/Blinks";
 import ProjectCover from "@/components/ProjectCover";
 import Scribble from "@/components/Scribble";
 import IconPlus from "@/components/icons/IconPlus";
 import Image from "next/image";
 import Link from "next/link";
+import ProjectFilter from "./ProjectFilter";
+import type { ProjectFilterType } from "@/types";
 
 export default function Home() {
+  const [filter, setFilter] = useState<ProjectFilterType>("all");
+
   return (
     <div className="container mx-auto max-w-8xl pt-52">
       <div className="font-extrabold text-8xl -mb-1">
@@ -16,13 +23,14 @@ export default function Home() {
         experiences for people.
       </div>
       <Scribble />
-      <div className="font-source text-xl pt-4 mb-20">
+      <div className="font-source text-xl pt-4 mb-14">
         <b>Laura</b> - Product Designer.<br></br> Currently freelancing.
         Previously{" "}
-        <a className="underline" href="https://gumroad.com">
+        <a className="underline hover:text-accent" href="https://gumroad.com">
           @Gumroad.
         </a>
       </div>
+      <ProjectFilter filter={filter} setFilter={setFilter} />
       <div className="grid grid-cols-4 gap-16 gap-y-24">
         <ProjectCover
           src="/assets/gumroad-cover.png"
