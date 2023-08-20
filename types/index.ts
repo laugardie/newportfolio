@@ -4,3 +4,12 @@ export type ProjectFilterType =
   | "illustration"
   | "product"
   | "uxui";
+
+export type ProjectDescriptor = {
+  src: string;
+  href: string;
+  name: string;
+  role: string;
+  alt: string;
+  tag: ProjectFilterType[];
+};

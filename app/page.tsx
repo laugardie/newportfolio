@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProjectFilter from "./ProjectFilter";
 import type { ProjectFilterType } from "@/types";
+import { projects } from "@/utils/projects";
 
 export default function Home() {
   const [filter, setFilter] = useState<ProjectFilterType>("all");
@@ -32,83 +33,11 @@ export default function Home() {
       </div>
       <ProjectFilter filter={filter} setFilter={setFilter} />
       <div className="grid grid-cols-4 gap-16 gap-y-24">
-        <ProjectCover
-          src="/assets/gumroad-cover.png"
-          href="/gumroad"
-          name="Gumroad"
-          role="Product Design"
-          alt="Gumroad logo"
-        />
-        <ProjectCover
-          src="/assets/daylight-cover.png"
-          href="/calquo"
-          name="Daylight calculator"
-          role="Product Design"
-          alt="A screenshot of the daylight calculator app"
-        />
-        <ProjectCover
-          src="/assets/buidlguidl-cover.png"
-          href="/buidlguidl"
-          name="BuidlGuidl Ethereum"
-          role="Web Design"
-          alt="Buidlguidl logo"
-        />
-        <ProjectCover
-          src="/assets/nectar-cover.png"
-          href="/nectar"
-          name="Nectar"
-          role="Design System"
-          alt="Nectar logo"
-        />
-        <ProjectCover
-          src="/assets/theatremode-cover.png"
-          href="/theatremode"
-          name="Theatre mode"
-          role="Feature Design"
-          alt=""
-        />
-        <ProjectCover
-          src="/assets/avatars-cover.png"
-          href="/avatars"
-          name="Avatars"
-          role="Illustration System"
-          alt="Hand drawn illustration of a girl smiling"
-        />
-        <ProjectCover
-          src="/assets/lexicon-cover.png"
-          href="/lexicon"
-          name="Lexicon"
-          role="Design System"
-          alt="Lexicon logo"
-        />
-        <ProjectCover
-          src="/assets/inbolt-cover.png"
-          href="/inbolt"
-          name="Inbolt"
-          role="UI Design"
-          alt="A screenshot of the inbolt app dashboard"
-        />
-        <ProjectCover
-          src="/assets/calquo-cover.png"
-          href="/calquo"
-          name="Calquo"
-          role="Product Design"
-          alt="A screenshot of the calquo app dashboard"
-        />
-        <ProjectCover
-          src="/assets/goeat-cover.png"
-          href="/goeat"
-          name="Goeat"
-          role="UX/UI Design"
-          alt="Hand holding a phone with goeat app"
-        />
-        <ProjectCover
-          src="/assets/whatsapp-cover.png"
-          href="/whatsapp"
-          name="Whatsapp polls"
-          role="Feature Design"
-          alt="Mobile showing whatsapp polls screen"
-        />
+        {projects
+          .filter((project) => filter === "all" || project.tag.includes(filter))
+          .map((project) => {
+            return <ProjectCover key={project.name} {...project} />;
+          })}
         <div>
           <Link
             className="text-center cursor-pointer flex flex-col"
