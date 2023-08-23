@@ -20,6 +20,12 @@ module.exports = {
       height: {
         864: "54rem",
       },
+      screens: {
+        "3xl": "2200px",
+      },
+      maxWidth: {
+        "screen-4xl": "128rem",
+      },
     },
   },
   plugins: [],

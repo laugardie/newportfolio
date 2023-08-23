@@ -15,7 +15,7 @@ export default function Home() {
   const [filter, setFilter] = useState<ProjectFilterType>("all");
 
   return (
-    <div className="container mx-auto max-w-8xl pt-52">
+    <div className="container mx-auto pt-52 3xl:max-w-screen-4xl lg:max-w-screen-2xl md:max-w-screen-md max-w-sm">
       <div className="font-extrabold text-8xl -mb-1">
         <div className="flex flex-start">
           <span>Crafting fresh</span>
@@ -24,7 +24,7 @@ export default function Home() {
         experiences for people.
       </div>
       <Scribble />
-      <div className="font-source text-xl pt-4 mb-14">
+      <div className="font-source text-xl pt-4 mb-28">
         <b>Laura</b> - Product Designer.<br></br> Currently freelancing.
         Previously{" "}
         <a className="underline hover:text-accent" href="https://gumroad.com">
@@ -32,7 +32,7 @@ export default function Home() {
         </a>
       </div>
       <ProjectFilter filter={filter} setFilter={setFilter} />
-      <div className="grid grid-cols-4 gap-16 gap-y-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-16 gap-y-24">
         {projects
           .filter((project) => filter === "all" || project.tag.includes(filter))
           .map((project) => {

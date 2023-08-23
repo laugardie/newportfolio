@@ -8,7 +8,7 @@ type TabProps = {
 const Tab = ({ children, className, isSelected, filterByTab }: TabProps) => (
   <button
     className={`
-      font-source text-xl font-normal hover:text-accent mr-6 ml-6
+      font-source text-xl font-normal hover:text-accent
       ${className ?? ""}
       ${isSelected ? "text-accent" : ""}
     `}

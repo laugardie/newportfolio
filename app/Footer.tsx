@@ -2,7 +2,7 @@ import Scribble2 from "@/components/Scribble2";
 
 export default function Footer() {
   return (
-    <div className="flex flex-col gap-12 container mx-auto  mb-32">
+    <div className="flex flex-col gap-12 mx-auto mb-32 container 3xl:max-w-screen-4xl lg:max-w-screen-2xl md:max-w-screen-md max-w-sm">
       <div className="flex items-end justify-start pt-32">
         <div className="font-inter font-extrabold text-8xl">
           Let{`'`}s work

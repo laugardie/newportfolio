@@ -39,7 +39,7 @@ export const projects: ProjectDescriptor[] = [
     name: "Theatre mode",
     role: "Feature Design",
     alt: "",
-    tag: ["uxui", "product"],
+    tag: ["product"],
   },
   {
     src: "/assets/avatars-cover.png",
@@ -47,7 +47,7 @@ export const projects: ProjectDescriptor[] = [
     name: "Avatars",
     role: "Illustration System",
     alt: "Hand drawn illustration of a girl smiling",
-    tag: ["illustration"],
+    tag: ["illustration", "design system"],
   },
   {
     src: "/assets/lexicon-cover.png",

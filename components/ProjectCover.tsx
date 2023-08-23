@@ -11,7 +11,7 @@ type ProjectCoverProps = {
 
 const ProjectCover = ({ href, src, alt, name, role }: ProjectCoverProps) => (
   <Link className="text-center cursor-pointer" href={href}>
-    <div className="inline-block overflow-hidden ease-in-out duration-200">
+    <div className="overflow-hidden ease-in-out duration-200">
       <Image
         src={src}
         width={450}
