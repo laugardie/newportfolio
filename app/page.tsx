@@ -10,6 +10,7 @@ import Link from "next/link";
 import ProjectFilter from "./ProjectFilter";
 import type { ProjectFilterType } from "@/types";
 import { projects } from "@/utils/projects";
+import Footer from "./Footer";
 
 export default function Home() {
   const [filter, setFilter] = useState<ProjectFilterType>("all");
@@ -25,7 +26,7 @@ export default function Home() {
       </div>
       <Scribble />
       <div className="font-source text-xl pt-4 mb-28">
-        <b>Laura</b> - Product Designer.<br></br> Currently freelancing.
+        <b>Laura</b> — Product Designer.<br></br> Currently freelancing.
         Previously{" "}
         <a className="underline hover:text-accent" href="https://gumroad.com">
           @Gumroad.
@@ -65,6 +66,7 @@ export default function Home() {
           </Link>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

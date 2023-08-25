@@ -32,7 +32,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         <div className="mx-auto box-border">{children}</div>
-        <Footer />
       </body>
     </html>
   );

@@ -8,6 +8,7 @@ import Title from "@/components/design system/Title";
 import Image from "next/image";
 import SectionSm from "@/components/design system/SectionSm";
 import SectionMd from "@/components/design system/SectionMd";
+import NextBack from "@/components/NextBack";
 
 export default function Calquo() {
   return (
@@ -143,6 +144,7 @@ export default function Calquo() {
           </div>
         </SectionMd>
       </article>
+      <NextBack href={"/goeat"} next={"Goeat"} />
     </div>
   );
 }

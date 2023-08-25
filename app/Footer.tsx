@@ -13,7 +13,8 @@ export default function Footer() {
       </div>
       <div className="flex items-start justify-between">
         <div>
-          Designed and coded with coffee and while holding my newborn son. ©2023
+          Designed and coded personally by me using Figma, Tailwindcss and
+          Nextjs. ©2023
         </div>
         <div className="flex space-x-4">
           <a
