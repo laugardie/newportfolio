@@ -48,7 +48,6 @@ export default function Theatremode() {
               target="_blank"
               className="underline hover:text-accent"
             >
-              {" "}
               Beezy
             </a>
             , I took charge of designing a feature known as <i>Theatre Mode</i>.
@@ -124,7 +123,7 @@ export default function Theatremode() {
         <SectionSm>
           <H1>Content thumbnails</H1>
           <Paragraph className="mb-6">
-            Thhumbnails provides users with an efficient way to distinguish
+            Thumbnails provides users with an efficient way to distinguish
             between various types of attached content within the modal and to
             effortlessly choose the specific content they wish to view.
           </Paragraph>

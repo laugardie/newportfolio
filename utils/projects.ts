@@ -11,7 +11,7 @@ export const projects: ProjectDescriptor[] = [
   },
   {
     src: "/assets/daylight-cover.png",
-    href: "/calquo",
+    href: "/daylightcalculator",
     name: "Daylight calculator",
     role: "Product Design",
     alt: "A screenshot of the daylight calculator app",
@@ -38,7 +38,7 @@ export const projects: ProjectDescriptor[] = [
     href: "/theatremode",
     name: "Theatre mode",
     role: "Feature Design",
-    alt: "",
+    alt: "Theatre mode feature",
     tag: ["product"],
   },
   {

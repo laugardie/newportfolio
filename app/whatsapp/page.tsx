@@ -457,12 +457,8 @@ export default function Goeat() {
             selection of an option, to the comprehensive overview of the poll
             {"'"}s list and status.
           </Paragraph>
-          <video className="mx-auto">
-            <source
-              className="w-30 h-30"
-              src="/assets/whatsappblog13.mp4"
-              type="video/mp4"
-            />
+          <video className="mx-auto w-30 h-30" controls>
+            <source src="/assets/whatsappblog13.mp4" type="video/mp4" />
           </video>
           <H1>Next steps</H1>
           <Paragraph>

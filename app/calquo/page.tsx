@@ -56,15 +56,6 @@ export default function Calquo() {
             The objective of this challenge was to create an MVP (Minimum Viable
             Product) that could be implemented and coded in the future.
           </Quote>
-          <Paragraph>
-            My journey into design started from a completely different path—I
-            spent four years as a Primary School Teacher. However, fueled by
-            curiosity I ventured into the digital world to explore the realm of
-            user-centered design. In 2019, I took a significant step in my
-            professional growth by enrolling in Ironhack{"'"}s UX/UI Bootcamp,
-            propelling my career forward and fostering an environment of
-            continuous learning.
-          </Paragraph>
           <H1>Design challenge results</H1>
           <Paragraph className="mb-6">
             The conclusion of the challenge resulted in the following
