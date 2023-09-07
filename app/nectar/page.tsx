@@ -6,7 +6,6 @@ import NextBack from "@/components/NextBack";
 import Paragraph from "@/components/design system/Paragraph";
 import SectionMd from "@/components/design system/SectionMd";
 import Caption from "@/components/design system/Caption";
-import SectionLg from "@/components/design system/SectionLg";
 
 export default function Theatremode() {
   return (

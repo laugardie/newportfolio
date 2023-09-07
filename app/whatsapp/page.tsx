@@ -11,7 +11,6 @@ import SectionXl from "@/components/design system/SectionXl";
 import Caption from "@/components/design system/Caption";
 import SectionMd from "@/components/design system/SectionMd";
 import SectionLg from "@/components/design system/SectionLg";
-import Footer from "../Footer";
 import NextBack from "@/components/NextBack";
 
 export default function Goeat() {

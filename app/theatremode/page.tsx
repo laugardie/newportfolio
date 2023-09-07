@@ -5,15 +5,11 @@ import Title from "@/components/design system/Title";
 import Paragraph from "@/components/design system/Paragraph";
 import Quote from "@/components/design system/Quote";
 import H1 from "@/components/design system/H1";
-import BulletedList from "@/components/design system/BulletedList";
-import BulletedListItem from "@/components/design system/BulletedListItem";
 import NumberedList from "@/components/design system/NumberedList";
 import NumberedListItem from "@/components/design system/NumberedListItem";
 import Caption from "@/components/design system/Caption";
-import H2 from "@/components/design system/H2";
 import SectionXl from "@/components/design system/SectionXl";
 import SectionMd from "@/components/design system/SectionMd";
-import SectionLg from "@/components/design system/SectionLg";
 import NextBack from "@/components/NextBack";
 
 export default function Theatremode() {

@@ -1,10 +1,6 @@
 import MetaProps from "@/components/MetaProp";
 import NextBack from "@/components/NextBack";
-import Caption from "@/components/design system/Caption";
-import H2 from "@/components/design system/H2";
 import Paragraph from "@/components/design system/Paragraph";
-import SectionLg from "@/components/design system/SectionLg";
-import SectionMd from "@/components/design system/SectionMd";
 import SectionSm from "@/components/design system/SectionSm";
 import SectionXl from "@/components/design system/SectionXl";
 import Title from "@/components/design system/Title";

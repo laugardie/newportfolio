@@ -5,7 +5,6 @@ import BulletedListItem from "@/components/design system/BulletedListItem";
 import Caption from "@/components/design system/Caption";
 import Paragraph from "@/components/design system/Paragraph";
 import Quote from "@/components/design system/Quote";
-import SectionMd from "@/components/design system/SectionMd";
 import SectionSm from "@/components/design system/SectionSm";
 import Title from "@/components/design system/Title";
 import Image from "next/image";
