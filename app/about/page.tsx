@@ -7,6 +7,7 @@ import SectionMd from "@/components/design system/SectionMd";
 import SectionSm from "@/components/design system/SectionSm";
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "../Footer";
 
 export default function About() {
   return (
@@ -182,6 +183,7 @@ export default function About() {
             />
           </div>
         </div>
+        <Footer />
       </SectionMd>
     </>
   );
