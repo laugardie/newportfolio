@@ -26,12 +26,12 @@ export default function Footer() {
           </a>
           <a
             className="underline"
-            href="https://www.linkedin.com/in/laugardie/"
+            href="https://www.linkedin.com/in/laugardie/?locale=en_US"
             target="_blank"
           >
             Linkedin
           </a>
-          <a className="underline" href="">
+          <a className="underline" href="cv - laura garcia.pdf" target="_blank">
             Resume
           </a>
         </div>
