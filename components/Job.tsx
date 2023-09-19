@@ -40,17 +40,19 @@ const Job = ({
     </div>
     <div className="flex flex-col flex-1">
       <div className="mb-4">
-        <div className="flex justify-between">
-          <div className="font-source font-bold text-2xl">{role}</div>
-          <div className="font-source text-xl text-lightGray">
+        <div className="flex justify-between flex-col lg:flex-row">
+          <div className="font-source font-bold text-xl lg:text-2xl">
+            {role}
+          </div>
+          <div className="font-source text-lg lg:text-xl text-lightGray">
             {from} {year1} - {to} {year2}
           </div>
         </div>
-        <div className="font-source text-xl text-lightGray">
+        <div className="font-source text-lg lg:text-xl text-lightGray">
           {company} {place} {type}
         </div>
       </div>
-      <div className="font-source text-xl">{description}</div>
+      <div className="font-source text-lg lg:text-xl">{description}</div>
     </div>
   </div>
 );

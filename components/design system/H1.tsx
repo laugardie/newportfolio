@@ -1,7 +1,7 @@
 type H1Props = { children: React.ReactNode };
 
 const H1 = ({ children }: H1Props) => (
-  <h1 className="font-extrabold font-inter text-4xl leading-[54px] mt-24 mb-5">
+  <h1 className="font-extrabold font-inter text-3xl lg:text-4xl leading-[54px] mt-24 mb-5">
     {children}
   </h1>
 );

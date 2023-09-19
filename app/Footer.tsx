@@ -3,15 +3,15 @@ import Scribble2 from "@/components/Scribble2";
 export default function Footer() {
   return (
     <div className="flex flex-col gap-12 mx-auto mb-32 container 3xl:max-w-screen-4xl lg:max-w-screen-2xl md:max-w-screen-md max-w-sm">
-      <div className="flex items-end justify-start pt-32">
-        <div className="font-inter font-extrabold text-8xl">
+      <div className="flex flex-col md:flex-row md:items-end justify-start pt-24 md:pt-32 gap-4">
+        <div className="font-inter font-extrabold text-6xl md:text-7xl lg:text-8xl">
           Let{`'`}s work
           <br />
           together.
         </div>
         <Scribble2 />
       </div>
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col md:flex-row gap-8 items-start justify-between">
         <div>
           Designed and coded personally by me using Figma, Tailwindcss and
           Nextjs. ©2023

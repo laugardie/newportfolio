@@ -9,8 +9,8 @@ import Footer from "../Footer";
 export default function Resume() {
   return (
     <>
-      <SectionSm className="pt-24">
-        <h1 className="font-extrabold text-6xl mt-40 pb-8 leading-[68px]">
+      <SectionSm className="pt-6 lg:pt-24">
+        <h1 className="font-extrabold text-5xl lg:text-6xl mt-40 pb-8 leading-[58px] lg:leading-[68px]">
           My work journey, knowledge and skills come together.
         </h1>
         <Paragraph>
@@ -19,14 +19,14 @@ export default function Resume() {
         </Paragraph>
         <div className="flex items-center h-14">
           <Link
-            className="flex items-center h-full px-6 bg-black text-white border-2 border-black hover:bg-accent hover:border-accent font-source font-semibold text-xl	"
+            className="flex items-center h-full px-6 bg-black text-white border-2 border-black hover:bg-accent hover:border-accent font-source font-semibold text-lg lg:text-xl"
             href="/cv - laura garcia.pdf"
             target="_blank"
           >
             Download CV ↓
           </Link>
           <Link
-            className="flex items-center h-full px-6 ml-6 bg-white text-black border-2 border-black hover:bg-black hover:text-white font-source font-semibold text-xl	"
+            className="flex items-center h-full px-6 ml-6 bg-white text-black border-2 border-black hover:bg-black hover:text-white font-source font-semibold text-lg lg:text-xl"
             href="https://www.linkedin.com/in/laugardie/?locale=en_US"
             target="_blank"
           >
@@ -122,16 +122,24 @@ export default function Resume() {
         <H1>Languages</H1>
         <div className="flex gap-8">
           <div>
-            <div className="font-source font-bold text-2xl">Spanish</div>
-            <div className="font-source text-xl text-lightGray">Native</div>
+            <div className="font-source font-bold text-xl lg:text-2xl">
+              Spanish
+            </div>
+            <div className="font-source text-lg lg:text-xl text-lightGray">
+              Native
+            </div>
           </div>
           <div>
-            <div className="font-source font-bold text-2xl">English</div>
-            <div className="font-source text-xl text-lightGray">C1</div>
+            <div className="font-source font-bold text-xl lg:text-2xl">
+              English
+            </div>
+            <div className="font-source text-lg lg:text-xl text-lightGray">
+              C1
+            </div>
           </div>
         </div>
         <H1>Skills</H1>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-rows lg:grid-cols-2 lg:gap-8">
           <div>
             <H2>Design</H2>
             <Paragraph className="mb-0">
