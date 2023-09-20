@@ -1,9 +1,9 @@
 export default function Scribble() {
   return (
     <svg
-      className="fill-accent"
-      width="426"
-      height="55"
+      className="fill-accent md:w-[426px] md:h-[55px]"
+      width="230"
+      height="37"
       viewBox="0 0 426 55"
       xmlns="http://www.w3.org/2000/svg"
     >

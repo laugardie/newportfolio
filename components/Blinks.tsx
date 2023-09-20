@@ -1,8 +1,9 @@
 export default function Blinks() {
   return (
     <svg
-      width="72"
-      height="62"
+      className="md:w-[72px] md:h-[62px]"
+      width="52"
+      height="42"
       viewBox="0 0 72 62"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

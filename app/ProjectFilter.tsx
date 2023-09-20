@@ -11,7 +11,7 @@ export default function ProjectFilter({
   setFilter,
 }: ProjectFilterProps) {
   return (
-    <div className="pb-10 flex gap-6 items-center">
+    <div className="flex gap-3 lg:gap-6 items-cente flex-wrap">
       <Tab
         isSelected={filter === "all"}
         filterByTab={() => {
