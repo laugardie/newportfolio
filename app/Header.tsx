@@ -4,11 +4,14 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="h-14 w-full flex justify-between items-center pl-6 md:px-24 font-source font-semibold text-lg md:text-xl fixed z-10">
+    <header className="h-14 w-full flex justify-between items-center pl-6 md:px-24 font-source font-semibold text-lg md:text-xl fixed z-10 bg-white dark:bg-[#101010]">
       <Link href="/">
         <Logo />
       </Link>
       <div className="flex items-center h-full">
+        <Link className="px-3 md:px-6 hover:text-accent" href="/">
+          Projects
+        </Link>
         <Link className="px-3 md:px-6 hover:text-accent" href="/about">
           About
         </Link>

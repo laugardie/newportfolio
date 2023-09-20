@@ -22,7 +22,8 @@ export default function Home() {
           <span>Crafting fresh</span>
           <Blinks />
         </div>{" "}
-        experiences for people.
+        experiences for <br />
+        people.
       </div>
       <Scribble />
       <div className="font-source text-xl pt-4 mb-20 lg:mb-28">
