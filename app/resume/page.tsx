@@ -19,7 +19,7 @@ export default function Resume() {
         </Paragraph>
         <div className="flex items-center h-14">
           <Link
-            className="flex items-center h-full px-6 bg-black text-white border-2 border-black hover:bg-accent hover:border-accent font-source font-semibold text-lg lg:text-xl"
+            className="flex items-center h-full px-6 dark:bg-accent bg-black text-white border-2 dark:border-accent border-black hover:bg-accent hover:border-accent font-source font-semibold text-lg lg:text-xl"
             href="/cv - laura garcia.pdf"
             target="_blank"
           >
