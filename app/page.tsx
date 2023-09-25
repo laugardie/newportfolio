@@ -16,7 +16,7 @@ export default function Home() {
   const [filter, setFilter] = useState<ProjectFilterType>("all");
 
   return (
-    <div className="container mx-auto pt-32 md:pt-52 3xl:max-w-screen-2xl 2xl:max-w-screen-xl xl:max-w-screen-lg lg:max-w-screen-md sm:max-w-screen-sm max-w-xs">
+    <div className="container mx-auto pt-32 md:pt-52 3xl:max-w-screen-2xl 2xl:max-w-screen-xl xl:max-w-screen-lg md:max-w-screen-sm max-w-xs">
       <div className="font-extrabold text-5xl md:text-7xl lg:text-8xl -mb-1">
         <div className="flex flex-end">
           <span>Crafting fresh</span>
@@ -34,7 +34,7 @@ export default function Home() {
         </a>
       </div>
       <ProjectFilter filter={filter} setFilter={setFilter} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 gap-16 gap-y-24 pt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 gap-16 gap-y-24 pt-8">
         {projects
           .filter((project) => filter === "all" || project.tag.includes(filter))
           .map((project) => {
@@ -46,7 +46,7 @@ export default function Home() {
             href="mailto:laugardie89@gmail.com"
             target="_blank"
           >
-            <div className="relative border-2">
+            <div className="relative border-2 -z-10">
               <Image
                 src="/"
                 width={450}

@@ -27,7 +27,9 @@ const MenuPhone = ({ className }: MenuPhoneProps) => {
         >
           <Link
             className={`text-2xl h-20 ${
-              pathname === "/" ? "text-accent" : "text-[#101010]"
+              pathname === "/"
+                ? "text-accent"
+                : "text-[#101010] dark:text-white"
             }`}
             href="/"
           >
@@ -35,7 +37,9 @@ const MenuPhone = ({ className }: MenuPhoneProps) => {
           </Link>
           <Link
             className={`text-2xl h-20 ${
-              pathname === "/about" ? "text-accent" : "text-[#101010]"
+              pathname === "/about"
+                ? "text-accent"
+                : "text-[#101010] dark:text-white"
             }`}
             href="/about"
           >
@@ -43,7 +47,9 @@ const MenuPhone = ({ className }: MenuPhoneProps) => {
           </Link>
           <Link
             className={`text-2xl h-20 ${
-              pathname === "/resume" ? "text-accent" : "text-[#101010]"
+              pathname === "/resume"
+                ? "text-accent"
+                : "text-[#101010] dark:text-white"
             }`}
             href="/resume"
           >

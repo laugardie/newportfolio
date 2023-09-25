@@ -13,7 +13,7 @@ export default function About() {
   return (
     <>
       <SectionSm className="pt-24">
-        <h1 className="font-extrabold text-6xl mt-40 pb-8">
+        <h1 className="font-extrabold text-5xl lg:text-6xl mt-20 lg:mt-40 pb-8">
           Passionate about pixels and experiences
         </h1>
         <Paragraph>
@@ -130,9 +130,9 @@ export default function About() {
           </BulletedListItem>
         </BulletedList>
       </SectionSm>
-      <SectionMd className="grid grid-rows-2 gap-2 max-w-4xl mx-auto pt-8">
+      <SectionMd className="grid grid-rows-2 gap-2 max-w-xl lg:max-w-4xl mx-auto pt-8">
         <div className="grid grid-cols-3 gap-2 w-124">
-          <div className="h-96 relative">
+          <div className="h-48 lg:h-96 relative">
             <Image
               src={"/assets/feet.png"}
               alt={"Handstand feet"}
@@ -140,7 +140,7 @@ export default function About() {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div className="h-96 relative">
+          <div className="h-48 lg:h-96 relative">
             <Image
               src={"/assets/diy.png"}
               alt={"crafts"}
@@ -148,7 +148,7 @@ export default function About() {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div className="h-96 relative">
+          <div className="h-48 lg:h-96 relative">
             <Image
               src={"/assets/landscape.png"}
               alt={"clouds landscape"}
@@ -158,7 +158,7 @@ export default function About() {
           </div>
         </div>
         <div className="grid grid-cols-6 gap-2 w-124">
-          <div className="h-96 col-span-1 relative">
+          <div className="h-48 lg:h-96 col-span-1 relative">
             <Image
               src={"/assets/trees.png"}
               alt={"palm trees"}
@@ -166,7 +166,7 @@ export default function About() {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div className="h-96 col-span-2 relative">
+          <div className="h-48 lg:h-96 col-span-2 relative">
             <Image
               src={"/assets/pizza.png"}
               alt={"pizza sign"}
@@ -174,7 +174,7 @@ export default function About() {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div className="h-96 col-span-3 relative">
+          <div className="h-48 lg:h-96 col-span-3 relative">
             <Image
               src={"/assets/jenga.png"}
               alt={"jenga"}

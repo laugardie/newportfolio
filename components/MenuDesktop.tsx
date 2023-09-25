@@ -17,7 +17,7 @@ const MenuDesktop = ({ className }: MenuDesktopProps) => {
     >
       <Link
         className={`hover:text-accent ${
-          pathname === "/" ? "text-accent" : "text-[#101010]"
+          pathname === "/" ? "text-accent" : "text-[#101010] dark:text-white"
         }`}
         href="/"
       >
@@ -25,7 +25,9 @@ const MenuDesktop = ({ className }: MenuDesktopProps) => {
       </Link>
       <Link
         className={`hover:text-accent ${
-          pathname === "/about" ? "text-accent" : "text-[#101010]"
+          pathname === "/about"
+            ? "text-accent"
+            : "text-[#101010] dark:text-white"
         }`}
         href="/about"
       >
@@ -33,7 +35,9 @@ const MenuDesktop = ({ className }: MenuDesktopProps) => {
       </Link>
       <Link
         className={`hover:text-accent ${
-          pathname === "/resume" ? "text-accent" : "text-[#101010]"
+          pathname === "/resume"
+            ? "text-accent"
+            : "text-[#101010] dark:text-white"
         }`}
         href="/resume"
       >

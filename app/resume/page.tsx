@@ -10,7 +10,7 @@ export default function Resume() {
   return (
     <>
       <SectionSm className="pt-6 lg:pt-24">
-        <h1 className="font-extrabold text-5xl lg:text-6xl mt-40 pb-8 leading-[58px] lg:leading-[68px]">
+        <h1 className="font-extrabold text-5xl lg:text-6xl mt-20 lg:mt-40 pb-8 leading-[58px] lg:leading-[68px]">
           My work journey, knowledge and skills come together.
         </h1>
         <Paragraph>
