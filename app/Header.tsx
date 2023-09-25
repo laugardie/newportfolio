@@ -10,7 +10,7 @@ export default function Header() {
         <Logo />
       </Link>
       <MenuDesktop className="hidden lg:flex" />
-      <MenuPhone className="lg:hidden" />
+      <MenuPhone className="flex lg:hidden" />
     </header>
   );
 }

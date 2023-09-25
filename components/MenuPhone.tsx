@@ -5,16 +5,18 @@ import IconBurger from "./icons/IconBurger";
 import IconClose from "./icons/IconClose";
 import Link from "next/link";
 import IconArrow from "./icons/IconArrow";
+import { usePathname } from "next/navigation";
 
 type MenuPhoneProps = { className?: string };
 
 const MenuPhone = ({ className }: MenuPhoneProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
   return (
     <div className={`text-black dark:text-white ${className ?? ""}`}>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="cursor-pointer z-20 relative"
+        className="cursor-pointer z-20 relative self-center"
       >
         {isOpen ? <IconClose /> : <IconBurger />}
       </button>
@@ -23,13 +25,28 @@ const MenuPhone = ({ className }: MenuPhoneProps) => {
           onClick={() => setIsOpen(false)}
           className="bg-white dark:bg-[#101010] font-source font-semibold fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center z-10"
         >
-          <Link className="text-2xl h-20" href="/">
+          <Link
+            className={`text-2xl h-20 ${
+              pathname === "/" ? "text-accent" : "text-[#101010]"
+            }`}
+            href="/"
+          >
             Projects
           </Link>
-          <Link className="text-2xl h-20" href="/about">
+          <Link
+            className={`text-2xl h-20 ${
+              pathname === "/about" ? "text-accent" : "text-[#101010]"
+            }`}
+            href="/about"
+          >
             About
           </Link>
-          <Link className="text-2xl h-20" href="/resume">
+          <Link
+            className={`text-2xl h-20 ${
+              pathname === "/resume" ? "text-accent" : "text-[#101010]"
+            }`}
+            href="/resume"
+          >
             Resume
           </Link>
           <Link
