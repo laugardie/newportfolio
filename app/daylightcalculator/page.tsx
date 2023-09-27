@@ -23,15 +23,15 @@ export default function daylightcalculator() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Daylight calculator</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="Product Designer" />
               <MetaProps tag="Project Type" description="Product Design" />
               <MetaProps tag="Date" description="May 7th, 2023" />
               <MetaProps tag="Duration" description="1 week" />
             </dl>
           </aside>
-          <Title>Daylight calculator</Title>
           <Paragraph>
             The Daylight Calculator project, developed by{" "}
             <a
@@ -88,7 +88,7 @@ export default function daylightcalculator() {
             </BulletedListItem>
           </BulletedList>
         </SectionSm>
-        <SectionXl className="mt-16 mb-8">
+        <SectionXl className="mt-12 lg:mt-16 mb-8">
           <figure>
             <Image
               src="/assets/whiteblog1.png"
