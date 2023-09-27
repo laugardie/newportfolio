@@ -22,15 +22,15 @@ export default function Lexicon() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Lexicon</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="Product Designer" />
               <MetaProps tag="Project Type" description="Desing System" />
               <MetaProps tag="Date" description="October, 2019" />
               <MetaProps tag="Duration" description="9 months" />
             </dl>
           </aside>
-          <Title>Lexicon</Title>
           <Paragraph>
             During my time at Liferay, I had the privilege to contribute to the{" "}
             <a
