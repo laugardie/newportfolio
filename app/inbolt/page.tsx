@@ -12,6 +12,21 @@ export default function Inbolt() {
     <div className="relative">
       <div className="w-full h-864 relative">
         <Image
+          className="lg:hidden"
+          src="/assets/inbolt-cover-mobile.png"
+          fill
+          alt="Inbolt dashboard"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden lg:flex 2xl:hidden"
+          src="/assets/inbolt-cover-lg.png"
+          fill
+          alt="Inbolt dashboard"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden 2xl:flex"
           src="/assets/inbolt.png"
           fill
           alt="Inbolt dashboard"
@@ -20,15 +35,15 @@ export default function Inbolt() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Inbolt</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="Designer" />
               <MetaProps tag="Project Type" description="Dashboard UI" />
               <MetaProps tag="Date" description="September 14th, 2021" />
               <MetaProps tag="Duration" description="1 day" />
             </dl>
           </aside>
-          <Title>Inbolt</Title>
           <Paragraph>
             Inbolt is a personal UI project where I designed a dashboard
             specifically for freelancers{"'"} invoices.
