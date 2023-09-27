@@ -10,21 +10,23 @@ const NextBack = ({ href, next }: NextBackProps) => (
     <div className="flex place-content-between pt-10 pb-20">
       <div>
         <a
-          className="font-inter text-2xl font-semibold hover:text-accent"
+          className="font-inter text-xl md:text-2xl font-semibold hover:text-accent"
           href="/"
         >
           ← Back
         </a>
-        <p className="font-source text-xl text-lightGray">All projects</p>
+        <p className="font-source text-lg md:text-xl text-lightGray">
+          All projects
+        </p>
       </div>
-      <div>
+      <div className="text-right">
         <a
-          className="font-inter text-2xl font-semibold hover:text-accent"
+          className="font-inter text-xl md:text-2xl font-semibold hover:text-accent"
           href={href}
         >
           Next →
         </a>
-        <p className="font-source text-xl text-lightGray">{next}</p>
+        <p className="font-source text-lg md:text-xl text-lightGray">{next}</p>
       </div>
     </div>
   </SectionSm>

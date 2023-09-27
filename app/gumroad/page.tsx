@@ -16,6 +16,21 @@ export default function Gumroad() {
     <div className="relative">
       <div className="w-full h-864 relative">
         <Image
+          className="xl:hidden"
+          src="/assets/gumroad-cover-mobile.png"
+          fill
+          alt="gumroad"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden lg:flex xl:hidden"
+          src="/assets/gumroad-cover-lg.png"
+          fill
+          alt="gumroad"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden xl:flex"
           src="/assets/gumroad.png"
           fill
           alt="gumroad"
@@ -24,15 +39,15 @@ export default function Gumroad() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Gumroad</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="Product Designer" />
               <MetaProps tag="Project Type" description="Product Design" />
               <MetaProps tag="Date" description="July, 2021" />
               <MetaProps tag="Duration" description="1 year and 5 months" />
             </dl>
           </aside>
-          <Title>Gumroad</Title>
           <Paragraph>
             I had a blast as a Product Designer at{" "}
             <a
