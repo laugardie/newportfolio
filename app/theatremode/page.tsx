@@ -17,6 +17,21 @@ export default function Theatremode() {
     <div className="relative">
       <div className="w-full h-864 relative">
         <Image
+          className="md:hidden"
+          src="/assets/theatremode-cover.png"
+          fill
+          alt="Theatre mode feature"
+          style={{ objectFit: "cover" }}
+        />{" "}
+        <Image
+          className="hidden md:flex 2xl:hidden"
+          src="/assets/theatremode-cover-lg.png"
+          fill
+          alt="Theatre mode feature"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden 2xl:flex"
           src="/assets/theatremode.png"
           fill
           alt="Theatre mode feature"
@@ -25,15 +40,15 @@ export default function Theatremode() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Theatre mode</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="Product Designer" />
               <MetaProps tag="Project Type" description="Feature Design" />
               <MetaProps tag="Date" description="August 17th, 2021" />
               <MetaProps tag="Duration" description="2 weeks" />
             </dl>
           </aside>
-          <Title>Theatre mode</Title>
           <Quote>
             Seamlessly access information and focus on what really matters.
           </Quote>
