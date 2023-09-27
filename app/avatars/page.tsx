@@ -22,15 +22,15 @@ export default function Avatars() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Avatars</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="Designer" />
               <MetaProps tag="Project Type" description="Illustration System" />
               <MetaProps tag="Date" description="March 19th, 2021" />
               <MetaProps tag="Duration" description="1 day" />
             </dl>
           </aside>
-          <Title>Avatars</Title>
           <Paragraph>
             Avatars is a playful doodle illustration system that I crafted in
             Figma, designed to spark creativity through its versatile range of
