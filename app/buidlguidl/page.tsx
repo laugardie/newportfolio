@@ -11,6 +11,14 @@ export default function Gumroad() {
     <div className="relative">
       <div className="w-full h-864 relative">
         <Image
+          className="lg:hidden"
+          src="/assets/buidlguidl-cover-mobile.png"
+          fill
+          alt="buidlguidl"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden lg:flex"
           src="/assets/buidlguidl.png"
           fill
           alt="buidlguidl"
@@ -19,15 +27,15 @@ export default function Gumroad() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Buidlguidl</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="Product Designer" />
               <MetaProps tag="Project Type" description="Web Design" />
               <MetaProps tag="Date" description="March 29th, 2022" />
               <MetaProps tag="Duration" description="1 week" />
             </dl>
           </aside>
-          <Title>Buidlguidl</Title>
           <Paragraph>
             <a
               href="https://buidlguidl.com/"
