@@ -20,6 +20,14 @@ export default function Goeat() {
     <div className="relative">
       <div className="w-full h-864 relative">
         <Image
+          className="xl:hidden"
+          src="/assets/goeat-cover-mobile.png"
+          fill
+          alt="A screenshot of the calquo app dashboard"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden xl:flex"
           src="/assets/goeat.png"
           fill
           alt="A screenshot of the calquo app dashboard"
@@ -28,15 +36,15 @@ export default function Goeat() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Goeat</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="Designer" />
               <MetaProps tag="Project Type" description="Travel app" />
               <MetaProps tag="Date" description="September 9th, 2019" />
               <MetaProps tag="Duration" description="10 days" />
             </dl>
           </aside>
-          <Title>Goeat</Title>
           <Quote>
             Bridging the Gap in Gastronomic Tourism. Discover the taste of the
             world.
