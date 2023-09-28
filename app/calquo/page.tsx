@@ -15,6 +15,21 @@ export default function Calquo() {
     <div className="relative">
       <div className="w-full h-864 relative">
         <Image
+          className="md:hidden"
+          src="/assets/calquo-cover-mobile.png"
+          fill
+          alt="A screenshot of the calquo app dashboard"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden md:flex xl:hidden"
+          src="/assets/calquo-cover-lg.png"
+          fill
+          alt="A screenshot of the calquo app dashboard"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden xl:flex"
           src="/assets/calquo.png"
           fill
           alt="A screenshot of the calquo app dashboard"
@@ -23,15 +38,15 @@ export default function Calquo() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Calquo</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="Product Designer" />
               <MetaProps tag="Project Type" description="B2B, SaaS" />
               <MetaProps tag="Date" description="March 21st, 2021" />
               <MetaProps tag="Duration" description="2 days" />
             </dl>
           </aside>
-          <Title>Calquo</Title>
           <Paragraph>
             Calquo is a no-code calculator form that empowers businesses to
             generate leads, boost sales, and enhance engagement, all while
@@ -77,60 +92,130 @@ export default function Calquo() {
           </BulletedList>
         </SectionSm>
         <SectionMd>
-          <div className="relative w-full h-[280px] mt-12 mb-6">
+          <div className="relative flex justify-center w-full mt-12 mb-6">
             <Image
+              className="sm:hidden"
+              src={"/assets/calquoblog1-mobile.png"}
+              alt={"Calquo logo and slogan"}
+              width={390}
+              height={954}
+              style={{ objectFit: "contain" }}
+            />
+            <Image
+              className="hidden sm:flex"
               src={"/assets/calquoblog1.png"}
               alt={"Calquo logo and slogan"}
-              fill
-              style={{ objectFit: "cover" }}
+              width={1166}
+              height={280}
+              style={{ objectFit: "scale-down" }}
             />
           </div>
-          <div className="relative w-full h-[600px] mb-6">
+          <div className="relative flex justify-center w-full mb-6">
             <Image
+              className="sm:hidden"
+              src={"/assets/calquoblog2-mobile.png"}
+              alt={"Calquo log in and sign in screen"}
+              width={390}
+              height={1004}
+              style={{ objectFit: "contain" }}
+            />
+            <Image
+              className="hidden sm:flex"
               src={"/assets/calquoblog2.png"}
               alt={"Calquo log in and sign in screen"}
-              fill
-              style={{ objectFit: "cover" }}
+              width={1166}
+              height={600}
+              style={{ objectFit: "scale-down" }}
             />
           </div>
-          <div className="relative w-full h-[635px] mb-6">
+          <div className="relative flex justify-center w-full mb-6">
             <Image
+              className="sm:hidden"
+              src={"/assets/calquoblog3-mobile.png"}
+              alt={"Calquo dashboard"}
+              width={390}
+              height={258}
+              style={{ objectFit: "contain" }}
+            />
+            <Image
+              className="hidden sm:flex"
               src={"/assets/calquoblog3.png"}
               alt={"Calquo dashboard"}
-              fill
-              style={{ objectFit: "cover" }}
+              width={1166}
+              height={635}
+              style={{ objectFit: "scale-down" }}
             />
           </div>
-          <div className="relative w-full h-[318px] mb-6">
+          <div className="relative flex justify-center w-full mb-6">
             <Image
+              className="sm:hidden"
+              src={"/assets/calquoblog4-mobile.png"}
+              alt={"Calquo color palette"}
+              width={390}
+              height={200}
+              style={{ objectFit: "contain" }}
+            />
+            <Image
+              className="hidden sm:flex"
               src={"/assets/calquoblog4.png"}
               alt={"Calquo color palette"}
-              fill
-              style={{ objectFit: "cover" }}
+              width={1166}
+              height={318}
+              style={{ objectFit: "scale-down" }}
             />
           </div>
-          <div className="relative w-full h-[600px] mb-6">
+          <div className="relative flex justify-center w-full mb-6">
             <Image
+              className="sm:hidden"
               src={"/assets/calquoblog5.png"}
               alt={"Calquo themes"}
-              fill
-              style={{ objectFit: "cover" }}
+              width={390}
+              height={201}
+              style={{ objectFit: "contain" }}
+            />
+            <Image
+              className="hidden sm:flex"
+              src={"/assets/calquoblog5.png"}
+              alt={"Calquo themes"}
+              width={1166}
+              height={600}
+              style={{ objectFit: "scale-down" }}
             />
           </div>
-          <div className="relative w-full h-[635px] mb-6">
+          <div className="relative flex justify-center w-full mb-6">
             <Image
+              className="sm:hidden"
               src={"/assets/calquoblog6.png"}
               alt={"Calquo workbench"}
-              fill
-              style={{ objectFit: "cover" }}
+              width={390}
+              height={263}
+              style={{ objectFit: "contain" }}
+            />
+            <Image
+              className="hidden sm:flex"
+              src={"/assets/calquoblog6.png"}
+              alt={"Calquo workbench"}
+              width={1166}
+              height={635}
+              style={{ objectFit: "scale-down" }}
             />
           </div>
-          <div className="relative w-full h-[635px] mb-6">
+          <div className="relative flex justify-center w-full mb-6">
             <Image
+              className="sm:hidden"
               src={"/assets/calquoblog7.png"}
               alt={"Calquo sidebars"}
-              fill
-              style={{ objectFit: "cover" }}
+              width={390}
+              height={261}
+              style={{ objectFit: "contain" }}
+            />
+            <Image
+              className="hidden sm:flex"
+              src={"/assets/calquoblog7.png"}
+              alt={"Calquo sidebars"}
+              width={1166}
+              height={635}
+              style={{ objectFit: "scale-down" }}
             />
           </div>
         </SectionMd>
