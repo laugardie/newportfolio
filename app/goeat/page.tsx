@@ -20,14 +20,14 @@ export default function Goeat() {
     <div className="relative">
       <div className="w-full h-864 relative">
         <Image
-          className="xl:hidden"
+          className="sm:hidden"
           src="/assets/goeat-cover-mobile.png"
           fill
           alt="A screenshot of the calquo app dashboard"
           style={{ objectFit: "cover" }}
         />
         <Image
-          className="hidden xl:flex"
+          className="hidden sm:flex"
           src="/assets/goeat.png"
           fill
           alt="A screenshot of the calquo app dashboard"
