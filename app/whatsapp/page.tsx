@@ -18,6 +18,14 @@ export default function Goeat() {
     <div className="relative">
       <div className="w-full h-864 relative">
         <Image
+          className="sm:hidden"
+          src="/assets/whatsapp-cover-mobile.png"
+          fill
+          alt="A screenshot of the whatsapp feature"
+          style={{ objectFit: "cover" }}
+        />
+        <Image
+          className="hidden sm:flex"
           src="/assets/whatsapp.png"
           fill
           alt="A screenshot of the whatsapp feature"
@@ -26,15 +34,15 @@ export default function Goeat() {
       </div>
       <article>
         <SectionSm className="relative pt-24">
-          <aside className="absolute left-full pl-24">
-            <dl className="mt-[152px]">
+          <Title>Whatsapp Polls</Title>
+          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
+            <dl className="flex flex-wrap gap-10 xl:gap-0">
               <MetaProps tag="Role" description="UX/UI Designer" />
               <MetaProps tag="Project Type" description="Feature Design" />
               <MetaProps tag="Date" description="July 8th, 2019" />
               <MetaProps tag="Duration" description="4 days" />
             </dl>
           </aside>
-          <Title>Whatsapp Polls</Title>
           <Paragraph>
             Ever found yourself using WhatsApp to coordinate plans with friends
             and getting stuck in the endless loop of deciding on a date? Are
