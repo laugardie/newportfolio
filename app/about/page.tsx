@@ -13,7 +13,7 @@ export default function About() {
   return (
     <>
       <SectionSm className="pt-24">
-        <h1 className="font-extrabold text-5xl lg:text-6xl mt-20 lg:mt-40 pb-8">
+        <h1 className="font-extrabold text-5xl lg:text-6xl mt-20 lg:mt-40 pb-8 leading-[58px] lg:leading-[68px">
           Passionate about pixels and experiences
         </h1>
         <Paragraph>
