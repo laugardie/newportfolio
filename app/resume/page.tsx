@@ -14,7 +14,7 @@ export default function Resume() {
           My work journey, knowledge and skills come together.
         </h1>
         <Paragraph>
-          A product designer with over 5 years of experience working across
+          A product designer with over 4 years of experience working across
           design systems, user experience, and accessibility.
         </Paragraph>
         <div className="flex items-center h-14">
