@@ -1,4 +1,5 @@
 import Header from "./Header";
+import Script from "next/script";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -31,6 +32,19 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         <div className="mx-auto box-border">{children}</div>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-J7JSKSS7Q5"
+        ></Script>
+        <Script id="google-analytics">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-J7JSKSS7Q5');
+          `}
+        </Script>
       </body>
     </html>
   );
