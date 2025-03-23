@@ -50,6 +50,7 @@ export default function Home() {
   return (
     <div className="bg-background min-h-screen font-figtree [background-image:radial-gradient(rgba(0,0,0,0.07)_1px,transparent_1px)] [background-size:16px_16px]">
       {/* Header */}
+      <div className="w-full border-b border-border">
         <header className="container mx-auto max-w-screen-xl">
           <div className="border-x border-border flex justify-between items-center">
             <Link className="cursor-pointer" href="/">
@@ -59,6 +60,7 @@ export default function Home() {
             <MenuPhone className="flex lg:hidden" />
           </div>
         </header>
+      </div>
 
       {/* Main content */}
       <div className="w-full border-b border-border">
@@ -226,25 +228,44 @@ export default function Home() {
                 alt="Gumroad Design System"
                 name="Gumroad"
                 role="Design System"
-                year="2021"
+                year="2024"
               />
               {projects
                 .filter((project) => filter === "all" || project.tag.includes(filter))
+                .sort((a, b) => {
+                  const getYear = (project: typeof a) => {
+                    switch (project.name) {
+                      case "Daylight Calculator": return 2023;
+                      case "BuidlGuidl Ethereum":
+                      case "Nectar": return 2022;
+                      case "Gumroad":
+                      case "Avatars":
+                      case "Inbolt":
+                      case "Theatre mode":
+                      case "Calquo": return 2021;
+                      case "Goeat":
+                      case "Lexicon":
+                      case "Whatsapp polls": return 2019;
+                      default: return 2020;
+                    }
+                  };
+                  return getYear(b) - getYear(a);
+                })
                 .map((project) => {
                   return <ProjectCover 
                     key={project.name} 
                     {...project} 
                     year={project.name === "Gumroad" ? "2021" :
                           project.name === "Goeat" ? "2019" :
-                          project.name === "Lexicon" ? "2020" :
-                          project.name === "Avatars" ? "2020" :
+                          project.name === "Lexicon" ? "2019" :
+                          project.name === "Avatars" ? "2021" :
                           project.name === "Whatsapp polls" ? "2019" :
                           project.name === "Inbolt" ? "2021" :
-                          project.name === "Theatre mode" ? "2019" :
-                          project.name === "Nectar" ? "2019" :
-                          project.name === "Calquo" ? "2019" :
-                          project.name === "BuidlGuidl Ethereum" ? "2019" :
-                          project.name === "Daylight Calculator" ? "2019" : "2020"
+                          project.name === "Theatre mode" ? "2021" :
+                          project.name === "Nectar" ? "2022" :
+                          project.name === "Calquo" ? "2021" :
+                          project.name === "BuidlGuidl Ethereum" ? "2022" :
+                          project.name === "Daylight Calculator" ? "2023" : "2020"
                     }
                   />;
                 })}
