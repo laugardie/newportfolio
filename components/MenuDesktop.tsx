@@ -11,46 +11,50 @@ const MenuDesktop = ({ className }: MenuDesktopProps) => {
 
   return (
     <div
-      className={`h-14 flex ml-auto items-center font-source font-semibold text-xl gap-8 ${
+      className={`flex justify-between items-center font-figtree font-base text-base w-full B ${
         className ?? ""
       }`}
     >
-      <Link
-        className={`hover:text-accent ${
-          pathname === "/" ? "text-accent" : "text-[#101010] dark:text-white"
-        }`}
-        href="/"
-      >
-        Projects
-      </Link>
-      <Link
-        className={`hover:text-accent ${
-          pathname === "/about"
-            ? "text-accent"
-            : "text-[#101010] dark:text-white"
-        }`}
-        href="/about"
-      >
-        About
-      </Link>
-      <Link
-        className={`hover:text-accent ${
-          pathname === "/resume"
-            ? "text-accent"
-            : "text-[#101010] dark:text-white"
-        }`}
-        href="/resume"
-      >
-        Resume
-      </Link>
-      <Link
-        className="flex items-center h-full px-6 ml-6 bg-accent text-white hover:bg-black hover:text-white"
-        href="mailto:laugardie89@gmail.com"
-        target="_blank"
-      >
-        Let&apos;s talk
-        <IconArrow />
-      </Link>
+      <nav className="flex items-center">
+        <Link
+          className="px-6 py-4 border-r border-l border-border transition-all text-black hover:bg-white/70 hover:text-black"
+          href="/"
+        >
+          Experience
+        </Link>
+        <Link
+          className="px-6 py-4 border-r border-border transition-all text-black hover:bg-white/70 hover:text-black"
+          href="/workplay"
+        >
+          Workplay
+        </Link>
+        <Link
+          className="px-6 py-4 border-r border-border transition-all text-black hover:bg-white/70 hover:text-black"
+          href="/toolkit"
+        >
+          Toolkit
+        </Link>
+      </nav>
+      <div className="flex items-center">
+        <Link
+          className={`border-l border-r border-border px-6 py-4 transition-all ${
+            pathname === "/download-cv"
+              ? "text-white bg-black"
+              : "text-black hover:bg-white/70 hover:text-black"
+          }`}
+          href="/download-cv"
+        >
+          Download CV
+        </Link>
+        <Link
+          className="font-base font-regular flex items-center h-full px-6 py-4 bg-black text-white hover:bg-accent transition-all"
+          href="mailto:laugardie89@gmail.com"
+          target="_blank"
+        >
+          Let&apos;s talk
+          <IconArrow />
+        </Link>
+      </div>
     </div>
   );
 };
