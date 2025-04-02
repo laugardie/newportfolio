@@ -428,7 +428,7 @@ export default function WhatsappPage() {
                   Once the poll is published, the user can vote and edit their choice by tapping on a different option.
                   </BulletedListItem>
                   <BulletedListItem>
-                  The user can see a list of polls inside “Group’s polls” [5], active ones with a white background and inactive ones with a grey background.
+                  The user can see a list of polls inside "Group's polls" [5], active ones with a white background and inactive ones with a grey background.
                   </BulletedListItem>
                 </BulletedList>
                 <Image 
@@ -441,7 +441,7 @@ export default function WhatsappPage() {
                   className="rounded-lg border border-border"
                 />
                 <figcaption className="text-sm text-muted-foreground text-center mt-2">
-                [5] 🇬🇧Group’s polls: 🇪🇸Encuestas del grupo
+                [5] 🇬🇧Group's polls: 🇪🇸Encuestas del grupo
                 </figcaption>
                 <Paragraph>
                 Presented below is the latest iteration of the prototype, encompassing the complete user journey—from the creation of a poll, selection of an option, to the comprehensive overview of the poll&apos;s list and status.

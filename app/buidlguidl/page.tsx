@@ -39,6 +39,7 @@ export default function Buidlguidl() {
               style={{ objectFit: "cover" }}
             />
           </div>
+          <div className="border-t border-border"></div>
         </div>
       </div>
 

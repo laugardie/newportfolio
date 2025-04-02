@@ -127,6 +127,7 @@ export default function DaylightCalculator() {
               </div>
             </div>
           </div>
+          <div className="border-t border-border"></div>
         </div>
       </div>
 
