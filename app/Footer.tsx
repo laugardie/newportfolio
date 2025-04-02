@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="flex justify-between items-center px-12 pt-12 pb-8">
+    <div className="flex justify-between items-center px-8 py-6">
       <div className="text-sm">
         Laugardie © 2025
       </div>
