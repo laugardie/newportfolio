@@ -10,7 +10,6 @@ import NextBack from "@/components/NextBack";
 import Paragraph from "@/components/design system/Paragraph";
 import Quote from "@/components/design system/Quote";
 import Title from "@/components/design system/Title";
-import Caption from "@/components/design system/Caption";
 
 export default function Avatars() {
   return (

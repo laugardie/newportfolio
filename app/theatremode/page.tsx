@@ -1,280 +1,258 @@
-import MetaProps from "@/components/MetaProp";
-import SectionSm from "@/components/design system/SectionSm";
+"use client";
+
+import Link from "next/link";
 import Image from "next/image";
-import Title from "@/components/design system/Title";
+import Logo from "@/components/Logo";
+import MenuDesktop from "@/components/MenuDesktop";
+import MenuPhone from "@/components/MenuPhone";
+import Footer from "@/app/Footer";
+import NextBack from "@/components/NextBack";
 import Paragraph from "@/components/design system/Paragraph";
 import Quote from "@/components/design system/Quote";
-import H1 from "@/components/design system/H1";
+import Title from "@/components/design system/Title";
 import NumberedList from "@/components/design system/NumberedList";
 import NumberedListItem from "@/components/design system/NumberedListItem";
-import Caption from "@/components/design system/Caption";
-import SectionXl from "@/components/design system/SectionXl";
-import SectionMd from "@/components/design system/SectionMd";
-import NextBack from "@/components/NextBack";
 
-export default function Theatremode() {
+export default function TheatreMode() {
   return (
-    <div className="relative">
-      <div className="w-full h-864 relative">
-        <Image
-          className="md:hidden"
-          src="/assets/theatremode-cover.png"
-          fill
-          alt="Theatre mode feature"
-          style={{ objectFit: "cover" }}
-        />{" "}
-        <Image
-          className="hidden md:flex 2xl:hidden"
-          src="/assets/theatremode-cover-lg.png"
-          fill
-          alt="Theatre mode feature"
-          style={{ objectFit: "cover" }}
-        />
-        <Image
-          className="hidden 2xl:flex"
-          src="/assets/theatremode.png"
-          fill
-          alt="Theatre mode feature"
-          style={{ objectFit: "cover" }}
-        />
+    <div className="bg-background min-h-screen font-figtree [background-image:radial-gradient(rgba(0,0,0,0.06)_1px,transparent_1px)] [background-size:16px_16px]">
+      {/* Header */}
+      <div className="w-full border-b border-border">
+        <header className="container mx-auto max-w-screen-xl">
+          <div className="border-x border-border flex justify-between items-center">
+            <Link className="cursor-pointer" href="/">
+              <div className="pl-1 hover:bg-white/70 hover:text-black"><Logo /></div>
+            </Link>
+            <MenuDesktop className="hidden lg:flex" />
+            <MenuPhone className="flex lg:hidden" />
+          </div>
+        </header>
       </div>
-      <article>
-        <SectionSm className="relative pt-24">
-          <Title>Theatre mode</Title>
-          <aside className="hidden lg:flex lg:mb-8 xl:absolute xl:left-full xl:pl-20 2xl:pl-24">
-            <dl className="flex flex-wrap gap-10 xl:gap-0">
-              <MetaProps tag="Role" description="Product Designer" />
-              <MetaProps tag="Project Type" description="Feature Design" />
-              <MetaProps tag="Date" description="August 17th, 2021" />
-              <MetaProps tag="Duration" description="2 weeks" />
-            </dl>
-          </aside>
-          <Quote>
-            Seamlessly access information and focus on what really matters.
-          </Quote>
-          <Paragraph>
-            During my time at{" "}
-            <a
-              href="https://www.beezy.net/"
-              target="_blank"
-              className="underline hover:text-accent"
-            >
-              Beezy
-            </a>
-            , I took charge of designing a feature known as <i>Theatre Mode</i>.
-            Beezy is a modern intranet that{"'"}s part of the Appspace workplace
-            experience platform.
-          </Paragraph>
-          <Paragraph>
-            This feature centers around a modal interface, providing a seamless
-            way to view attached documents, photos, videos, PDFs, and more, all
-            while enabling real-time commenting and reacting. What sets this
-            feature apart is its adaptability - users can dive into content
-            within the modal or immerse themselves in a distraction-free
-            full-screen mode. Theatre Mode amplifies the user experience,
-            enabling seamless content exploration and dynamic interaction.
-          </Paragraph>
-          <H1>The problem</H1>
-          <Paragraph className="mb-6">
-            The Theatre Mode feature addresses two key pain points:
-          </Paragraph>
-          <NumberedList>
-            <NumberedListItem>
-              <b>Navigating content challenges</b>: With Theatre Mode, there
-              {"'"}s no need to download documents to access them. This
-              eliminates the hassle of downloading, saving, and managing files,
-              providing users with immediate access to the information they
-              need.
-            </NumberedListItem>
-            <NumberedListItem>
-              <b>Loss of time</b>: Theatre Mode creates a unified space where
-              users can seamlessly interact with the attached information.
-              Instead of navigating away to view or comment on documents, users
-              can engage directly within the same interface, streamlining their
-              workflow and enhancing their productivity.
-            </NumberedListItem>
-          </NumberedList>
-          <H1>The solution</H1>
-          <Paragraph>
-            Theatre Mode optimizes the user experience. It minimizes
-            disruptions, empowers users to engage directly with the content they
-            need, and ultimately fosters a more efficient and productive work
-            environment within Beezy{"'"}s digital workplace platform.
-          </Paragraph>
-        </SectionSm>
-        <SectionMd>
-          <Image
-            src="/assets/theatremodeblog1.png"
-            width={0}
-            height={0}
-            alt="Theatre mode modal with comments"
-            style={{ objectFit: "contain", width: "100%", height: "auto" }}
-            sizes="100vw"
-          />
-        </SectionMd>
-        <SectionSm>
-          <H1>Distraction-free mode</H1>
-          <Paragraph>
-            The theatre mode creates a dedicated, distraction-free environment
-            where users can solely concentrate on the content at hand. It
-            empowers users with the option to display or hide comments, ensuring
-            an undisturbed and immersive experience tailored to their needs.
-          </Paragraph>
-        </SectionSm>
-        <SectionMd>
-          <Image
-            src="/assets/theatremodeblog2.png"
-            width={0}
-            height={0}
-            alt="Theatre mode modal distraction-free mode"
-            style={{ objectFit: "contain", width: "100%", height: "auto" }}
-            sizes="100vw"
-          />
-        </SectionMd>
-        <SectionSm>
-          <H1>Content thumbnails</H1>
-          <Paragraph className="mb-6">
-            Thumbnails provides users with an efficient way to distinguish
-            between various types of attached content within the modal and to
-            effortlessly choose the specific content they wish to view.
-          </Paragraph>
-          <Image
-            src="/assets/theatremodeblog3.png"
-            width={0}
-            height={0}
-            alt="Thumbnails"
-            style={{ objectFit: "contain", width: "100%", height: "auto" }}
-            sizes="100vw"
-            className="mb-10"
-          />
-          <Paragraph>
-            Users can flip through attached content effortlessly with a cool
-            horizontal scrolling, and an intuitive hint guides them towards
-            hidden elements, ensuring a comprehensive viewing experience. To
-            access these elements, users can either scroll horizontally through
-            the thumbnails or conveniently tab through them, effortlessly
-            transitioning from one thumbnail to another.
-          </Paragraph>
-        </SectionSm>
-        <SectionMd>
-          <Image
-            src="/assets/theatremodeblog5.png"
-            width={0}
-            height={0}
-            alt="Horizontal scroll in thumbnails"
-            style={{ objectFit: "contain", width: "100%", height: "auto" }}
-            sizes="100vw"
-          />
-        </SectionMd>
-        <SectionSm>
-          <H1>Comments and likes</H1>
-          <Paragraph>
-            The right panel enables a dynamic side-by-side display of content
-            and comments. Users can effortlessly engage with comments while
-            simultaneously viewing the content, fostering real-time
-            collaboration and offering insight into ongoing discussions.
-          </Paragraph>
-        </SectionSm>
-        <SectionMd>
-          <Image
-            src="/assets/theatremodeblog4.png"
-            width={0}
-            height={0}
-            alt="Comments drawer"
-            style={{ objectFit: "contain", width: "100%", height: "auto" }}
-            sizes="100vw"
-          />
-        </SectionMd>
-        <SectionSm>
-          <H1>Content display</H1>
-          <Paragraph>
-            Whether it{"'"}s images, documents, videos, or PDFs, the modal is an
-            all-in-one hub. With a user-friendly interface, you can seamlessly
-            toggle between different types of content, giving you the
-            flexibility to engage with your attachments just the way you want.
-            No more switching windows or hunting for files. It{"'"}s all right
-            there, neatly organized for your convenience.
-          </Paragraph>
-          <Paragraph>
-            Check out the image below to see how we{"'"}ve displayed various
-            types of content.
-          </Paragraph>
-        </SectionSm>
-        <SectionXl>
-          <Image
-            src="/assets/theatremodeblog6.png"
-            width={0}
-            height={0}
-            alt="Content displayed"
-            style={{ objectFit: "contain", width: "100%", height: "auto" }}
-            sizes="100vw"
-          />
-        </SectionXl>
-        <SectionSm>
-          <H1>Hide/Show thumbnails</H1>
-          <Paragraph>
-            In a content-packed modal, you have the power to control your
-            experience. Toggle the content thumbnails on or off for a smoother
-            journey through your attachments. It{"'"}s all about tailoring the
-            experience to what suits users best!
-          </Paragraph>
-        </SectionSm>
-        <SectionMd>
-          <figure className="mb-10">
+
+      {/* Cover image section */}
+      <div className="w-full">
+        <div className="container mx-auto max-w-screen-xl border-x border-border">
+          <div className="w-full aspect-[16/9] max-h-[469px]">
             <Image
-              src="/assets/theatremodeblog7.png"
-              width={0}
-              height={0}
-              alt="Hide thumbnails"
-              style={{ objectFit: "contain", width: "100%", height: "auto" }}
+              src="/assets/theatremode.png"
+              alt="Theatre mode feature"
+              width={1280}
+              height={720}
+              className="w-full h-full"
               sizes="100vw"
+              style={{ objectFit: "cover" }}
             />
-            <Caption>Hide thumbnails</Caption>
-          </figure>
-          <figure className="mb-10">
-            <Image
-              src="/assets/theatremodeblog8.png"
-              width={0}
-              height={0}
-              alt="Show thumbnails"
-              style={{ objectFit: "contain", width: "100%", height: "auto" }}
-              sizes="100vw"
-            />
-            <Caption>Show thumbnails</Caption>
-          </figure>
-        </SectionMd>
-        <SectionSm>
-          <Paragraph>
-            In conclusion, Theatre Mode isn{"'"}t just a feature; it{"'"}s a
-            transformative tool that reshapes how we engage with content and
-            collaborate within the digital workspace. By addressing the pain
-            points of distraction, simplifying content interaction, and valuing
-            every second saved, this innovation aligns with Beezy{"'"}s
-            commitment to enhancing productivity and fostering seamless
-            communication. As we step into an era of ever-evolving work
-            dynamics, Theatre Mode stands as a testament to the power of
-            user-centric design in making work not just efficient, but
-            enjoyable.
-          </Paragraph>
-          <Paragraph className="text-lightGray">
-            * Photos by{" "}
-            <a
-              className=" hover:text-accent underline"
-              href="https://unsplash.com/en/@mkmasdos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-            >
-              MK +2
-            </a>{" "}
-            at{" "}
-            <a
-              className=" hover:text-accent underline"
-              href="https://unsplash.com/ en/photos/7R1eUOlI24M?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-            >
-              Unsplash
-            </a>
-          </Paragraph>
-        </SectionSm>
-      </article>
-      <NextBack href={"/avatars"} next={"Avatars"} />
+          </div>
+        </div>
+      </div>
+
+      {/* Introduction section */}
+      <div className="w-full">
+        <div className="container mx-auto max-w-screen-xl border-x border-border">
+          <div className="px-12 pt-24 py-6">
+            <div className="flex flex-col gap-6 max-w-3xl mx-auto">
+              <label className="text-base font-medium font-jetbrains-mono">FEATURE DESIGN</label>
+              <h1 className="text-5xl font-medium">
+                Theatre Mode<br />
+                <span className="font-cormorant italic">Seamlessly access information and focus on what really matters</span>
+              </h1>
+              <Paragraph>
+                During my time at{" "}
+                <a href="https://www.beezy.net/" className="underline hover:text-accent">
+                  Beezy
+                </a>
+                , I took charge of designing a feature known as <i>Theatre Mode</i>. Beezy is a modern intranet that's part of the Appspace workplace experience platform.
+              </Paragraph>
+              <Paragraph>
+                This feature centers around a modal interface, providing a seamless way to view attached documents, photos, videos, PDFs, and more, all while enabling real-time commenting and reacting. What sets this feature apart is its adaptability - users can dive into content within the modal or immerse themselves in a distraction-free full-screen mode.
+              </Paragraph>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full">
+        <div className="container mx-auto max-w-screen-xl border-x border-border">
+          <div className="px-12 py-6">
+            {/* Project details section */}
+            <div className="max-w-3xl mx-auto grid grid-cols-4 gap-4">
+              <div className="bg-white/70 border border-border rounded-lg p-3">
+                <h3 className="text-xs font-jetbrains-mono text-black/60 uppercase mb-1">Role</h3>
+                <p className="text-sm font-medium">Product Designer</p>
+              </div>
+              <div className="bg-white/70 border border-border rounded-lg p-3">
+                <h3 className="text-xs font-jetbrains-mono text-black/60 uppercase mb-1">Project Type</h3>
+                <p className="text-sm font-medium">Feature Design</p>
+              </div>
+              <div className="bg-white/70 border border-border rounded-lg p-3">
+                <h3 className="text-xs font-jetbrains-mono text-black/60 uppercase mb-1">Date</h3>
+                <p className="text-sm font-medium">August 17th, 2021</p>
+              </div>
+              <div className="bg-white/70 border border-border rounded-lg p-3">
+                <h3 className="text-xs font-jetbrains-mono text-black/60 uppercase mb-1">Duration</h3>
+                <p className="text-sm font-medium">2 weeks</p>
+              </div>
+            </div>
+
+            {/* Main content */}
+            <div className="px-12 pt-16 pb-12">
+              <div className="max-w-3xl mx-auto">
+                <div className="flex flex-col gap-6">
+                  <Title>The problem</Title>
+                  <Paragraph>
+                    The Theatre Mode feature addresses two key pain points:
+                  </Paragraph>
+                  <NumberedList>
+                    <NumberedListItem>
+                      <strong>Navigating content challenges:</strong> With Theatre Mode, there's no need to download documents to access them. This eliminates the hassle of downloading, saving, and managing files, providing users with immediate access to the information they need.
+                    </NumberedListItem>
+                    <NumberedListItem>
+                      <strong>Loss of time:</strong> Theatre Mode creates a unified space where users can seamlessly interact with the attached information. Instead of navigating away to view or comment on documents, users can engage directly within the same interface, streamlining their workflow and enhancing their productivity.
+                    </NumberedListItem>
+                  </NumberedList>
+                  <Title>The solution</Title>
+                  <Paragraph>
+                  Theatre Mode optimizes the user experience. It minimizes disruptions, empowers users to engage directly with the content they need, and ultimately fosters a more efficient and productive work environment within Beezy's digital workplace platform.
+                  </Paragraph>
+                  <Image
+                    src="/assets/theatremodeblog1.png"
+                    alt="Theatre mode"
+                    width={1280}
+                    height={720}
+                    className="w-full h-full"
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <Title>Distraction-free experience</Title>
+                  <Paragraph>
+                  Theatre Mode creates a distraction-free environment, allowing users to focus solely on the content they need. This immersive experience ensures that users can engage with the attached information without being distracted by other interface elements.
+                  </Paragraph>
+                  <Image
+                    src="/assets/theatremodeblog2.png"
+                    alt="Theatre mode"
+                    width={1280}
+                    height={720}
+                    className="w-full h-full"
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <Title>Content thumbnails</Title>
+                  <Paragraph>
+                  Thumbnails provides users with an efficient way to distinguish between various types of attached content within the modal and to effortlessly choose the specific content they wish to view.
+                  </Paragraph>
+                  <Image
+                    src="/assets/theatremodeblog3.png"
+                    alt="Theatre mode"
+                    width={1280}
+                    height={720}
+                    className="w-full h-full"
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <Paragraph>
+                  Users can flip through attached content effortlessly with a cool horizontal scrolling, and an intuitive hint guides them towards hidden elements, ensuring a comprehensive viewing experience. To access these elements, users can either scroll horizontally through the thumbnails or conveniently tab through them, effortlessly transitioning from one thumbnail to another.
+                  </Paragraph>
+                  <Image
+                    src="/assets/theatremodeblog5.png"
+                    alt="Theatre mode"
+                    width={1280}
+                    height={720}
+                    className="w-full h-full"
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <Title>Comments and likes</Title>
+                  <Paragraph>
+                  The right panel enables a dynamic side-by-side display of content and comments. Users can effortlessly engage with comments while simultaneously viewing the content, fostering real-time collaboration and offering insight into ongoing discussions.
+                  </Paragraph>
+                  <Image
+                    src="/assets/theatremodeblog4.png"
+                    alt="Theatre mode"
+                    width={1280}
+                    height={720}
+                    className="w-full h-full"
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <Title>Content display</Title>
+                  <Paragraph>
+                  Whether it's images, documents, videos, or PDFs, the modal is an all-in-one hub. With a user-friendly interface, you can seamlessly toggle between different types of content, giving you the flexibility to engage with your attachments just the way you want. No more switching windows or hunting for files. It's all right there, neatly organized for your convenience.
+                  </Paragraph>
+                  <Paragraph>
+                  Check out the image below to see how we've displayed various types of content.
+                  </Paragraph>
+                  <Image
+                    src="/assets/theatremodeblog6.png"
+                    alt="Theatre mode"
+                    width={1280}
+                    height={720}
+                    className="w-full h-full"
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <Title>Hide/Show thumbnails</Title>
+                  <Paragraph>
+                  In a content-packed modal, you have the power to control your experience. Toggle the content thumbnails on or off for a smoother journey through your attachments. It's all about tailoring the experience to what suits users best!
+                  </Paragraph>
+                  <figure>
+                    <Image
+                      src="/assets/theatremodeblog7.png"
+                      alt="Theatre mode"
+                    width={1280}
+                    height={720}
+                    className="w-full h-full"
+                    sizes="100vw"
+                      style={{ objectFit: "cover" }}
+                    />
+                    <figcaption className="font-cormorant italic text-base text-center mx-auto pt-2 md:pt-6">
+                    Hide thumbnails
+                    </figcaption>
+                  </figure>
+                  <figure>
+                    <Image
+                      src="/assets/theatremodeblog8.png"
+                      alt="Theatre mode"
+                      width={1280}
+                      height={720}
+                      className="w-full h-full"
+                      sizes="100vw"
+                      style={{ objectFit: "cover" }}
+                    />
+                    <figcaption className="font-cormorant italic text-base text-center mx-auto pt-2 md:pt-6">
+                    Show thumbnails
+                    </figcaption>
+                  </figure>
+                  <Paragraph>
+                  In conclusion, Theatre Mode isn't just a feature; it's a transformative tool that reshapes how we engage with content and collaborate within the digital workspace. By addressing the pain points of distraction, simplifying content interaction, and valuing every second saved, this innovation aligns with Beezy's commitment to enhancing productivity and fostering seamless communication. As we step into an era of ever-evolving work dynamics, Theatre Mode stands as a testament to the power of user-centric design in making work not just efficient, but enjoyable.
+                  </Paragraph>
+                  <p className="text-sm font-cormorant italic text-gray-600">
+                  * Photos by <a href="https://unsplash.com/en/@mkmasdos" target="_blank" rel="noopener noreferrer">MK +2</a> at <a href="https://unsplash.com/%20en/photos/7R1eUOlI24M" target="_blank" rel="noopener noreferrer">Unsplash</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <NextBack 
+        prev={{
+          href: "/",
+          text: "All projects"
+        }}
+        next={{
+          href: "/avatars",
+          text: "Avatars"
+        }}
+      />
+
+      {/* Footer */}
+      <div className="w-full">
+        <div className="container mx-auto max-w-screen-xl border-x border-border relative">
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }
