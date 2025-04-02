@@ -8,7 +8,6 @@ import MenuPhone from "@/components/MenuPhone";
 import Footer from "@/app/Footer";
 import NextBack from "@/components/NextBack";
 import Paragraph from "@/components/design system/Paragraph";
-import Quote from "@/components/design system/Quote";
 import Title from "@/components/design system/Title";
 import NumberedList from "@/components/design system/NumberedList";
 import NumberedListItem from "@/components/design system/NumberedListItem";
@@ -238,8 +237,8 @@ export default function TheatreMode() {
       {/* Navigation */}
       <NextBack 
         prev={{
-          href: "/",
-          text: "All projects"
+          href: "/gumroad",
+          text: "Gumroad"
         }}
         next={{
           href: "/avatars",
