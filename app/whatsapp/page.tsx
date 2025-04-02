@@ -6,23 +6,16 @@ import Logo from "@/components/Logo";
 import MenuDesktop from "@/components/MenuDesktop";
 import MenuPhone from "@/components/MenuPhone";
 import Footer from "@/app/Footer";
-import SectionSm from "@/components/design system/SectionSm";
 import Title from "@/components/design system/Title";
-import MetaProps from "@/components/MetaProp";
 import Paragraph from "@/components/design system/Paragraph";
-import H1 from "@/components/design system/H1";
 import Quote from "@/components/design system/Quote";
 import BulletedList from "@/components/design system/BulletedList";
 import BulletedListItem from "@/components/design system/BulletedListItem";
-import SectionXl from "@/components/design system/SectionXl";
-import Caption from "@/components/design system/Caption";
-import SectionMd from "@/components/design system/SectionMd";
-import SectionLg from "@/components/design system/SectionLg";
 import NextBack from "@/components/NextBack";
 
 export default function WhatsappPage() {
   return (
-    <div className="bg-background min-h-screen font-figtree [background-image:radial-gradient(rgba(0,0,0,0.07)_1px,transparent_1px)] [background-size:16px_16px]">
+    <div className="bg-background min-h-screen font-figtree [background-image:radial-gradient(rgba(0,0,0,0.06)_1px,transparent_1px)] [background-size:16px_16px]">
       {/* Header */}
       <div className="w-full border-b border-border">
         <header className="container mx-auto max-w-screen-xl">
@@ -71,11 +64,10 @@ export default function WhatsappPage() {
         </div>
       </div>
 
-
       <div className="w-full">
         <div className="container mx-auto max-w-screen-xl border-x border-border">
-          {/* Project details section */}
           <div className="px-12 py-6">
+          {/* Project details section */}
             <div className="max-w-3xl mx-auto grid grid-cols-4 gap-4">
               <div className="bg-white/70 border border-border rounded-lg p-3">
                 <h3 className="text-xs font-jetbrains-mono text-black/60 uppercase mb-1">Role</h3>

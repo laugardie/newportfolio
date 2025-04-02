@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import IconPlus from "@/components/icons/IconPlus";
 import ProjectCover from "@/components/ProjectCover";
-import Image from "next/image";
 import Link from "next/link";
 import type { ProjectFilterType } from "@/types";
 import { projects } from "@/utils/projects";
@@ -48,7 +46,7 @@ export default function Home() {
   const [filter, setFilter] = useState<ProjectFilterType>("all");
 
   return (
-    <div className="bg-background min-h-screen font-figtree [background-image:radial-gradient(rgba(0,0,0,0.07)_1px,transparent_1px)] [background-size:16px_16px]">
+    <div className="bg-background min-h-screen font-figtree [background-image:radial-gradient(rgba(0,0,0,0.06)_1px,transparent_1px)] [background-size:16px_16px]">
       {/* Header */}
       <div className="w-full border-b border-border">
         <header className="container mx-auto max-w-screen-xl">
