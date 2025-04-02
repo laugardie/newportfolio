@@ -8,7 +8,6 @@ import MenuPhone from "@/components/MenuPhone";
 import Footer from "@/app/Footer";
 import NextBack from "@/components/NextBack";
 import Paragraph from "@/components/design system/Paragraph";
-import Title from "@/components/design system/Title";
 
 export default function Inbolt() {
   return (
