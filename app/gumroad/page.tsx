@@ -9,13 +9,7 @@ import Footer from "@/app/Footer";
 import NextBack from "@/components/NextBack";
 import Paragraph from "@/components/design system/Paragraph";
 import Title from "@/components/design system/Title";
-import Quote from "@/components/design system/Quote";
-import MetaProps from "@/components/MetaProp";
-import BulletedList from "@/components/design system/BulletedList";
-import BulletedListItem from "@/components/design system/BulletedListItem";
 import Caption from "@/components/design system/Caption";
-import SectionMd from "@/components/design system/SectionMd";
-import SectionSm from "@/components/design system/SectionSm";
 
 export default function Gumroad() {
   return (
