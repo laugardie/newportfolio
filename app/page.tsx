@@ -66,7 +66,7 @@ export default function Home() {
           {/* Main content */}
           <div className="px-6 border-b border-border">
             {/* Header section */}
-            <div className="pt-24 md:pt-48 pb-24 md:pb-56 relative">
+            <div className="pt-32 md:pt-48 pb-32 md:pb-56 relative">
               {/* Circle with arrow */}
               <div className="absolute left-1/2 bottom-0 -mb-5 -translate-x-1/2">
                 <button 
