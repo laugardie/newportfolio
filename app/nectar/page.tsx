@@ -115,8 +115,8 @@ export default function Nectar() {
           {/* Navigation */}
           <NextBack 
             prev={{
-              href: "/buidlguild",
-              text: "BuidlGuild"
+              href: "/buidlguidl",
+              text: "Buidlguidl"
             }}
             next={{
               href: "/gumroad",

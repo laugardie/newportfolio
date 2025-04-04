@@ -211,7 +211,7 @@ export default function Home() {
           <div className="w-full border-b border-border">
             <div className="container mx-auto max-w-screen-xl">
               {/* Work section */}
-              <section className="pt-24 xl:pt-36 px-6 md:px-12">
+              <section id="workplay" className="pt-24 xl:pt-36 px-6 md:px-12">
                 <label className="text-center block mb-4 md:mb-6 text-xs md:text-base font-medium font-jetbrains-mono uppercase">Workplay</label>
                 <h2 className="text-center mb-16 text-4xl md:text-5xl font-medium">
                   The way <br className="block md:hidden" /> I make sense<br />
@@ -275,7 +275,7 @@ export default function Home() {
           <div className="w-full border-b border-border">
             <div className="container mx-auto max-w-screen-xl">
               {/* Toolkit section */}
-              <section className="pt-24 xl:pt-36 px-6 md:px-12">
+              <section id="toolkit" className="pt-24 xl:pt-36 px-6 md:px-12">
                 <label className="text-center block mb-4 md:mb-6 text-xs md:text-base font-medium font-jetbrains-mono uppercase">Toolkit</label>
                 <h2 className="text-center mb-14 text-4xl md:text-5xl font-medium">
                   Designing <span className="font-cormorant italic">smarter</span>,<br />

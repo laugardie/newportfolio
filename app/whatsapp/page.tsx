@@ -437,12 +437,12 @@ export default function WhatsappPage() {
           {/* Navigation */}
           <NextBack 
             prev={{
-              href: "/buidlguidl",
-              text: "Buidlguidl"
+              href: "/goeat",
+              text: "Goeat"
             }}
             next={{
-              href: "/nectar",
-              text: "Nectar"
+              href: "/",
+              text: "Gumroad Design System"
             }}
           />
 
