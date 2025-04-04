@@ -32,20 +32,28 @@ export default function Goeat() {
       {/* Cover image section */}
       <div className="w-full">
         <div className="container mx-auto max-w-screen-xl border-x border-border">
-          <Image
-            src="/assets/goeat-cover-mobile.png"
-            alt="Goeat app cover image" 
-            width={1280}
-            height={720}
-            className="w-full sm:hidden"
-          />
-          <Image 
-            src="/assets/goeat.png"
-            alt="Goeat app cover image"
-            width={1280}
-            height={720}
-            className="hidden sm:flex w-full"
-          />
+          <div className="w-full aspect-[16/9] max-h-[469px] relative">
+            <Image
+              src="/assets/goeat-cover-mobile.png"
+              alt="Goeat app cover image" 
+              width={1280}
+              height={720}
+              className="w-full sm:hidden"
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+              priority
+            />
+            <Image 
+              src="/assets/goeat.png"
+              alt="Goeat app cover image"
+              width={1280}
+              height={720}
+              className="hidden sm:block w-full h-full"
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+              priority
+            />
+          </div>
         </div>
       </div>
 
@@ -78,11 +86,12 @@ export default function Goeat() {
         </div>
       </div>
 
+      {/* Project details and main content */}
       <div className="w-full">
         <div className="container mx-auto max-w-screen-xl border-x border-border">
-          {/* Project details section */}
           <div className="px-12 py-6">
-            <div className="max-w-3xl mx-auto grid grid-cols-4 gap-4">
+            {/* Project details section */}
+            <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="bg-white/70 border border-border rounded-lg p-3">
                 <h3 className="text-xs font-jetbrains-mono text-black/60 uppercase mb-1">Role</h3>
                 <p className="text-sm font-medium">Designer</p>
@@ -101,6 +110,8 @@ export default function Goeat() {
               </div>
             </div>
           </div>
+
+          {/* Main content sections */}
           {/* The problem section */}
           <div className="px-12 py-4">
             <div className="max-w-3xl mx-auto">
@@ -564,10 +575,10 @@ export default function Goeat() {
               <div className="flex flex-col gap-6">
                 <Title>Style Guide</Title>
                 <Paragraph>
-                 To maintain consistency and alignment with the brand&apos;s vision, this document serves as a comprehensive guide, offering essential guidelines and visual references for the design process.
+                  To maintain consistency and alignment with the brand&apos;s vision, this document serves as a comprehensive guide, offering essential guidelines and visual references for the design process.
                 </Paragraph>
                 <Paragraph>
-                 <strong>Typography:</strong> We have selected <strong><i>Lato</i></strong> as the primary typeface. Created by <strong>Lukasz Dziedzic</strong>, Lato is a warm and friendly Sans Serif font. Its semi-rounded details strike the perfect balance between formality and approachability, enhancing the overall brand persona.
+                  <strong>Typography:</strong> We have selected <strong><i>Lato</i></strong> as the primary typeface. Created by <strong>Lukasz Dziedzic</strong>, Lato is a warm and friendly Sans Serif font. Its semi-rounded details strike the perfect balance between formality and approachability, enhancing the overall brand persona.
                 </Paragraph>
                 <Image
                   src="/assets/goeatblog12.png"
@@ -638,8 +649,7 @@ export default function Goeat() {
                   className="rounded-lg border border-border mx-auto max-w-xs"
                 />
                 <Paragraph>
-                In this second video, we witness the user's seamless transition from discovering the restaurant to immersing themselves in the dining experience. As the user arrives at the restaurant, they receive a notification prompting them to access the restaurant's menu.
-                </Paragraph>
+                In this second video, we witness the user&apos;s seamless transition from discovering                  </Paragraph>
                 <Paragraph>
                 With a simple tap, the user effortlessly accesses the menu, revealing a visually enticing display of culinary delights. They navigate through the menu, exploring different sections and dishes with ease. When the user selects a dessert, they are presented with additional information, such as ingredients and a captivating description.
                 </Paragraph>
@@ -653,7 +663,7 @@ export default function Goeat() {
                   className="rounded-lg border border-border mx-auto max-w-xs"
                 />
                 <Paragraph>
-                In this third video, we witness the user's return to the app, this time to take advantage of the discount points feature and further engage with their dining experiences.
+                In this third video, we witness the user&apos;s return to the app, this time to take advantage of the discount points feature and further engage with their dining experiences.
                 </Paragraph>
                 <Image
                   src="/assets/goeatflinto3.gif"
@@ -687,17 +697,22 @@ export default function Goeat() {
               </div>
             </div>
           </div>
-          {/*Next Steps section*/}
-          <div className="px-12 pt-4 pb-24">
+        </div>
+      </div>
+
+      {/* Next Steps section */}
+      <div className="w-full">
+        <div className="container mx-auto max-w-screen-xl border-x border-border">
+          <div className="px-12 pt-6 pb-12">
             <div className="max-w-3xl mx-auto">
               <div className="flex flex-col gap-6">
                 <Title>Next Steps</Title>
                 <Paragraph>
-                As Goeat continues to evolve, several exciting features are on the horizon, waiting to be explored and tested:
+                  As Goeat continues to evolve, several exciting features are on the horizon, waiting to be explored and tested:
                 </Paragraph>
                 <BulletedList>
                   <BulletedListItem>
-                    <b>Monetization Strategy:</b> Exploring premium features, partnerships with local restaurants, and targeted advertising opportunities to create sustainable revenue streams while maintaining the app's core value for users.
+                    <b>Monetization Strategy:</b> Exploring premium features, partnerships with local restaurants, and targeted advertising opportunities to create sustainable revenue streams while maintaining the app&apos;s core value for users.
                   </BulletedListItem>
                   <BulletedListItem>
                     <b>Friend Following:</b> Enabling users to connect and follow friends on Goeat opens up new social dimensions to the app. Testing this feature will empower users to discover and share culinary experiences with their social circle.
@@ -719,16 +734,21 @@ export default function Goeat() {
       </div>
 
       {/* Navigation */}
-      <NextBack 
-        prev={{
-          href: "/lexicon",
-          text: "Lexicon"
-        }}
-        next={{
-          href: "/whatsapp",
-          text: "WhatsApp polls"
-        }}
-      />
+      <div className="w-full">
+        <div className="container mx-auto max-w-screen-xl border-x border-border">
+          <NextBack 
+            prev={{
+              href: "/lexicon",
+              text: "Lexicon"
+            }}
+            next={{
+              href: "/whatsapp",
+              text: "WhatsApp polls"
+            }}
+          />
+        </div>
+      </div>
+
       {/* Footer */}
       <div className="w-full">
         <div className="container mx-auto max-w-screen-xl border-x border-border relative">
@@ -738,4 +758,3 @@ export default function Goeat() {
     </div>
   );
 }
-
