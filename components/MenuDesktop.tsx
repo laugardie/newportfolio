@@ -17,19 +17,19 @@ const MenuDesktop = ({ className }: MenuDesktopProps) => {
     >
       <nav className="flex items-center">
         <Link
-          className="px-6 py-4 border-r border-l border-border transition-all text-black hover:bg-white/70 hover:text-black"
+          className="px-4 sm:px-6 py-4 border-r border-l border-border transition-all text-black hover:bg-white/70 hover:text-black"
           href="/"
         >
           Experience
         </Link>
         <Link
-          className="px-6 py-4 border-r border-border transition-all text-black hover:bg-white/70 hover:text-black"
+          className="px-4 sm:px-6 py-4 border-r border-border transition-all text-black hover:bg-white/70 hover:text-black"
           href="/workplay"
         >
           Workplay
         </Link>
         <Link
-          className="px-6 py-4 border-r border-border transition-all text-black hover:bg-white/70 hover:text-black"
+          className="px-4 sm:px-6 py-4 border-r border-border transition-all text-black hover:bg-white/70 hover:text-black"
           href="/toolkit"
         >
           Toolkit
@@ -37,7 +37,7 @@ const MenuDesktop = ({ className }: MenuDesktopProps) => {
       </nav>
       <div className="flex items-center">
         <Link
-          className={`border-l border-r border-border px-6 py-4 transition-all ${
+          className={`border-l border-r border-border px-4 sm:px-6 py-4 transition-all ${
             pathname === "/download-cv"
               ? "text-white bg-black"
               : "text-black hover:bg-white/70 hover:text-black"
@@ -47,7 +47,7 @@ const MenuDesktop = ({ className }: MenuDesktopProps) => {
           Download CV
         </Link>
         <Link
-          className="font-base font-regular flex items-center h-full px-6 py-4 bg-black text-white hover:bg-accent transition-all"
+          className="font-base font-regular flex items-center h-full px-4 md:px-6 py-4 bg-black text-white hover:bg-accent transition-all"
           href="mailto:laugardie89@gmail.com"
           target="_blank"
         >

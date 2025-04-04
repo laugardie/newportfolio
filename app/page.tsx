@@ -49,24 +49,24 @@ export default function Home() {
     <div className="bg-background min-h-screen font-figtree [background-image:radial-gradient(rgba(0,0,0,0.06)_1px,transparent_1px)] [background-size:16px_16px]">
       {/* Add margin container */}
       <div className="mx-6 md:mx-12">
-        <div className="mx-auto max-w-[1280px] border-x border-border min-h-screen">
+        <div className="mx-auto max-w-7xl border-x border-border min-h-screen">
           {/* Header */}
           <div className="w-full border-b border-border">
-            <header className="md:px-6 pr-4 pl-0">
+            <header className="md:px-0 pr-4 pl-0">
               <div className="flex justify-between items-center">
                 <Link className="cursor-pointer" href="/">
                   <div className="pl-1 hover:bg-white/70 hover:text-black"><Logo /></div>
                 </Link>
-                <MenuDesktop className="hidden md:flex" />
-                <MenuPhone className="flex md:hidden" />
+                <MenuDesktop className="hidden lg:flex" />
+                <MenuPhone className="flex lg:hidden" />
               </div>
             </header>
           </div>
 
           {/* Main content */}
-          <div className="px-6 border-b border-border">
+          <div className="px-12 border-b border-border">
             {/* Header section */}
-            <div className="pt-32 md:pt-48 pb-32 md:pb-56 relative">
+            <div className="pt-32 lg:pt-48 pb-32 lg:pb-56 relative">
               {/* Circle with arrow */}
               <div className="absolute left-1/2 bottom-0 -mb-5 -translate-x-1/2">
                 <button 
@@ -87,8 +87,8 @@ export default function Home() {
                 </button>
               </div>
               
-              <div className="font-semibold md:font-bold text-5xl md:text-7xl">
-                Creating fresh,<br /> memorable <span className="font-cormorant italic font-semibold mt-2 md:mt-0 block md:inline">
+              <div className="font-semibold text-5xl md:text-7xl">
+                Creating fresh,<br /> memorable <span className="font-cormorant italic font-semibold mt-2 lg:mt-0 block lg:inline">
                   <div className="inline-block border-2 border-black px-2 pb-2 relative">
                     experiences
                     {/* Corner elements */}
@@ -97,10 +97,10 @@ export default function Home() {
                     <div className="absolute -left-2 -bottom-2 w-3 h-3 border-2 border-black bg-background"></div>
                     <div className="absolute -right-2 -bottom-2 w-3 h-3 border-2 border-black bg-background"></div>
                     {/* Cursor and pink label */}
-                    <div className="absolute -right-16 top-full mt-2 hidden md:flex flex-col items-end">
+                    <div className="absolute -right-16 top-full mt-2 flex flex-col items-end">
                       <div className="relative w-full">
-                        <CursorArrow className="absolute top-16 -left-32" />
-                        <div className="absolute -right-2 -bottom-16 font-jetbrains-mono border-accent border-2 bg-accentLight text-white px-4 py-1.5 rounded-r-full rounded-bl-full text-base font-medium">
+                        <CursorArrow className="absolute top-1 -left-32 sm:-top-1 sm:-left-20 lg:top-1 lg:-left-32 xl:top-4 xl:-left-20" />
+                        <div className="absolute -right-2 -bottom-16 sm:-bottom-16 sm:-right-16 lg:-bottom-16 lg:-right-4 xl:-bottom-20 xl:-right-16 font-jetbrains-mono border-accent border-2 bg-accentLight text-white px-4 py-1.5 rounded-r-full rounded-bl-full text-base font-medium">
                           laugardie
                         </div>
                       </div>
@@ -109,7 +109,7 @@ export default function Home() {
                 </span>
               </div>
               <div className="text-base pt-8 md:pt-6">
-                Laura García Diéguez—Senior Product designer <Link href="https://gumroad.com/" className="text-accent">@Gumroad</Link>
+                Laura García Diéguez <br className="lg:hidden" /> —Senior Product designer <br className="md:hidden" /> <Link href="https://gumroad.com/" className="text-accent">@Gumroad</Link>
              </div>
              </div>
           </div>
@@ -119,7 +119,7 @@ export default function Home() {
               {/* Experience section */}
               <section 
                 id="experience" 
-                className="pt-24 pb-24 md:pb-36 px-6 md:px-12 flex flex-col items-center"
+                className="pt-24 pb-24 xl:pb-36 px-6 md:px-12 flex flex-col items-center"
               >
                 <label className="text-center mb-4 md:mb-6 text-xs md:text-base font-medium font-jetbrains-mono">EXPERIENCE</label>
                 <h2 className="text-center mb-16 text-4xl md:text-5xl font-medium">
@@ -211,14 +211,14 @@ export default function Home() {
           <div className="w-full border-b border-border">
             <div className="container mx-auto max-w-screen-xl">
               {/* Work section */}
-              <section className="pt-24 md:pt-36 px-6 md:px-12">
+              <section className="pt-24 xl:pt-36 px-6 md:px-12">
                 <label className="text-center block mb-4 md:mb-6 text-xs md:text-base font-medium font-jetbrains-mono uppercase">Workplay</label>
                 <h2 className="text-center mb-16 text-4xl md:text-5xl font-medium">
                   The way <br className="block md:hidden" /> I make sense<br />
                   of the <span className="font-cormorant italic">world</span>, one pixel at a time.
                 </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 pb-24 md:pb-36">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 pb-24 xl:pb-36">
                   <ProjectCover 
                     key="gumroad-design-system"
                     href="https://www.figma.com/community/file/1405573618937136138"
@@ -275,13 +275,13 @@ export default function Home() {
           <div className="w-full border-b border-border">
             <div className="container mx-auto max-w-screen-xl">
               {/* Toolkit section */}
-              <section className="pt-24 md:pt-36 px-6 md:px-12">
+              <section className="pt-24 xl:pt-36 px-6 md:px-12">
                 <label className="text-center block mb-4 md:mb-6 text-xs md:text-base font-medium font-jetbrains-mono uppercase">Toolkit</label>
                 <h2 className="text-center mb-14 text-4xl md:text-5xl font-medium">
                   Designing <span className="font-cormorant italic">smarter</span>,<br />
                   coding <span className="font-cormorant italic">faster</span>.
                 </h2>
-                <div className="flex flex-wrap justify-center gap-3 max-w-[942px] mx-auto pb-24 md:pb-36">
+                <div className="flex flex-wrap justify-center gap-3 max-w-[942px] mx-auto pb-24 xl:pb-36">
                   {TOOLKIT_ITEMS.map((tool) => (
                     <span 
                       key={tool}

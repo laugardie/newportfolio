@@ -16,7 +16,7 @@ export default function NextBack({ next, prev }: NextBackProps) {
   return (
     <div className="w-full border-t border-b border-border">
       <div className="container mx-auto max-w-screen-xl">
-        <div className="border-x border-border grid grid-cols-2">
+        <div className=" grid grid-cols-2">
           <Link 
             href={prev.href}
             className="px-6 py-4 border-r border-border hover:bg-white/70 hover:text-black transition-colors flex items-center gap-2"
