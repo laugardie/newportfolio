@@ -58,10 +58,10 @@ export default function Nectar() {
                   <a href="https://www.beezy.net/" className="underline hover:text-accent">
                     Beezy
                   </a>
-                  , I embraced an exciting challenge – building a brand-new design system from scratch. This meant not just creating the essential foundations, such as developing tools, refining processes, establishing naming conventions, defining organizational structures, crafting a unique brand identity, and creating a memorable logo, but it also involved the seamless integration of fresh components into our team's Figma library.
+                  , I embraced an exciting challenge – building a brand-new design system from scratch. This meant not just creating the essential foundations, such as developing tools, refining processes, establishing naming conventions, defining organizational structures, crafting a unique brand identity, and creating a memorable logo, but it also involved the seamless integration of fresh components into our team&apos;s Figma library.
                 </Paragraph>
                 <Paragraph>
-                I made sure to keep these resources current, so our design system, which I proudly named "Nectar", always stayed up-to-date and incredibly useful for the team. This allowed us to enhance our design workflow but also fostered a sense of unity and consistency across all our projects.</Paragraph>
+                I made sure to keep these resources current, so our design system, which I proudly named &quot;Nectar&quot;, always stayed up-to-date and incredibly useful for the team. This allowed us to enhance our design workflow but also fostered a sense of unity and consistency across all our projects.</Paragraph>
               </div>
             </div>
           </div>
