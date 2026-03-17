@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { projects, type Project } from "@/content/projects";
 import { explorations } from "@/content/explorations";
 import LogoLau from "@/components/LogoLau";
@@ -94,9 +95,11 @@ const SectionHeading = ({ children }: { children: React.ReactNode }) => (
 
 function ExpLogo({ src, name }: { src: string; name: string }) {
   return (
-    <img
+    <Image
       src={src}
       alt={name}
+      width={32}
+      height={32}
       className="w-8 h-8 flex-shrink-0 object-contain"
     />
   );
@@ -159,11 +162,9 @@ function WorkRow({ project }: { project: Project }) {
         variants={slideVariants}
         transition={slideTransition}
       >
-        <img
-          src={project.thumbnail}
-          alt=""
-          className="flex-shrink-0 object-cover rounded-[4px] w-14 h-10 sm:w-[72px] sm:h-12"
-        />
+        <div className="relative flex-shrink-0 rounded-[4px] overflow-hidden w-14 h-10 sm:w-[72px] sm:h-12">
+          <Image src={project.thumbnail} alt="" fill className="object-cover" />
+        </div>
         {/* Mobile: stacked name + company · year */}
         <div className="sm:hidden flex-1 min-w-0">
           <div className="text-base text-ink truncate">{project.title}</div>
@@ -223,11 +224,9 @@ function ListRow({ item }: { item: ListItem }) {
         variants={slideVariants}
         transition={slideTransition}
       >
-        <img
-          src={item.thumbnail}
-          alt=""
-          className="flex-shrink-0 object-cover rounded-[4px] w-14 h-10 sm:w-[72px] sm:h-12"
-        />
+        <div className="relative flex-shrink-0 rounded-[4px] overflow-hidden w-14 h-10 sm:w-[72px] sm:h-12">
+          <Image src={item.thumbnail} alt="" fill className="object-cover" />
+        </div>
         {/* Mobile: stacked name + company · year */}
         <div className="sm:hidden flex-1 min-w-0">
           <div className="text-base text-ink truncate">{item.name}</div>

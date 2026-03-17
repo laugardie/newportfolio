@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { explorations } from "@/content/explorations";
 
 function renderTextContent(content: string) {
@@ -64,10 +65,14 @@ export default function ExplorationPage({ params }: Props) {
               return (
                 <figure key={i} className="-mx-16">
                   <div className="rounded-2xl overflow-hidden bg-surface">
-                    <img
+                    <Image
                       src={section.content}
                       alt={section.caption ?? ""}
-                      className="w-full object-cover"
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      style={{ width: "100%", height: "auto" }}
+                      className="object-cover"
                     />
                   </div>
                   {section.caption && (
