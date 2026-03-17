@@ -1,0 +1,13 @@
+<svg width="236" height="150" viewBox="0 0 236 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+  .bg { fill: #F2EFE9; }
+  @media (prefers-color-scheme: dark) {
+    .bg { fill: #1C1A17; }
+  }
+</style>
+<rect class="bg" width="236" height="150" rx="8"/>
+<path d="M139.427 33.0303H117.141V53.3619H139.427V33.0303Z" fill="#D97757"/>
+<path d="M117.138 83.3943H96.4258V117.797H117.138V83.3943Z" fill="#D97757"/>
+<path d="M117.138 53.3623H96.4258V64.36H117.138V53.3623Z" fill="#D97757"/>
+<path d="M139.427 64.3591H117.141V83.4218H139.427V64.3591Z" fill="#D97757"/>
+</svg>

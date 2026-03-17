@@ -1,190 +1,94 @@
-import BulletedList from "@/components/design system/BulletedList";
-import BulletedListItem from "@/components/design system/BulletedListItem";
-import H1 from "@/components/design system/H1";
-import Paragraph from "@/components/design system/Paragraph";
-import Quote from "@/components/design system/Quote";
-import SectionMd from "@/components/design system/SectionMd";
-import SectionSm from "@/components/design system/SectionSm";
-import Image from "next/image";
-import Link from "next/link";
-import Footer from "../Footer";
+import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
+
+const CLIENTS = [
+  'Gumroad',
+  'Antiwork',
+  'BuidlGuidl',
+  'Liferay',
+  'Beezy',
+  'Flexile',
+]
 
 export default function About() {
   return (
     <>
-      <SectionSm className="pt-24">
-        <h1 className="font-extrabold text-5xl lg:text-6xl mt-20 lg:mt-40 pb-8 leading-[58px] lg:leading-[68px]">
-          Passionate about pixels and experiences
-        </h1>
-        <Paragraph>
-          Hola! I{"'"} m Laura, a design enthusiast on a mission to tackle real
-          problems and create captivating, functional, and user-friendly
-          experiences.
-        </Paragraph>
-        <Paragraph>
-          Currently, I{"'"}m rocking the remote life as a freelance Product
-          Designer. Previously, I had the privilege of being part of the
-          talented team at{" "}
-          <a className="underline hover:text-accent" href="https://gumroad.com">
-            Gumroad
-          </a>
-          , an online marketplace for creators. I also had the opportunity to
-          work at{" "}
-          <a
-            className="underline hover:text-accent"
-            href="https://www.beezy.net/"
+      <Nav />
+
+      <main className="pt-20">
+        <div className="max-w-2xl mx-auto px-6 md:px-10 pt-16 md:pt-32 pb-4">
+
+          {/* ── Headline ──────────────────────────────────────── */}
+          <h1
+            className="font-fraunces font-black text-ink leading-[1.03] tracking-tight"
+            style={{ fontSize: 'clamp(2.8rem, 6vw, 4.5rem)' }}
           >
-            Beezy
-          </a>
-          , where I engaged in a variety of exciting tasks. From laying the
-          groundwork for a Design System to crafting innovative features. Prior
-          to this, I had an absolute blast contributing to the Design System
-          Team at Liferay, leaving my mark on the incredible{" "}
-          <a
-            className="underline hover:text-accent"
-            href="https://liferay.design/lexicon/"
+            about
+          </h1>
+
+          {/* ── Bio ───────────────────────────────────────────── */}
+          <div
+            className="mt-12 space-y-6 font-fraunces font-light text-ink/80 leading-relaxed"
+            style={{ fontSize: 'clamp(1.1rem, 2.2vw, 1.4rem)' }}
           >
-            Lexicon
-          </a>{" "}
-          project.
-        </Paragraph>
-        <Quote>
-          A product designer with over 4 years of experience working across
-          design systems, user experience, and accessibility.
-        </Quote>
-        <Image
-          className="my-4 pb-8"
-          src={"/assets/laura-flores.jpeg"}
-          alt={"a profile picture of Laura"}
-          width={739}
-          height={492}
-        />
-        <Paragraph>
-          {" "}
-          My journey into design started from a completely different path—I
-          spent four years as a Primary School Teacher. However, fueled by
-          curiosity I ventured into the digital world to explore the realm of
-          user-centered design. In 2019, I took a significant step in my
-          professional growth by enrolling in Ironhack{"'"}s UX/UI Bootcamp,
-          propelling my career forward and fostering an environment of
-          continuous learning.
-        </Paragraph>
-        <Paragraph>
-          While design is my primary focus, I also enjoy challenging myself in
-          other areas, including expanding my knowledge in front-end
-          development.
-        </Paragraph>
-        <Paragraph>
-          Beyond the tech world, I{"'"}m passionate about CrossFit, yoga, cats,
-          and whipping up culinary wonders in the kitchen. Food is not just
-          sustenance for me; it{"'"}s my second language.
-        </Paragraph>
-        <Paragraph>
-          Feel free to connect with me on{" "}
-          <a
-            className="underline hover:text-accent"
-            href="https://www.linkedin.com/in/laugardie/"
-          >
-            LinkedIn
-          </a>{" "}
-          or drop me a line via{" "}
-          <Link
-            className="underline hover:text-accent"
-            href="mailto:laugardie89@gmail.com"
-            target="_blank"
-          >
-            email
-          </Link>
-          . Whether it{"'"}s about exciting opportunities or even just a
-          friendly hello!! 😊
-        </Paragraph>
-        <H1>Fun facts about me</H1>
-        <BulletedList>
-          <BulletedListItem>
-            Not only am I a designer, but I{"'"}m also a certified yoga teacher,
-            spreading mindfulness and flexibility both on and off the mat.
-          </BulletedListItem>
-          <BulletedListItem>
-            I{"'"}ve had the incredible opportunity to call several vibrant
-            cities home, including New York, Dublin, Madrid, and my beloved
-            Sevilla, each leaving an indelible mark on my journey.
-          </BulletedListItem>
-          <BulletedListItem>
-            I{"'"}m completely obsessed with perfecting the art of homemade
-            pizza.
-          </BulletedListItem>
-          <BulletedListItem>
-            I{"'"}m a true DIY enthusiast, always eager to embark on creative
-            projects and bring my imagination to life.
-          </BulletedListItem>
-          <BulletedListItem>
-            Board game aficionado alert! After playing a new board game, I can
-            {"'"}t resist the temptation to add it to my ever-growing
-            collection.
-          </BulletedListItem>
-          <BulletedListItem>
-            Music is my ultimate jam, and I can{"'"}t get enough of talented
-            producers like Flume, Pluko, Vance Joy, Benny Blanco, PLÜM, and San
-            Holo. Their mind-blowing melodies never fail to captivate my ears
-            and ignite my creative fire.
-          </BulletedListItem>
-        </BulletedList>
-      </SectionSm>
-      <SectionMd className="grid grid-rows-2 gap-2 max-w-xl lg:max-w-4xl mx-auto pt-8">
-        <div className="grid grid-cols-3 gap-2 w-124">
-          <div className="h-48 lg:h-96 relative">
-            <Image
-              src={"/assets/feet.png"}
-              alt={"Handstand feet"}
-              fill
-              style={{ objectFit: "cover" }}
-            />
+            <p>
+              I&apos;m a product designer who believes that good design is mostly
+              invisible &mdash; it&apos;s what remains when all the unnecessary parts have
+              been removed.
+            </p>
+            <p>
+              I&apos;ve spent the last six years working on products used by millions
+              of people, most recently at Gumroad where I led design for the
+              core creator experience.
+            </p>
+            <p>
+              I&apos;m currently freelancing, taking on work where design can make a
+              real difference in how people experience something &mdash; not just how
+              it looks.
+            </p>
           </div>
-          <div className="h-48 lg:h-96 relative">
-            <Image
-              src={"/assets/diy.png"}
-              alt={"crafts"}
-              fill
-              style={{ objectFit: "cover" }}
-            />
+
+          {/* ── Process ───────────────────────────────────────── */}
+          <div className="mt-16 pt-12 border-t border-divider">
+            <p className="font-dm-sans text-xs text-secondary/60 tracking-[0.15em] uppercase mb-8">
+              process
+            </p>
+            <div className="space-y-5 font-dm-sans text-[0.95rem] text-ink/70 leading-[1.8]">
+              <p>
+                I start with the problem, not the solution. Discovery work &mdash;
+                research, synthesis, framing &mdash; often takes longer than the
+                design itself, and that&apos;s exactly right.
+              </p>
+              <p>
+                I write a lot. Articulating a design in words before pushing
+                pixels forces clarity of intent. If you can&apos;t describe it, you
+                don&apos;t understand it yet.
+              </p>
+              <p>
+                I work closely with engineers. The best design decisions happen
+                in conversation, not in handoff documents.
+              </p>
+            </div>
           </div>
-          <div className="h-48 lg:h-96 relative">
-            <Image
-              src={"/assets/landscape.png"}
-              alt={"clouds landscape"}
-              fill
-              style={{ objectFit: "cover" }}
-            />
+
+          {/* ── Clients ───────────────────────────────────────── */}
+          <div className="mt-16 pt-12 border-t border-divider">
+            <p className="font-dm-sans text-xs text-secondary/60 tracking-[0.15em] uppercase mb-8">
+              clients &amp; companies
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6">
+              {CLIENTS.map((name) => (
+                <span key={name} className="font-dm-sans text-sm text-ink/65">
+                  {name}
+                </span>
+              ))}
+            </div>
           </div>
+
         </div>
-        <div className="grid grid-cols-6 gap-2 w-124">
-          <div className="h-48 lg:h-96 col-span-1 relative">
-            <Image
-              src={"/assets/trees.png"}
-              alt={"palm trees"}
-              fill
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-          <div className="h-48 lg:h-96 col-span-2 relative">
-            <Image
-              src={"/assets/pizza.png"}
-              alt={"pizza sign"}
-              fill
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-          <div className="h-48 lg:h-96 col-span-3 relative">
-            <Image
-              src={"/assets/jenga.png"}
-              alt={"jenga"}
-              fill
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-        </div>
-        <Footer />
-      </SectionMd>
+      </main>
+
+      <Footer />
     </>
-  );
+  )
 }

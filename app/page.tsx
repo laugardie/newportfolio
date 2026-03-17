@@ -1,302 +1,512 @@
 "use client";
 
-import { useState } from "react";
-import ProjectCover from "@/components/ProjectCover";
-import Link from "next/link";
-import type { ProjectFilterType } from "@/types";
-import { projects } from "@/utils/projects";
-import Footer from "./Footer";
-import CursorArrow from "@/components/CursorArrow";
-import GumroadLogo from "@/components/GumroadLogo";
-import AntiworkLogo from "@/components/AntiworkLogo";
-import NectarLogo from "@/components/NectarLogo";
-import FlexileLogo from "@/components/FlexileLogo";
-import Logo from "@/components/Logo";
-import MenuDesktop from "@/components/MenuDesktop";
-import MenuPhone from "@/components/MenuPhone";
-import BeezyLogo from "@/components/BeezyLogo";
-import LexiconLogo from "@/components/LexiconLogo";
-import BuildguidlLogo from "@/components/BuildguidlLogo";
-import LiferayLogo from "@/components/LiferayLogo";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { projects, type Project } from "@/content/projects";
+import { explorations } from "@/content/explorations";
+import LogoLau from "@/components/LogoLau";
 
-const TOOLKIT_ITEMS = [
-  'Figma',
-  'Design Systems',
-  'Icons',
-  'UX/UI Design',
-  'Product Design',
-  'Mobile Design',
-  'Responsive Design',
-  'Accessibility',
-  'HTML',
-  'CSS',
-  'JavaScript',
-  'Next.js',
-  'Tailwind CSS',
-  'Shadcn',
-  'Github',
-  'iTerm',
-  'Cursor',
-  'Devin',
-  'v0',
-  'ChatGPT'
-] as const;
+function useClock() {
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const fmt = () =>
+      new Date().toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      });
+    setTime(fmt());
+    const id = setInterval(() => setTime(fmt()), 60_000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
 
-export default function Home() {
-  const [filter, setFilter] = useState<ProjectFilterType>("all");
+type ExperienceEntry = {
+  name: string;
+  logo: string;
+  isLogomark?: boolean;
+  url: string | null;
+  active?: boolean;
+  date: string;
+};
 
+const EXPERIENCE: ExperienceEntry[] = [
+  {
+    name: "Freelancing",
+    logo: "",
+    isLogomark: true,
+    url: null,
+    active: true,
+    date: "Present",
+  },
+  {
+    name: "Gumroad, Antiwork",
+    logo: "/assets/gumroad-logo.svg",
+    url: "https://gumroad.com/",
+    date: "jul 2021 – mar 2026",
+  },
+  {
+    name: "Beezy",
+    logo: "/assets/beezy-logo.svg",
+    url: "https://www.beezy.net",
+    date: "jun 2020 – oct 2022",
+  },
+  {
+    name: "Liferay",
+    logo: "/assets/liferay-logo.svg",
+    url: "https://liferay.design/lexicon/",
+    date: "oct 2019 – jun 2020",
+  },
+];
+
+const SMALL_BETS = [
+  {
+    name: "Habits",
+    company: "tryhabits.app",
+    year: "2026",
+    thumbnail: "/assets/habits-preview.svg",
+    url: "https://tryhabits.app",
+  },
+];
+
+const EXPLORATIONS = explorations.map((e) => ({
+  name: e.name,
+  company: e.company,
+  year: e.year,
+  thumbnail: e.thumbnail,
+  url: `/explorations/${e.slug}`,
+}));
+
+function fadeUp(delay = 0) {
+  return {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.45, delay, ease: [0.25, 0.1, 0.25, 1] as const },
+  };
+}
+
+const SectionHeading = ({ children }: { children: React.ReactNode }) => (
+  <p className="text-xs font-medium uppercase tracking-[0.1em] text-ink/50 mb-5 leading-[25px]">
+    {children}
+  </p>
+);
+
+function ExpLogo({ src, name }: { src: string; name: string }) {
   return (
-    <div className="bg-background min-h-screen font-figtree [background-image:radial-gradient(rgba(0,0,0,0.06)_1px,transparent_1px)] [background-size:16px_16px]">
-      {/* Add margin container */}
-      <div className="mx-6 md:mx-12">
-        <div className="mx-auto max-w-7xl border-x border-border min-h-screen">
-          {/* Header */}
-          <div className="w-full border-b border-border">
-            <header className="md:px-0 pr-4 pl-0">
-              <div className="flex justify-between items-center">
-                <Link className="cursor-pointer" href="/">
-                  <div className="pl-1 hover:bg-white/70 hover:text-black"><Logo /></div>
-                </Link>
-                <MenuDesktop className="hidden lg:flex" />
-                <MenuPhone className="flex lg:hidden" />
-              </div>
-            </header>
-          </div>
+    <img
+      src={src}
+      alt={name}
+      className="w-8 h-8 flex-shrink-0 object-contain"
+    />
+  );
+}
 
-          {/* Main content */}
-          <div className="px-12 border-b border-border">
-            {/* Header section */}
-            <div className="pt-32 lg:pt-48 pb-32 lg:pb-56 relative">
-              {/* Circle with arrow */}
-              <div className="absolute left-1/2 bottom-0 -mb-5 -translate-x-1/2">
-                <button 
-                  onClick={() => {
-                    const element = document.getElementById('experience');
-                    if (element) {
-                      const elementRect = element.getBoundingClientRect();
-                      const absoluteElementTop = elementRect.top + window.pageYOffset;
-                      const middle = absoluteElementTop - (window.innerHeight / 2) + (elementRect.height / 2);
-                      window.scrollTo({ top: middle, behavior: 'smooth' });
-                    }
-                  }}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-background font-figtree font-medium text-base"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 4L12 20M12 20L18 14M12 20L6 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </button>
-              </div>
-              
-              <div className="font-semibold text-5xl md:text-7xl">
-                Creating fresh,<br /> memorable <span className="font-cormorant italic font-semibold mt-2 lg:mt-0 block lg:inline">
-                  <div className="inline-block border-2 border-black px-2 pb-2 relative">
-                    experiences
-                    {/* Corner elements */}
-                    <div className="absolute -left-2 -top-2 w-3 h-3 border-2 border-black bg-background"></div>
-                    <div className="absolute -right-2 -top-2 w-3 h-3 border-2 border-black bg-background"></div>
-                    <div className="absolute -left-2 -bottom-2 w-3 h-3 border-2 border-black bg-background"></div>
-                    <div className="absolute -right-2 -bottom-2 w-3 h-3 border-2 border-black bg-background"></div>
-                    {/* Cursor and pink label */}
-                    <div className="absolute -right-16 top-full mt-2 flex flex-col items-end">
-                      <div className="relative w-full">
-                        <CursorArrow className="absolute top-1 -left-32 sm:-top-1 sm:-left-20 lg:top-1 lg:-left-32 xl:top-4 xl:-left-20" />
-                        <div className="absolute -right-2 -bottom-16 sm:-bottom-16 sm:-right-16 lg:-bottom-16 lg:-right-4 xl:-bottom-20 xl:-right-16 font-jetbrains-mono border-accent border-2 bg-accentLight text-white px-4 py-1.5 rounded-r-full rounded-bl-full text-base font-medium">
-                          laugardie
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </span>
-              </div>
-              <div className="text-base pt-8 md:pt-6">
-                Laura García Diéguez <br className="lg:hidden" /> —Senior Product designer <br className="md:hidden" /> <Link href="https://gumroad.com/" className="text-accent">@Gumroad</Link>
-             </div>
-             </div>
-          </div>
+function LogomarkIcon({ color }: { color: string }) {
+  return (
+    <div className="relative w-8 h-8 flex-shrink-0">
+      <div
+        className="absolute top-0 left-0"
+        style={{ width: 3.5, height: 3.5, backgroundColor: color }}
+      />
+      <div
+        className="absolute top-0 right-0"
+        style={{ width: 3.5, height: 3.5, backgroundColor: color }}
+      />
+      <div
+        className="absolute bottom-0 left-0"
+        style={{ width: 3.5, height: 3.5, backgroundColor: color }}
+      />
+      <div
+        className="absolute bottom-0 right-0"
+        style={{ width: 3.5, height: 3.5, backgroundColor: color }}
+      />
+      <div
+        className="absolute inset-[1px]"
+        style={{ border: `1px dashed ${color}` }}
+      />
+      <span
+        className="absolute inset-0 flex items-center justify-center font-medium leading-none select-none"
+        style={{ color, fontSize: 19 }}
+      >
+        L
+      </span>
+    </div>
+  );
+}
 
-          <div className="w-full border-b border-border">
-            <div className="container mx-auto max-w-screen-xl ">
-              {/* Experience section */}
-              <section 
-                id="experience" 
-                className="pt-24 pb-24 xl:pb-36 px-6 md:px-12 flex flex-col items-center"
-              >
-                <label className="text-center mb-4 md:mb-6 text-xs md:text-base font-medium font-jetbrains-mono">EXPERIENCE</label>
-                <h2 className="text-center mb-16 text-4xl md:text-5xl font-medium">
-                  Designing systems, shaping<br />
-                  products, driving <span className="italic font-cormorant">growth</span>.
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-14 gap-y-14 w-full">
-                  <div className="text-center w-full">
-                    <h3 className="mb-4 text-l font-jetbrains-mono font-base">Design Systems</h3>
-                    <div className="space-y-6 w-full">
-                      <Link 
-                        href="https://www.figma.com/community/file/1405573618937136138" 
-                        target="_blank" 
-                        className="flex items-center justify-center w-full h-[74px] bg-white/70 border border-border hover:bg-black hover:text-white hover:border-black transition-colors px-6 rounded-lg text-lg"
-                      >
-                        <GumroadLogo />
-                      </Link>
-                      <div 
-                        className="flex items-center justify-center w-full h-[74px] bg-white/70 border border-border hover:bg-black hover:text-white hover:border-black transition-colors px-6 rounded-lg text-lg"
-                      >
-                        <NectarLogo />
-                      </div>
-                      <Link 
-                        href="https://liferay.design/lexicon/get-started" 
-                        target="_blank" 
-                        className="flex items-center justify-center w-full h-[74px] bg-white/70 border border-border hover:bg-black hover:text-white hover:border-black transition-colors px-6 rounded-lg text-lg group"
-                      >
-                        <LexiconLogo />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center w-full">
-                    <h3 className="mb-4 text-l font-jetbrains-mono font-base">Products</h3>
-                    <div className="space-y-6 w-full">
-                      <Link 
-                        href="https://gumroad.com" 
-                        target="_blank" 
-                        className="flex items-center justify-center w-full h-[74px] bg-white/70 border border-border hover:bg-black hover:text-white hover:border-black transition-colors px-6 rounded-lg text-lg"
-                      >
-                        <GumroadLogo />
-                      </Link>
-                      <Link 
-                        href="https://flexile.com" 
-                        target="_blank" 
-                        className="flex items-center justify-center w-full h-[74px] bg-white/70 border border-border hover:bg-black hover:text-white hover:border-black transition-colors px-6 rounded-lg text-lg"
-                      >
-                        <FlexileLogo />
-                      </Link>
-                      <Link 
-                        href="https://buidlguidl.com/" 
-                        target="_blank" 
-                        className="flex items-center justify-center w-full h-[74px] bg-white/70 border border-border hover:bg-black hover:text-white hover:border-black transition-colors px-6 rounded-lg text-lg group"
-                      >
-                        <BuildguidlLogo />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center w-full">
-                    <h3 className="mb-4 text-l font-jetbrains-mono font-base">Companies</h3>
-                    <div className="space-y-6 w-full">
-                      <Link 
-                        href="https://antiwork.com" 
-                        target="_blank" 
-                        className="flex items-center justify-center w-full h-[74px] bg-white/70 border border-border hover:bg-black hover:text-white hover:border-black transition-colors px-6 rounded-lg text-lg"
-                      >
-                        <AntiworkLogo />
-                      </Link>
-                      <Link 
-                        href="https://www.appspace.com/intranet/" 
-                        target="_blank" 
-                        className="flex items-center justify-center w-full h-[74px] bg-white/70 border border-border hover:bg-black hover:text-white hover:border-black transition-colors px-6 rounded-lg text-lg group"
-                      >
-                        <BeezyLogo />
-                      </Link>
-                      <Link 
-                        href="https://www.liferay.com/" 
-                        target="_blank" 
-                        className="flex items-center justify-center w-full h-[74px] bg-white/70 border border-border hover:bg-black hover:text-white hover:border-black transition-colors px-6 rounded-lg text-lg group"
-                      >
-                        <LiferayLogo />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
+const rowTransition = { duration: 0.15, ease: "easeOut" as const };
+const slideVariants = { rest: { x: 0 }, hover: { x: 4 } };
+const slideTransition = {
+  type: "spring" as const,
+  stiffness: 300,
+  damping: 20,
+};
+const fadeVariants = { rest: { opacity: 0.5 }, hover: { opacity: 0.8 } };
+const fadeTransition = { duration: 0.2, ease: "easeOut" as const };
 
-          <div className="w-full border-b border-border">
-            <div className="container mx-auto max-w-screen-xl">
-              {/* Work section */}
-              <section id="workplay" className="pt-24 xl:pt-36 px-6 md:px-12">
-                <label className="text-center block mb-4 md:mb-6 text-xs md:text-base font-medium font-jetbrains-mono uppercase">Workplay</label>
-                <h2 className="text-center mb-16 text-4xl md:text-5xl font-medium">
-                  The way <br className="block md:hidden" /> I make sense<br />
-                  of the <span className="font-cormorant italic">world</span>, one pixel at a time.
-                </h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 pb-24 xl:pb-36">
-                  <ProjectCover 
-                    key="gumroad-design-system"
-                    href="https://www.figma.com/community/file/1405573618937136138"
-                    src="/assets/gumroad-cover.png"
-                    alt="Gumroad Design System"
-                    name="Gumroad"
-                    role="Design System"
-                    year="2024"
-                  />
-                  {projects
-                    .filter((project) => filter === "all" || project.tag.includes(filter))
-                    .sort((a, b) => {
-                      const getYear = (project: typeof a) => {
-                        switch (project.name) {
-                          case "Daylight Calculator": return 2023;
-                          case "BuidlGuidl Ethereum":
-                          case "Nectar": return 2022;
-                          case "Gumroad":
-                          case "Avatars":
-                          case "Inbolt":
-                          case "Theatre mode":
-                          case "Calquo": return 2021;
-                          case "Goeat":
-                          case "Lexicon":
-                          case "Whatsapp polls": return 2019;
-                          default: return 2020;
-                        }
-                      };
-                      return getYear(b) - getYear(a);
-                    })
-                    .map((project) => {
-                      return <ProjectCover 
-                        key={project.name} 
-                        {...project} 
-                        year={project.name === "Gumroad" ? "2021" :
-                              project.name === "Goeat" ? "2019" :
-                              project.name === "Lexicon" ? "2019" :
-                              project.name === "Avatars" ? "2021" :
-                              project.name === "Whatsapp polls" ? "2019" :
-                              project.name === "Inbolt" ? "2021" :
-                              project.name === "Theatre mode" ? "2021" :
-                              project.name === "Nectar" ? "2022" :
-                              project.name === "Calquo" ? "2021" :
-                              project.name === "BuidlGuidl Ethereum" ? "2022" :
-                              project.name === "Daylight Calculator" ? "2023" : "2020"
-                      }
-                    />;
-                  })}
-                </div>
-              </section>
-            </div>
-          </div>
-
-          <div className="w-full border-b border-border">
-            <div className="container mx-auto max-w-screen-xl">
-              {/* Toolkit section */}
-              <section id="toolkit" className="pt-24 xl:pt-36 px-6 md:px-12">
-                <label className="text-center block mb-4 md:mb-6 text-xs md:text-base font-medium font-jetbrains-mono uppercase">Toolkit</label>
-                <h2 className="text-center mb-14 text-4xl md:text-5xl font-medium">
-                  Designing <span className="font-cormorant italic">smarter</span>,<br />
-                  coding <span className="font-cormorant italic">faster</span>.
-                </h2>
-                <div className="flex flex-wrap justify-center gap-3 max-w-[942px] mx-auto pb-24 xl:pb-36">
-                  {TOOLKIT_ITEMS.map((tool) => (
-                    <span 
-                      key={tool}
-                      className="h-12 px-6 flex items-center justify-center rounded-full border border-border bg-white/70 font-medium text-sm text-black w-full md:w-auto"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </section>
-            </div>
-          </div>
-              <Footer />
-            </div>
+function WorkRow({ project }: { project: Project }) {
+  return (
+    <motion.a
+      href={`/work/${project.slug}`}
+      className="row-item flex items-center py-3 sm:py-2.5 border-b border-divider -mx-2 px-2 cursor-pointer"
+      initial="rest"
+      whileHover="hover"
+      animate="rest"
+    >
+      <motion.div
+        className="flex items-center gap-3 sm:gap-4 w-full"
+        variants={slideVariants}
+        transition={slideTransition}
+      >
+        <img
+          src={project.thumbnail}
+          alt=""
+          className="flex-shrink-0 object-cover rounded-[4px] w-14 h-10 sm:w-[72px] sm:h-12"
+        />
+        {/* Mobile: stacked name + company · year */}
+        <div className="sm:hidden flex-1 min-w-0">
+          <div className="text-base text-ink truncate">{project.title}</div>
+          <div className="text-xs text-ink/50">
+            {project.company} · {project.year}
           </div>
         </div>
+        {/* Desktop: single line */}
+        <div className="hidden sm:flex items-baseline justify-between flex-1 min-w-0">
+          <div className="flex items-baseline gap-1.5 min-w-0 mr-4">
+            <span className="text-base text-ink">{project.title}</span>
+            <span className="text-base text-ink/50 whitespace-nowrap flex-shrink-0">
+              · {project.company}
+            </span>
+          </div>
+          <motion.span
+            className="text-xs text-ink tabular-nums flex-shrink-0"
+            variants={fadeVariants}
+            transition={fadeTransition}
+          >
+            {project.year}
+          </motion.span>
+        </div>
+      </motion.div>
+    </motion.a>
+  );
+}
+
+type ListItem = {
+  name: string;
+  company: string;
+  year: string;
+  thumbnail: string;
+  url?: string;
+};
+
+function ListRow({ item }: { item: ListItem }) {
+  const Tag = item.url ? motion.a : motion.div;
+  const isExternal = item.url && !item.url.startsWith("/");
+  const linkProps = item.url
+    ? {
+        href: item.url,
+        ...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}),
+      }
+    : {};
+  return (
+    <Tag
+      {...linkProps}
+      className="row-item flex items-center py-3 sm:py-2.5 border-b border-divider -mx-2 px-2"
+      style={{ textDecoration: "none" }}
+      initial="rest"
+      whileHover="hover"
+      animate="rest"
+    >
+      <motion.div
+        className="flex items-center gap-3 sm:gap-4 w-full"
+        variants={slideVariants}
+        transition={slideTransition}
+      >
+        <img
+          src={item.thumbnail}
+          alt=""
+          className="flex-shrink-0 object-cover rounded-[4px] w-14 h-10 sm:w-[72px] sm:h-12"
+        />
+        {/* Mobile: stacked name + company · year */}
+        <div className="sm:hidden flex-1 min-w-0">
+          <div className="text-base text-ink truncate">{item.name}</div>
+          <div className="text-xs text-ink/50">
+            {item.company} · {item.year}
+          </div>
+        </div>
+        {/* Desktop: single line */}
+        <div className="hidden sm:flex items-baseline justify-between flex-1 min-w-0">
+          <div className="flex items-baseline gap-1.5 min-w-0 mr-4">
+            <span className="text-base text-ink">{item.name}</span>
+            <span className="text-base text-ink/50 whitespace-nowrap flex-shrink-0">
+              · {item.company}
+            </span>
+          </div>
+          <motion.span
+            className="text-xs text-ink tabular-nums flex-shrink-0"
+            variants={fadeVariants}
+            transition={fadeTransition}
+          >
+            {item.year}
+          </motion.span>
+        </div>
+      </motion.div>
+    </Tag>
+  );
+}
+
+function Logomark() {
+  // TL → TR → BR → BL, each 0.08s apart
+  const corners: { style: React.CSSProperties; delay: number }[] = [
+    { style: { top: 0, left: 0 }, delay: 0 },
+    { style: { top: 0, right: 0 }, delay: 0.08 },
+    { style: { bottom: 0, right: 0 }, delay: 0.16 },
+    { style: { bottom: 0, left: 0 }, delay: 0.24 },
+  ];
+
+  return (
+    <div className="relative w-12 h-12">
+      {/* Corner squares */}
+      {corners.map(({ style, delay }, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-[5px] h-[5px] bg-accent"
+          style={style}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay, duration: 0.15, ease: "easeOut" }}
+        />
+      ))}
+
+      {/* Dashed border — 0.05s after last corner starts */}
+      <motion.div
+        className="absolute inset-[2px] border border-dashed border-accent"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.29, duration: 0.2, ease: "easeOut" }}
+      />
+
+      {/* L — 0.05s after border starts */}
+      <motion.span
+        className="absolute inset-0 flex items-center justify-center text-3xl font-medium text-accent leading-none select-none"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.34, duration: 0.2, ease: "easeOut" }}
+      >
+        L
+      </motion.span>
+    </div>
+  );
+}
+
+export default function Home() {
+  const time = useClock();
+
+  return (
+    <main className="min-h-screen bg-bg">
+      <div className="max-w-[560px] mx-auto px-6 sm:px-8 md:px-0 pt-20 pb-36">
+        {/* ── 1. Logomark ─────────────────────────────────────── */}
+        <div className="mb-16">
+          <LogoLau />
+        </div>
+
+        {/* ── 2. Bio ───────────────────────────────────────────── */}
+        <motion.section {...fadeUp(0.06)} className="mb-16">
+          <p className="text-base leading-[1.67] text-ink">
+            I&apos;m Laura, a Product Designer based in Lagos, Portugal.
+            Obsessed with details, and happiest when my work goes completely
+            unnoticed.
+            <br />
+            <br />
+            I started out as a primary school teacher, for 4 years. In 2019 I
+            decided to make the jump into design and never looked back. I also
+            write code, not enough to call myself an engineer, but enough to
+            know what I'm asking for and get myself into trouble. AI covers the
+            rest.
+            <br />
+            <br />
+            I&apos;ve lived in Sevilla, Dublin, New York, and Madrid. Now Lagos,
+            Portugal, where I&apos;m learning to surf and perfecting homemade
+            pizza. Mum to Diego, 3. Keeps me awake at night and grounded in what
+            actually matters.
+            <br />
+            <br />
+            Food is my first language. I run, do crossfit, and somehow also have
+            a yoga teaching certificate.
+            <br />
+            <br />
+            Currently freelancing with my husband, throwing small bets, seeing
+            what sticks. O-1B visa holder.
+            <br />
+            <br />
+            Previously at{" "}
+            <a
+              href="https://gumroad.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150"
+            >
+              Gumroad
+            </a>
+            , Antiwork.
+          </p>
+        </motion.section>
+
+        {/* ── 3. Experience ────────────────────────────────────── */}
+        <motion.section {...fadeUp(0.12)} className="mb-16">
+          <SectionHeading>Experience</SectionHeading>
+          <div>
+            {EXPERIENCE.map((exp, i) => (
+              <motion.a
+                key={i}
+                {...(exp.url
+                  ? {
+                      href: exp.url,
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    }
+                  : {})}
+                className={`row-item flex items-center justify-between py-2.5 border-b border-divider -mx-2 px-2${exp.url ? " cursor-pointer" : ""}`}
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
+              >
+                <motion.div
+                  className="flex items-center justify-between w-full"
+                  variants={slideVariants}
+                  transition={slideTransition}
+                >
+                  <div className="flex items-center gap-3">
+                    <div>
+                      {exp.isLogomark ? (
+                        <LogoLau size={32} />
+                      ) : (
+                        <ExpLogo src={exp.logo} name={exp.name} />
+                      )}
+                    </div>
+                    <span className="text-base text-ink">{exp.name}</span>
+                  </div>
+                  <motion.div
+                    className="flex items-center gap-2 flex-shrink-0"
+                    variants={{
+                      rest: { opacity: 0.5 },
+                      hover: { opacity: 0.8 },
+                    }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                  >
+                    {exp.active && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#4A7A4A] flex-shrink-0" />
+                    )}
+                    <span className="text-xs text-ink">{exp.date}</span>
+                  </motion.div>
+                </motion.div>
+              </motion.a>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* ── 4. Work ──────────────────────────────────────────── */}
+        <motion.section {...fadeUp(0.18)} id="work" className="mb-16">
+          <SectionHeading>Work</SectionHeading>
+          <div>
+            {projects.map((project) => (
+              <WorkRow key={project.slug} project={project} />
+            ))}
+          </div>
+        </motion.section>
+
+        {/* ── 5. Small bets ────────────────────────────────────── */}
+        <motion.section {...fadeUp(0.22)} className="mb-16">
+          <SectionHeading>Small bets</SectionHeading>
+          <div>
+            {SMALL_BETS.map((item) => (
+              <ListRow key={item.name} item={item} />
+            ))}
+          </div>
+        </motion.section>
+
+        {/* ── 6. Explorations ──────────────────────────────────── */}
+        <motion.section {...fadeUp(0.25)} className="mb-16">
+          <SectionHeading>Explorations</SectionHeading>
+          <div>
+            {EXPLORATIONS.map((item) => (
+              <ListRow key={item.name} item={item} />
+            ))}
+          </div>
+        </motion.section>
+
+        {/* ── 7. You can find me here ───────────────────────────── */}
+        <motion.section {...fadeUp(0.28)} className="mb-16">
+          <SectionHeading>You can find me here</SectionHeading>
+          <div className="space-y-1">
+            <a
+              href="mailto:laugardie89@gmail.com"
+              className="group flex items-center gap-2.5"
+              style={{ textDecoration: "none" }}
+            >
+              <span className="text-base text-ink/50 w-4 text-center flex-shrink-0">
+                @
+              </span>
+              <span className="text-base text-accent underline decoration-accent underline-offset-[3px] [text-decoration-thickness:0.08em] group-hover:text-accent-hover group-hover:decoration-accent-hover transition-colors duration-150">
+                laugardie89@gmail.com
+              </span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/laugardie/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2.5"
+              style={{ textDecoration: "none" }}
+            >
+              <span className="text-base text-ink/50 w-4 text-center flex-shrink-0">
+                ↗
+              </span>
+              <span className="text-base text-accent underline decoration-accent underline-offset-[3px] [text-decoration-thickness:0.08em] group-hover:text-accent-hover group-hover:decoration-accent-hover transition-colors duration-150">
+                LinkedIn
+              </span>
+            </a>
+            <a
+              href="https://github.com/laugardie"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2.5"
+              style={{ textDecoration: "none" }}
+            >
+              <span className="text-base text-ink/50 w-4 text-center flex-shrink-0">
+                ↗
+              </span>
+              <span className="text-base text-accent underline decoration-accent underline-offset-[3px] [text-decoration-thickness:0.08em] group-hover:text-accent-hover group-hover:decoration-accent-hover transition-colors duration-150">
+                GitHub
+              </span>
+            </a>
+            <a
+              href="/cv - laura garcia.pdf"
+              className="group flex items-center gap-2.5"
+              style={{ textDecoration: "none" }}
+            >
+              <span className="text-base text-ink/50 w-4 text-center flex-shrink-0">
+                ↓
+              </span>
+              <span className="text-base text-accent underline decoration-accent underline-offset-[3px] [text-decoration-thickness:0.08em] group-hover:text-accent-hover group-hover:decoration-accent-hover transition-colors duration-150">
+                Resume
+              </span>
+            </a>
+          </div>
+        </motion.section>
+
+        {/* ── 8. Footer ────────────────────────────────────────── */}
+        <motion.footer {...fadeUp(0.31)}>
+          {time && (
+            <p className="text-base text-ink/50 leading-[25px]">
+              {time}, Lagos, Portugal
+            </p>
+          )}
+          <p className="text-base text-ink/50 leading-[25px]">
+            Laura García Diéguez © 2026
+          </p>
+        </motion.footer>
+      </div>
+    </main>
   );
 }
