@@ -7,6 +7,7 @@ import {
   useMotionValue,
   useSpring,
 } from 'framer-motion'
+import Image from 'next/image'
 import { projects } from '@/content/projects'
 import ProjectRow from './ProjectRow'
 
@@ -65,9 +66,11 @@ export default function ProjectList() {
             exit={{ opacity: 0, scale: 0.92 }}
             transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <img
+            <Image
               src={projects[hoveredIndex].cover}
               alt={projects[hoveredIndex].title}
+              width={280}
+              height={175}
               className="w-full aspect-[16/10] object-cover"
               draggable={false}
             />
