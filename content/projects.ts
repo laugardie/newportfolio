@@ -1,5 +1,5 @@
 export type ProjectSection = {
-  type: "text" | "image" | "video";
+  type: "text" | "image" | "video" | "embed";
   content: string;
   heading?: string;
   caption?: string;
