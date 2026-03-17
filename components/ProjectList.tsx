@@ -67,7 +67,7 @@ export default function ProjectList() {
             transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <Image
-              src={projects[hoveredIndex].cover}
+              src={projects[hoveredIndex].thumbnail}
               alt={projects[hoveredIndex].title}
               width={280}
               height={175}
