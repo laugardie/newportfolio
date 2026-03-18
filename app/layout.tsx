@@ -1,51 +1,40 @@
-import Header from "./Header";
-import Script from "next/script";
-import "./globals.css";
-import { Inter } from "next/font/google";
+import type { Metadata } from 'next'
+import Script from 'next/script'
+import { DM_Sans } from 'next/font/google'
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
 
-export const metadata = {
-  title: "laugardie",
-  description: "Laura García Diéguez's portfolio - Product Designer",
-};
+export const metadata: Metadata = {
+  title: 'Laura García — Product Designer',
+  description:
+    'Product designer crafting thoughtful digital experiences. Currently freelancing, previously Gumroad.',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Poppins:wght@400;600&family=Source+Sans+Pro:wght@400;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className={inter.className}>
-        <Header />
-        <div className="mx-auto box-border">{children}</div>
+    <html lang="en" className={dmSans.variable}>
+      <body className="font-dm-sans bg-bg text-ink antialiased">
+        {children}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-J7JSKSS7Q5"
-        ></Script>
-        <Script id="google-analytics">
-          {`
+        />
+        <Script id="google-analytics">{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'G-J7JSKSS7Q5');
-          `}
-        </Script>
+        `}</Script>
       </body>
     </html>
-  );
+  )
 }

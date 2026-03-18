@@ -3,25 +3,76 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 16, 16, 16;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --color-bg:       #F2EFE9;
+  --color-ink:      #222222;
+  --color-surface:  #EBE8E1;
+  --color-parchment:#F5F0E8;
+  --color-secondary:#72665C;
+  --color-row-hover:#E8E4DB;
+  --color-border:   rgba(0,0,0,0.05);
+  --color-accent-hover: #B85E3D;
+  color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 16, 16, 16;
-    --background-end-rgb: 16, 16, 16;
+    --color-bg:       #1C1A17;
+    --color-ink:      #F2EFE9;
+    --color-surface:  #272420;
+    --color-parchment:#252320;
+    --color-secondary:#9E9282;
+    --color-row-hover:#272420;
+    --color-border:   #2E2B27;
+    --color-accent-hover: #E8956A;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* ─── Row hover ──────────────────────────────────────────────────── */
+.row-item {
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+.row-item:hover {
+  background-color: var(--color-row-hover);
+}
+
+/* ─── Grain texture overlay ─────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%,  100% { transform: translate(0,    0); }
+  10%        { transform: translate(-5%,  -10%); }
+  20%        { transform: translate(-15%, 5%); }
+  30%        { transform: translate(7%,   -25%); }
+  40%        { transform: translate(-5%,  25%); }
+  50%        { transform: translate(-15%, 10%); }
+  60%        { transform: translate(15%,  0%); }
+  70%        { transform: translate(0%,   15%); }
+  80%        { transform: translate(3%,   35%); }
+  90%        { transform: translate(-10%, 10%); }
 }
