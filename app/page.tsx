@@ -43,19 +43,19 @@ const EXPERIENCE: ExperienceEntry[] = [
   },
   {
     name: "Gumroad, Antiwork",
-    logo: "/assets/gumroad-logo.svg",
+    logo: "/assets/Gumroad-logo.svg",
     url: "https://gumroad.com/",
     date: "jul 2021 – mar 2026",
   },
   {
     name: "Beezy",
-    logo: "/assets/beezy-logo.svg",
+    logo: "/assets/Beezy-logo.svg",
     url: "https://www.beezy.net",
     date: "jun 2020 – oct 2022",
   },
   {
     name: "Liferay",
-    logo: "/assets/liferay-logo.svg",
+    logo: "/assets/Liferay-logo.svg",
     url: "https://liferay.design/lexicon/",
     date: "oct 2019 – jun 2020",
   },
@@ -321,8 +321,8 @@ export default function Home() {
             I started out as a primary school teacher, for 4 years. In 2019 I
             decided to make the jump into design and never looked back. I also
             write code, not enough to call myself an engineer, but enough to
-            know what I&apos;m asking for and get myself into trouble. AI covers the
-            rest.
+            know what I&apos;m asking for and get myself into trouble. AI covers
+            the rest.
             <br />
             <br />
             I&apos;ve lived in Sevilla, Dublin, New York, and Madrid. Now Lagos,
