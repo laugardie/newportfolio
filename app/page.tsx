@@ -440,7 +440,7 @@ export default function Home() {
           <SectionHeading>You can find me here</SectionHeading>
           <div className="space-y-1">
             <a
-              href="mailto:laugardie89@gmail.com"
+              href="mailto:hi@laugardie.com"
               className="group flex items-center gap-2.5"
               style={{ textDecoration: "none" }}
             >
@@ -448,7 +448,7 @@ export default function Home() {
                 @
               </span>
               <span className="text-base text-accent underline decoration-accent underline-offset-[3px] [text-decoration-thickness:0.08em] group-hover:text-accent-hover group-hover:decoration-accent-hover transition-colors duration-150">
-                laugardie89@gmail.com
+                hi@laugardie.com
               </span>
             </a>
             <a
