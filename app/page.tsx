@@ -313,22 +313,23 @@ export default function Home() {
         {/* ── 2. Bio ───────────────────────────────────────────── */}
         <motion.section {...fadeUp(0.06)} className="mb-16">
           <p className="text-base leading-[1.67] text-ink">
-            I&apos;m Laura, a Product Designer based in Lagos, Portugal.
-            Obsessed with details, and happiest when my work goes completely
-            unnoticed.
+            I&apos;m Laura, a Product Designer & Design Engineer based in Lagos,
+            Portugal. I’m obsessed with the invisible details,the kind of work
+            that feels so natural it goes unnoticed.
             <br />
             <br />
             I started out as a primary school teacher, for 4 years. In 2019 I
-            decided to make the jump into design and never looked back. I also
-            write code, not enough to call myself an engineer, but enough to
-            know what I&apos;m asking for and get myself into trouble. AI covers
-            the rest.
+            decided to make the jump into design and never looked back.
+            <br />
+            <br />
+            Today, I build at the intersection of design and code. I work
+            directly in the codebase (React/Tailwind).
             <br />
             <br />
             I&apos;ve lived in Sevilla, Dublin, New York, and Madrid. Now Lagos,
-            Portugal, where I&apos;m learning to surf and perfecting homemade
-            pizza. Mum to Diego, 3. Keeps me awake at night and grounded in what
-            actually matters.
+            Portugal, where I&apos;m learning to surf and obsessing over
+            nutritious recipes. Mum to Diego, 3. Keeps me awake at night and
+            grounded in what actually matters.
             <br />
             <br />
             Food is my first language. I run, do crossfit, and somehow also have
