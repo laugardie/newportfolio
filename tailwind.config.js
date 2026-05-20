@@ -14,7 +14,7 @@ module.exports = {
         ink: "var(--color-ink)",
         "border-ink": "var(--color-ink)",
         muted: "var(--color-secondary)",
-        accent: "#5E7890",
+        accent: "#87967C",
         "accent-hover": "var(--color-accent-hover)",
         surface: "var(--color-surface)",
         divider: "var(--color-border)",

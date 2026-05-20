@@ -2,13 +2,13 @@
 <style>
   .bg { fill: #FFFFFF; }
   .ink { fill: #222222; }
-  .accent { fill: #5E7890; }
+  .accent { fill: #87967C; }
   .fill { fill: #FFFFFF; }
   @media (prefers-color-scheme: dark) {
-    .bg { fill: #181715; }
-    .ink { fill: #181715; }
-    .accent { fill: #5E7890; }
-    .fill { fill: #5E7890; }
+    .bg { fill: #161716; }
+    .ink { fill: #161716; }
+    .accent { fill: #87967C; }
+    .fill { fill: #87967C; }
   }
 </style>
 <rect class="bg" width="236" height="150" rx="8"/>

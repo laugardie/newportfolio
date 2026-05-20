@@ -2,10 +2,10 @@
 <style>
   .bg { fill: #FFFFFF; }
   .ink { fill: #222222; }
-  .freckle { fill: #5E7890; }
+  .freckle { fill: #87967C; }
   @media (prefers-color-scheme: dark) {
-    .bg { fill: #181715; }
-    .ink { fill: #5E7890; }
+    .bg { fill: #161716; }
+    .ink { fill: #87967C; }
     .freckle { fill: #FFFFFF; }
   }
 </style>
