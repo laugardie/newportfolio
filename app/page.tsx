@@ -34,14 +34,6 @@ type ExperienceEntry = {
 
 const EXPERIENCE: ExperienceEntry[] = [
   {
-    name: "Freelancing",
-    logo: "",
-    isLogomark: true,
-    url: null,
-    active: true,
-    date: "Present",
-  },
-  {
     name: "Gumroad, Antiwork",
     logo: "/assets/Gumroad-logo.svg",
     url: "https://gumroad.com/",
@@ -313,31 +305,24 @@ export default function Home() {
         {/* ── 2. Bio ───────────────────────────────────────────── */}
         <motion.section {...fadeUp(0.06)} className="mb-16">
           <p className="text-base leading-[1.67] text-ink">
-            I&apos;m Laura, a Product Designer & Design Engineer based in Lagos,
-            Portugal. I’m obsessed with the invisible details,the kind of work
-            that feels so natural it goes unnoticed.
+            <span className="font-medium">
+              I&apos;m Laura,
+              <br />
+              <br /> A
+              <span className="font-medium"> Senior Product Designer</span>
+            </span>{" "}
+            based in <span className="font-medium">Lagos, Portugal</span>,
+            working at the intersection of design and code. I specialize in
+            crafting intuitive, high-quality digital experiences and work
+            directly in the codebase with{" "}
+            <span className="font-medium">React</span> and{" "}
+            <span className="font-medium">Tailwind</span>.
             <br />
-            <br />
-            I started out as a primary school teacher, for 4 years. In 2019 I
-            decided to make the jump into design and never looked back.
-            <br />
-            <br />
-            Today, I build at the intersection of design and code. I work
-            directly in the codebase (React/Tailwind).
-            <br />
-            <br />
-            I&apos;ve lived in Sevilla, Dublin, New York, and Madrid. Now Lagos,
-            Portugal, where I&apos;m learning to surf and obsessing over
-            nutritious recipes. Mum to Diego, 3. Keeps me awake at night and
-            grounded in what actually matters.
-            <br />
-            <br />
-            Food is my first language. I run, do crossfit, and somehow also have
-            a yoga teaching certificate.
-            <br />
-            <br />
-            Currently freelancing with my husband, throwing small bets, seeing
-            what sticks. O-1B visa holder.
+            <br />I started out as a primary school teacher before transitioning
+            into
+            <span className="font-medium"> product</span>,{" "}
+            <span className="font-medium">UX</span>, and{" "}
+            <span className="font-medium">front-end development</span>.
             <br />
             <br />
             Previously at{" "}
@@ -349,7 +334,11 @@ export default function Home() {
             >
               Gumroad
             </a>
-            , Antiwork.
+            . <span className="font-medium">US O-1B visa holder</span>.
+            <br />
+            <br />
+            Outside of work, I&apos;m into surfing, running, CrossFit,
+            nutrition, and yoga, and I&apos;m also mum to Diego, 3.
           </p>
         </motion.section>
 

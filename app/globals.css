@@ -3,27 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --color-bg:       #F2EFE9;
-  --color-ink:      #222222;
-  --color-surface:  #EBE8E1;
-  --color-parchment:#F5F0E8;
-  --color-secondary:#72665C;
-  --color-row-hover:#E8E4DB;
-  --color-border:   rgba(0,0,0,0.05);
-  --color-accent-hover: #B85E3D;
+  --color-bg: #ffffff;
+  --color-ink: #222222;
+  --color-surface: #ebe8e1;
+  --color-parchment: #f5f0e8;
+  --color-secondary: #72665c;
+  --color-row-hover: #F8F8F7;
+  --color-border: rgba(0, 0, 0, 0.05);
+  --color-accent-hover: #586d7d;
   color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg:       #1C1A17;
-    --color-ink:      #F2EFE9;
-    --color-surface:  #272420;
-    --color-parchment:#252320;
-    --color-secondary:#9E9282;
-    --color-row-hover:#272420;
-    --color-border:   #2E2B27;
-    --color-accent-hover: #E8956A;
+    --color-bg: #181715;
+    --color-ink: #f2efe9;
+    --color-surface: #23211e;
+    --color-parchment: #1f1d1a;
+    --color-secondary: #9d9388;
+    --color-row-hover: #2a2724;
+    --color-border: rgba(255, 255, 255, 0.06);
+    --color-accent: #8ca3b3;
+    --color-accent-hover: #a7bbc8;
   }
 }
 
@@ -35,7 +36,9 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
   }
 }
 
@@ -50,7 +53,7 @@
 
 /* ─── Grain texture overlay ─────────────────────────────────────── */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: -50%;
   left: -50%;
@@ -65,14 +68,35 @@ body::before {
 }
 
 @keyframes grain {
-  0%,  100% { transform: translate(0,    0); }
-  10%        { transform: translate(-5%,  -10%); }
-  20%        { transform: translate(-15%, 5%); }
-  30%        { transform: translate(7%,   -25%); }
-  40%        { transform: translate(-5%,  25%); }
-  50%        { transform: translate(-15%, 10%); }
-  60%        { transform: translate(15%,  0%); }
-  70%        { transform: translate(0%,   15%); }
-  80%        { transform: translate(3%,   35%); }
-  90%        { transform: translate(-10%, 10%); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
 }
