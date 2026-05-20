@@ -1,12 +1,12 @@
 <svg width="236" height="150" viewBox="0 0 236 150" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
-  .bg { fill: #F2EFE9; }
+  .bg { fill: #FFFFFF; }
   .ink-stroked { fill: #222222; stroke: #222222; }
-  .bg-stroke { fill: #F2EFE9; stroke: #222222; }
+  .bg-stroke { fill: #FFFFFF; stroke: #222222; }
   @media (prefers-color-scheme: dark) {
-    .bg { fill: #1C1A17; }
-    .ink-stroked { fill: #F2EFE9; stroke: #F2EFE9; }
-    .bg-stroke { fill: #1C1A17; stroke: #F2EFE9; }
+    .bg { fill: #181715; }
+    .ink-stroked { fill: #FFFFFF; stroke: #F2EFE9; }
+    .bg-stroke { fill: #181715; stroke: #F2EFE9; }
   }
 </style>
 <rect class="bg" width="236" height="150" rx="8"/>
