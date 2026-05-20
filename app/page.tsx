@@ -305,24 +305,22 @@ export default function Home() {
         {/* ── 2. Bio ───────────────────────────────────────────── */}
         <motion.section {...fadeUp(0.06)} className="mb-16">
           <p className="text-base leading-[1.67] text-ink">
-            <span className="font-medium">
-              I&apos;m Laura,
-              <br />
-              <br /> A
-              <span className="font-medium"> Senior Product Designer</span>
-            </span>{" "}
-            based in <span className="font-medium">Lagos, Portugal</span>,
-            working at the intersection of design and code. I specialize in
-            crafting intuitive, high-quality digital experiences and work
-            directly in the codebase with{" "}
-            <span className="font-medium">React</span> and{" "}
-            <span className="font-medium">Tailwind</span>.
+            I&apos;m Laura,
+            <br />
+            <br /> A
+            <span className=" text-accent"> Senior Product Designer </span>
+            based in Lagos, Portugal, working at the intersection of design and
+            code. I specialize in crafting intuitive, high-quality digital
+            experiences and work directly in the codebase with{" "}
+            <span className=" text-accent">React</span> and{" "}
+            <span className=" text-accent">Tailwind</span>.
             <br />
             <br />I started out as a primary school teacher before transitioning
             into
-            <span className="font-medium"> product</span>,{" "}
-            <span className="font-medium">UX</span>, and{" "}
-            <span className="font-medium">front-end development</span>.
+            <span className=" text-accent"> product</span>,{" "}
+            <span className=" text-accent">UX</span>, and{" "}
+            <span className=" text-accent">front-end development</span>
+            .
             <br />
             <br />
             Previously at{" "}
@@ -334,11 +332,12 @@ export default function Home() {
             >
               Gumroad
             </a>
-            . <span className="font-medium">US O-1B visa holder</span>.
+            . <span className=" text-accent"> US O-1B visa holder</span>
+            .
             <br />
             <br />
-            Outside of work, I&apos;m into surfing, running, CrossFit,
-            nutrition, and yoga, and I&apos;m also mum to Diego, 3.
+            Outside of work, I&apos;m into running, CrossFit, nutrition, and
+            yoga, and I&apos;m also mum to Diego, 3.
           </p>
         </motion.section>
 

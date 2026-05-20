@@ -10,21 +10,21 @@
   --color-secondary: #72665c;
   --color-row-hover: #F8F8F7;
   --color-border: rgba(0, 0, 0, 0.05);
-  --color-accent-hover: #586d7d;
-  color-scheme: light dark;
+  --color-accent-hover: #6F7D66;
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark-disabled) {
   :root {
-    --color-bg: #181715;
+    --color-bg: #161716;
     --color-ink: #f2efe9;
     --color-surface: #23211e;
     --color-parchment: #1f1d1a;
     --color-secondary: #9d9388;
     --color-row-hover: #2a2724;
     --color-border: rgba(255, 255, 255, 0.06);
-    --color-accent: #8ca3b3;
-    --color-accent-hover: #a7bbc8;
+    --color-accent: #A8B69E;
+    --color-accent-hover: #CCD6C4;
   }
 }
 

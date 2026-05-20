@@ -4,9 +4,9 @@
   .ink-stroked { fill: #222222; stroke: #222222; }
   .bg-stroke { fill: #FFFFFF; stroke: #222222; }
   @media (prefers-color-scheme: dark) {
-    .bg { fill: #181715; }
+    .bg { fill: #161716; }
     .ink-stroked { fill: #FFFFFF; stroke: #F2EFE9; }
-    .bg-stroke { fill: #181715; stroke: #F2EFE9; }
+    .bg-stroke { fill: #161716; stroke: #F2EFE9; }
   }
 </style>
 <rect class="bg" width="236" height="150" rx="8"/>
