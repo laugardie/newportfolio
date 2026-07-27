@@ -1,7 +1,7 @@
 <svg width="236" height="150" viewBox="0 0 236 150" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
   .bg { fill: #FFFFFF; }
-  .wedge { fill: #87967C; }
+  .wedge { fill: #567A5B; }
   @media (prefers-color-scheme: dark) {
     .bg { fill: #161716; }
     .wedge { fill: #FFFFFF; }

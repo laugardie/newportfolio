@@ -55,6 +55,19 @@ const EXPERIENCE: ExperienceEntry[] = [
 
 const SMALL_BETS = [
   {
+    name: "Meal planner",
+    company: "Web app",
+    year: "currently",
+    thumbnail: "/assets/mealio-preview.svg",
+  },
+  {
+    name: "Tatai",
+    company: "Coloring books",
+    year: "2026",
+    thumbnail: "/assets/tatai-books.svg",
+    url: "https://www.amazon.es/stores/author/B0H7SPB314?ingress=0&visitId=abe2539c-bbe6-4c53-88a0-a4d3e46984f2",
+  },
+  {
     name: "Habits",
     company: "tryhabits.app",
     year: "2026",
