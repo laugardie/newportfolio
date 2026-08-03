@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 export default function LogoLau({ size = 48 }: { size?: number }) {
   return (
-    <div className="[--logo-ink:#567A5B] dark:[--logo-ink:#F2EFE9]">
+    <div className="logo-mark">
     <svg width={size} height={size} viewBox="0 0 60 61" fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* TL corner — delay 0 */}
       <motion.g

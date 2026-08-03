@@ -1,11 +1,18 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import { DM_Sans } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import './globals.css'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
+  display: 'swap',
+})
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['500', '600'],
+  variable: '--font-cormorant',
   display: 'swap',
 })
 
@@ -21,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={dmSans.variable}>
+    <html lang="en" className={`${dmSans.variable} ${cormorant.variable}`}>
       <body className="font-dm-sans bg-bg text-ink antialiased">
         {children}
         <Script

@@ -34,7 +34,7 @@ type ExperienceEntry = {
 
 const EXPERIENCE: ExperienceEntry[] = [
   {
-    name: "Gumroad, Antiwork",
+    name: "Gumroad (Antiwork)",
     logo: "/assets/Gumroad-logo.svg",
     url: "https://gumroad.com/",
     date: "jul 2021 – mar 2026",
@@ -56,15 +56,17 @@ const EXPERIENCE: ExperienceEntry[] = [
 const SMALL_BETS = [
   {
     name: "Meal planner",
-    company: "Web app",
-    year: "currently",
+    company: "Currently building",
+    year: "now",
     thumbnail: "/assets/mealio-preview.svg",
+    thumbnailScale: 0.63,
   },
   {
     name: "Tatai",
     company: "Coloring books",
     year: "2026",
     thumbnail: "/assets/tatai-books.svg",
+    thumbnailScale: 0.75,
     url: "https://www.amazon.es/stores/author/B0H7SPB314?ingress=0&visitId=abe2539c-bbe6-4c53-88a0-a4d3e46984f2",
   },
   {
@@ -72,6 +74,7 @@ const SMALL_BETS = [
     company: "tryhabits.app",
     year: "2026",
     thumbnail: "/assets/habits-preview.svg",
+    thumbnailScale: 0.63,
     url: "https://tryhabits.app",
   },
 ];
@@ -81,6 +84,7 @@ const EXPLORATIONS = explorations.map((e) => ({
   company: e.company,
   year: e.year,
   thumbnail: e.thumbnail,
+  thumbnailScale: e.thumbnailScale,
   url: `/explorations/${e.slug}`,
 }));
 
@@ -93,7 +97,7 @@ function fadeUp(delay = 0) {
 }
 
 const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-xs font-medium uppercase tracking-[0.1em] text-ink/50 mb-5 leading-[25px]">
+  <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted mb-6 leading-none">
     {children}
   </p>
 );
@@ -157,18 +161,24 @@ function WorkRow({ project }: { project: Project }) {
   return (
     <motion.a
       href={`/work/${project.slug}`}
-      className="row-item flex items-center py-3 sm:py-2.5 border-b border-divider -mx-2 px-2 cursor-pointer"
+      className="row-item flex items-center py-4 border-b border-divider -mx-3 px-3 cursor-pointer"
       initial="rest"
       whileHover="hover"
       animate="rest"
     >
       <motion.div
-        className="flex items-center gap-3 sm:gap-4 w-full"
+        className="flex items-center gap-4 w-full"
         variants={slideVariants}
         transition={slideTransition}
       >
-        <div className="relative flex-shrink-0 rounded-[4px] overflow-hidden w-14 h-10 sm:w-[72px] sm:h-12">
-          <Image src={project.thumbnail} alt="" fill className="object-cover" />
+        <div className="relative flex-shrink-0 overflow-hidden w-16 h-11 sm:w-20 sm:h-14">
+          <Image
+            src={project.thumbnail}
+            alt=""
+            fill
+            className="object-contain"
+            style={{ transform: `scale(${project.thumbnailScale ?? 1})` }}
+          />
         </div>
         {/* Mobile: stacked name + company · year */}
         <div className="sm:hidden flex-1 min-w-0">
@@ -203,6 +213,7 @@ type ListItem = {
   company: string;
   year: string;
   thumbnail: string;
+  thumbnailScale?: number;
   url?: string;
 };
 
@@ -218,19 +229,25 @@ function ListRow({ item }: { item: ListItem }) {
   return (
     <Tag
       {...linkProps}
-      className="row-item flex items-center py-3 sm:py-2.5 border-b border-divider -mx-2 px-2"
+      className="row-item flex items-center py-4 border-b border-divider -mx-3 px-3"
       style={{ textDecoration: "none" }}
       initial="rest"
       whileHover="hover"
       animate="rest"
     >
       <motion.div
-        className="flex items-center gap-3 sm:gap-4 w-full"
+        className="flex items-center gap-4 w-full"
         variants={slideVariants}
         transition={slideTransition}
       >
-        <div className="relative flex-shrink-0 rounded-[4px] overflow-hidden w-14 h-10 sm:w-[72px] sm:h-12">
-          <Image src={item.thumbnail} alt="" fill className="object-cover" />
+        <div className="relative flex-shrink-0 overflow-hidden w-16 h-11 sm:w-20 sm:h-14">
+          <Image
+            src={item.thumbnail}
+            alt=""
+            fill
+            className="object-contain"
+            style={{ transform: `scale(${item.thumbnailScale ?? 1})` }}
+          />
         </div>
         {/* Mobile: stacked name + company · year */}
         <div className="sm:hidden flex-1 min-w-0">
@@ -308,19 +325,20 @@ export default function Home() {
   const time = useClock();
 
   return (
-    <main className="min-h-screen bg-bg">
-      <div className="max-w-[560px] mx-auto px-6 sm:px-8 md:px-0 pt-20 pb-36">
+    <main className="min-h-screen bg-transparent overflow-hidden">
+      <div className="max-w-[600px] mx-auto px-6 sm:px-8 md:px-0 pt-12 sm:pt-16 pb-28 sm:pb-36">
         {/* ── 1. Logomark ─────────────────────────────────────── */}
-        <div className="mb-16">
+        <div className="mb-20 sm:mb-24">
           <LogoLau />
         </div>
 
         {/* ── 2. Bio ───────────────────────────────────────────── */}
-        <motion.section {...fadeUp(0.06)} className="mb-16">
-          <p className="text-base leading-[1.67] text-ink">
-            I&apos;m Laura,
-            <br />
-            <br /> A
+        <motion.section {...fadeUp(0.06)} className="mb-24 sm:mb-28">
+          <h1 className="font-cormorant text-[3.5rem] sm:text-[4.5rem] font-medium tracking-[-0.035em] leading-[0.9] text-ink mb-9">
+            I&apos;m Laura.
+          </h1>
+          <p className="text-[17px] leading-[1.72] text-ink/80">
+            A
             <span className=" text-accent"> Senior Product Designer </span>
             based in Lagos, Portugal, working at the intersection of design and
             code. I specialize in crafting intuitive, high-quality digital
@@ -345,6 +363,15 @@ export default function Home() {
             >
               Gumroad
             </a>
+            , part of{" "}
+            <a
+              href="https://antiwork.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150"
+            >
+              Antiwork
+            </a>
             . <span className=" text-accent"> US O-1B visa holder</span>
             .
             <br />
@@ -355,7 +382,7 @@ export default function Home() {
         </motion.section>
 
         {/* ── 3. Experience ────────────────────────────────────── */}
-        <motion.section {...fadeUp(0.12)} className="mb-16">
+        <motion.section {...fadeUp(0.12)} className="mb-24">
           <SectionHeading>Experience</SectionHeading>
           <div>
             {EXPERIENCE.map((exp, i) => (
@@ -368,7 +395,7 @@ export default function Home() {
                       rel: "noopener noreferrer",
                     }
                   : {})}
-                className={`row-item flex items-center justify-between py-2.5 border-b border-divider -mx-2 px-2${exp.url ? " cursor-pointer" : ""}`}
+                className={`row-item flex items-center justify-between py-3.5 border-b border-divider -mx-3 px-3${exp.url ? " cursor-pointer" : ""}`}
                 initial="rest"
                 whileHover="hover"
                 animate="rest"
@@ -408,7 +435,7 @@ export default function Home() {
         </motion.section>
 
         {/* ── 4. Work ──────────────────────────────────────────── */}
-        <motion.section {...fadeUp(0.18)} id="work" className="mb-16">
+        <motion.section {...fadeUp(0.18)} id="work" className="mb-24">
           <SectionHeading>Work</SectionHeading>
           <div>
             {projects.map((project) => (
@@ -418,7 +445,7 @@ export default function Home() {
         </motion.section>
 
         {/* ── 5. Small bets ────────────────────────────────────── */}
-        <motion.section {...fadeUp(0.22)} className="mb-16">
+        <motion.section {...fadeUp(0.22)} className="mb-24">
           <SectionHeading>Small bets</SectionHeading>
           <div>
             {SMALL_BETS.map((item) => (
@@ -428,7 +455,7 @@ export default function Home() {
         </motion.section>
 
         {/* ── 6. Explorations ──────────────────────────────────── */}
-        <motion.section {...fadeUp(0.25)} className="mb-16">
+        <motion.section {...fadeUp(0.25)} className="mb-24">
           <SectionHeading>Explorations</SectionHeading>
           <div>
             {EXPLORATIONS.map((item) => (
@@ -438,7 +465,7 @@ export default function Home() {
         </motion.section>
 
         {/* ── 7. You can find me here ───────────────────────────── */}
-        <motion.section {...fadeUp(0.28)} className="mb-16">
+        <motion.section {...fadeUp(0.28)} className="mb-24">
           <SectionHeading>You can find me here</SectionHeading>
           <div className="space-y-1">
             <a
@@ -497,7 +524,7 @@ export default function Home() {
         </motion.section>
 
         {/* ── 8. Footer ────────────────────────────────────────── */}
-        <motion.footer {...fadeUp(0.31)}>
+        <motion.footer {...fadeUp(0.31)} className="pt-8 border-t border-divider">
           {time && (
             <p className="text-base text-ink/50 leading-[25px]">
               {time}, Lagos, Portugal
