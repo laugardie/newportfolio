@@ -340,11 +340,12 @@ export default function Home() {
           <p className="text-[17px] leading-[1.72] text-ink/80">
             A
             <span className=" text-accent"> Senior Product Designer </span>
-            based in Lagos, Portugal, working at the intersection of design and
-            code. I specialize in crafting intuitive, high-quality digital
-            experiences and work directly in the codebase with{" "}
+            based in Lagos, Portugal. I design and ship complex product
+            workflows, moving between product thinking, interaction design, and
+            production code. I work directly in{" "}
             <span className=" text-accent">React</span> and{" "}
-            <span className=" text-accent">Tailwind</span>.
+            <span className=" text-accent">Tailwind</span>, reducing complexity
+            without losing the details that make a product feel considered.
             <br />
             <br />I started out as a primary school teacher before transitioning
             into
