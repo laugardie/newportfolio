@@ -14,7 +14,7 @@ module.exports = {
         ink: "var(--color-ink)",
         "border-ink": "var(--color-ink)",
         muted: "var(--color-secondary)",
-        accent: "#567A5B",
+        accent: "#A8C3AC",
         "accent-hover": "var(--color-accent-hover)",
         surface: "var(--color-surface)",
         divider: "var(--color-border)",
@@ -37,7 +37,7 @@ module.exports = {
         fraunces: ["var(--font-fraunces)", "Georgia", "serif"],
         figtree: ["Figtree", "ui-sans-serif", "system-ui"],
         "source-sans": ["Source Sans 3", "ui-sans-serif", "system-ui"],
-        cormorant: ["Cormorant Garamond", "serif"],
+        cormorant: ["var(--font-cormorant)", "Georgia", "serif"],
         "jetbrains-mono": ["JetBrains Mono", "monospace"],
       },
       maxWidth: {

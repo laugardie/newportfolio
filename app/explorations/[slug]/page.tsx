@@ -29,12 +29,12 @@ export default function ExplorationPage({ params }: Props) {
     .slice(0, 4);
 
   return (
-    <main className="min-h-screen bg-bg">
-      <div className="max-w-[560px] mx-auto px-6 sm:px-8 md:px-0 pt-20 pb-36">
+    <main className="min-h-screen bg-transparent overflow-hidden">
+      <div className="max-w-[600px] mx-auto px-6 sm:px-8 md:px-0 pt-12 sm:pt-16 pb-28 sm:pb-36">
         {/* Back */}
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-sm text-muted hover:text-ink transition-colors mb-12 group"
+          className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.16em] text-muted hover:text-ink transition-colors mb-16 group"
         >
           <span className="group-hover:-translate-x-0.5 transition-transform">
             ←
@@ -43,28 +43,28 @@ export default function ExplorationPage({ params }: Props) {
         </Link>
 
         {/* Title */}
-        <h1 className="text-2xl font-medium leading-tight tracking-tight text-ink mb-2">
+        <h1 className="font-cormorant text-[3.5rem] sm:text-[4.5rem] font-medium leading-[0.92] tracking-[-0.035em] text-ink mb-5">
           {exploration.name}
         </h1>
 
         {/* Meta */}
-        <p className="text-sm text-muted mb-10">
+        <p className="text-[11px] uppercase tracking-[0.14em] text-muted mb-12">
           {exploration.company} · {exploration.year}
         </p>
 
         {/* Description */}
         <p
-          className="text-base leading-[1.75] text-ink mb-16"
+          className="text-[17px] leading-[1.75] text-ink/80 mb-20"
           dangerouslySetInnerHTML={renderTextContent(exploration.description)}
         />
 
         {/* Sections */}
-        <div className="space-y-14">
+        <div className="space-y-16">
           {exploration.sections.map((section, i) => {
             if (section.type === "image") {
               return (
-                <figure key={i} className="-mx-16">
-                  <div className="rounded-2xl overflow-hidden bg-surface">
+                <figure key={i} className="md:-mx-16">
+                  <div className="overflow-hidden bg-surface border border-divider">
                     <Image
                       src={section.content}
                       alt={section.caption ?? ""}
@@ -86,12 +86,12 @@ export default function ExplorationPage({ params }: Props) {
             return (
               <div key={i}>
                 {section.heading && (
-                  <h2 className="text-base font-semibold text-ink mb-3">
+                  <h2 className="font-cormorant text-3xl font-semibold tracking-[-0.015em] text-ink mb-4">
                     {section.heading}
                   </h2>
                 )}
                 <p
-                  className="text-base leading-[1.75] text-ink"
+                  className="text-[17px] leading-[1.75] text-ink/80"
                   dangerouslySetInnerHTML={renderTextContent(section.content)}
                 />
               </div>
@@ -102,7 +102,7 @@ export default function ExplorationPage({ params }: Props) {
         {/* More explorations */}
         {others.length > 0 && (
           <div className="mt-20 pt-16 border-t border-divider">
-            <p className="text-xs font-medium uppercase tracking-[0.1em] text-muted mb-5">
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted mb-6">
               More explorations
             </p>
             <div>

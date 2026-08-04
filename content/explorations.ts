@@ -6,6 +6,7 @@ export type Exploration = {
   company: string;
   year: string;
   thumbnail: string;
+  thumbnailScale?: number;
   description: string;
   sections: ProjectSection[];
 };
@@ -17,6 +18,7 @@ export const explorations: Exploration[] = [
     company: "Illustration System",
     year: "2021",
     thumbnail: "/assets/avatars-preview.svg",
+    thumbnailScale: 0.72,
     description:
       "Avatars is a playful doodle-based illustration system I designed and built in Figma. The goal was to turn hand-drawn characters into a flexible, mix-and-match component system.",
     sections: [
@@ -45,6 +47,7 @@ export const explorations: Exploration[] = [
     company: "UX/UI Design",
     year: "2019",
     thumbnail: "/assets/goeat-preview.svg",
+    thumbnailScale: 0.63,
     description:
       "Goeat was my final project during Ironhack’s UX/UI Bootcamp. Over 10 days, I designed an app to help travelers discover authentic local dishes while bridging cultural and language gaps. The project was selected as a finalist and showcased at Madrid’s Hackshow.",
     sections: [
@@ -73,8 +76,9 @@ export const explorations: Exploration[] = [
     company: "Feature Design",
     year: "2019",
     thumbnail: "/assets/whatsapp-preview.svg",
+    thumbnailScale: 0.63,
     description:
-      "During Ironhack’s UX/UI Bootcamp, my colleague Miguel Durán Pardo and I collaborated on a 4-day sprint to design a new WhatsApp feature: Polls. The goal was to simplify group decision-making in chats, reducing clutter and confusion.",
+      "During Ironhack’s UX/UI Bootcamp, my colleague Miguel Durán Pardo and I collaborated on a 4-day sprint to design WhatsApp Polls, before WhatsApp introduced the feature. The goal was to simplify group decision-making in chats, reducing clutter and confusion.",
     sections: [
       {
         type: "text",

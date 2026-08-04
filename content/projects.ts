@@ -11,6 +11,7 @@ export type Project = {
   company: string;
   year: string;
   thumbnail: string;
+  thumbnailScale?: number;
   description: string;
   sections: ProjectSection[];
 };
@@ -19,9 +20,10 @@ export const projects: Project[] = [
   {
     slug: "flexile-github-integration",
     title: "Flexile GitHub Integration",
-    company: "Flexile, Antiwork",
+    company: "Flexile (Antiwork)",
     year: "2026",
     thumbnail: "/assets/flexile-preview.svg",
+    thumbnailScale: 1.15,
     description:
       '<a href="https://flexile.com/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Flexile</a> is a contractor payments platform. Gumroad uses it to pay open source contributors. Both are part of <a href="https://antiwork.com/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Antiwork</a>.',
     sections: [
@@ -29,7 +31,13 @@ export const projects: Project[] = [
         type: "text",
         heading: "The problem",
         content:
-          "Every time a contributor submitted an invoice, an admin had to manually verify they actually owned the PR. One by one.",
+          "Feedback from both admins and contributors pointed to two sides of the same problem. Admins had to manually verify that each contributor owned the PR they were invoicing for. Contributors couldn’t easily see the status of their PR or know exactly how much to invoice.",
+      },
+      {
+        type: "text",
+        heading: "My role",
+        content:
+          "I started with a prototype to work through the core flow, then designed the UI and states. As the integration was implemented, I worked with engineering and open source contributors to address edge cases, review the implemented UI, and refine the details before release.",
       },
       {
         type: "text",
@@ -46,46 +54,31 @@ export const projects: Project[] = [
         type: "text",
         heading: "Outcome",
         content:
-          'No more manual checks. Contractors spend less time invoicing, and paying is way easier on the admin side too.<br /><br />Here\'s the <a href="https://github.com/antiwork/flexile/issues/1507" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">GitHub issue</a> and the <a href="https://www.figma.com/design/3hnLTTti7oMlsj8VmQmWEL/Github-integration?node-id=1-63&t=328iNJD1Li018zjv-1" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Figma file</a> if you\'re curious.',
-      },
-    ],
-  },
-  {
-    slug: "gumroad-careers",
-    title: "Careers page",
-    company: "Gumroad, Antiwork",
-    year: "2026",
-    thumbnail: "/assets/careers-preview.svg",
-    description:
-      'Gumroad was changing. After years of being fully remote and async, <a href="https://x.com/ershus" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Ershad</a>, who\'d been at Gumroad for 8 years, took over from <a href="https://x.com/shl?lang=en" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Sahil Lavingia</a> as CEO and was moving the team to an office in New York. <br /><br /> The New York office had just been renovated. Ershad wanted to grow the team, ship more, move faster, and make Gumroad the best creator platform in a world where AI keeps raising the bar. But there was nowhere to publish the open roles.',
-    sections: [
-      {
-        type: "text",
-        content:
-          '<div class="md:-mx-16"><div class="hidden sm:block rounded-2xl overflow-hidden" style="height:500px"><iframe src="https://gumroad.com/careers" style="width:1280px;height:1000px;transform:scale(0.5375);transform-origin:top left;border:0" loading="lazy"></iframe></div><div class="sm:hidden rounded-2xl overflow-hidden" style="height:400px"><iframe src="https://gumroad.com/careers" style="width:100%;height:400px;border:0" loading="lazy"></iframe></div></div>',
-      },
-      {
-        type: "text",
-        heading: "What I designed and shipped",
-        content:
-          'A simple careers page that felt like Gumroad. I designed and coded it in a couple of days using Cursor. If you are curious, <a href="https://github.com/antiwork/gumroad/pull/2835" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">here\'s the code</a> and the <a href="https://www.figma.com/design/5NpTghLd2tIbUSVXQuLgKP/Jobs-page?node-id=1-60&t=5OUEprpIsnrfBzGy-1" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Figma file</a>.',
+          'After launch, both admins and contributors responded positively to the clearer workflow.<br /><br />Here\'s the <a href="https://github.com/antiwork/flexile/issues/1507" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">GitHub issue</a> and the <a href="https://www.figma.com/design/3hnLTTti7oMlsj8VmQmWEL/Github-integration?node-id=1-63&t=328iNJD1Li018zjv-1" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Figma file</a> if you\'re curious.',
       },
     ],
   },
   {
     slug: "gumroad-community",
     title: "Community",
-    company: "Gumroad, Antiwork",
+    company: "Gumroad (Antiwork)",
     year: "2025",
     thumbnail: "/assets/community-preview.svg",
+    thumbnailScale: 0.65,
     description:
-      "Creators were already building communities around their work, just not inside Gumroad. Every time a customer bought something, they'd get a link and have to go somewhere else to connect.",
+      "Feedback gathered from creators and shared by the product team pointed to a clear gap. Creators wanted to communicate with their customers without sending them to third-party tools, while also giving customers a place to talk to each other.",
     sections: [
       {
         type: "text",
-        heading: "What I designed",
+        heading: "My role",
         content:
-          "A simple community. A built-in chat, tied to each product. Buy a product, get access to the community for that product. Creators could talk to their customers, customers could talk to each other. No third-party tools, no extra links, just part of the product.<br /><br />We shipped it in April 2025. It was a big hit, and it was the first time Gumroad had a space for creators to connect with their customers.",
+          "I created the prototype and designed the UX and UI for the chat, notifications, and the way each community integrated with its product. The access model connected community membership to a purchase: buy a product, get access to its community.",
+      },
+      {
+        type: "text",
+        heading: "What we shipped",
+        content:
+          "A built-in community tied to each product, where creators could talk to their customers and customers could talk to each other. We shipped it in April 2025, creating Gumroad’s first native space for those conversations.",
       },
       {
         type: "text",
@@ -96,11 +89,12 @@ export const projects: Project[] = [
   {
     slug: "gumroad-design-system",
     title: "Gumroad Design System",
-    company: "Gumroad, Antiwork",
+    company: "Gumroad (Antiwork)",
     year: "2024",
     thumbnail: "/assets/gumroadDS-preview.svg",
+    thumbnailScale: 0.72,
     description:
-      'In 2024, <a href="https://jchang.cc/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Jason</a> (Designer), <a href="https://x.com/MayaRainer_" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Maya</a> (Engineer), and I finally did something we\'d been putting off for a while: we sat down and went through every single component in our design system and published it to the Figma Community.',
+      'In 2024, <a href="https://jchang.cc/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Jason</a> (Designer), <a href="https://x.com/MayaRainer_" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Maya</a> (Engineer), and I audited every component in our design system and published it to the Figma Community.',
     sections: [
       {
         type: "text",
@@ -117,7 +111,13 @@ export const projects: Project[] = [
         type: "text",
         heading: "Approach",
         content:
-          "So we just went through it all. Buttons, pills, alerts, modals...one by one. Figma on one side, Storybook on the other. What's different, what's wrong, what's the right call. A lot of it came down to naming. Some words only made sense to designers, some only to developers. We picked names that worked for both and stuck to them.<br /><br />We rebuilt the components using Figma's newer properties and variables and also made sure everything was clearly documented, so both sides could stay in sync without guesswork. We opened PRs to close the visual gaps in Storybook, so what designers were handing off was exactly what developers were building.",
+          "We audited buttons, pills, alerts, modals, and every other component across Figma and Storybook. We identified visual differences, implementation gaps, and naming that only made sense to designers or developers, then chose terminology that worked for both.<br /><br />We rebuilt the components using Figma's newer properties and variables and documented them clearly so both sides could stay in sync. We also opened PRs to close the visual gaps in Storybook, so what designers handed off matched what developers built.",
+      },
+      {
+        type: "text",
+        heading: "My contribution",
+        content:
+          "We divided the audit by assigning components to each person. My scope included foundations such as brand, shadows, spacing, breakpoints, and border radius; icon and illustration systems; and components including buttons, alerts, pills, tooltips, modals, inputs, and the WYSIWYG editor. I shared colors and typography with Jason.<br /><br />Across those areas, I audited Figma against Storybook, rebuilt components using properties and variables, clarified naming and documentation, and contributed PRs to close visual gaps in the implementation.",
       },
       {
         type: "image",
@@ -128,18 +128,19 @@ export const projects: Project[] = [
         type: "text",
         heading: "Outcome",
         content:
-          "We shipped in August 2024 and published it to the Figma Community. It got a lot of attention. But what I was most proud of was simpler, the product looked better. More consistent, more considered. The kind of thing most people won't notice, but designers always do.",
+          "We published the system to the Figma Community in August 2024. I also contributed implementation PRs that matched Figma and Storybook naming for pills, corrected the balance of the pill icon, and standardised alert typography.",
       },
     ],
   },
   {
     slug: "gumroad-tipping",
     title: "Tipping",
-    company: "Gumroad, Antiwork",
+    company: "Gumroad (Antiwork)",
     year: "2024",
     thumbnail: "/assets/tipping-preview.svg",
+    thumbnailScale: 0.6,
     description:
-      "Gumroad asked creators a simple question on Twitter: tipping, yes or no? 377 votes later, yes won. Three days after that, it was live.",
+      "Gumroad asked creators a simple question on Twitter: tipping, yes or no? Yes received the largest share of 377 votes. Less than three days later, tipping was live.",
     sections: [
       {
         type: "text",
@@ -153,9 +154,21 @@ export const projects: Project[] = [
       },
       {
         type: "text",
-        heading: "Approach",
+        heading: "My role",
         content:
-          "I designed the tipping flow as part of the existing checkout, adding preset options plus a custom amount, right before the pay button. The goal was to make it feel natural, not pushy. <br /><br />We shipped a first version with 0%, 10%, 20% and custom tip, defaulting to 20%, which drove a 4.5% increase in GMV from tips. But some creators weren't happy with it being pre-selected, feeling it put pressure on their customers. So we listened and iterated. The second version replaced 0% with 'No tip', shifted the options to 15%, 20%, 25% to anchor people around the middle, and changed the default to 'No tip'. GMV from tips dropped to around 0.7%, but creators felt better about it, and that mattered too.<br /><br />",
+          "I defined the problem and explored possible approaches with another designer. I then created the prototype and designed the UI. After launch, I followed public replies from creators and used them to shape the next iteration.",
+      },
+      {
+        type: "text",
+        heading: "The first release",
+        content:
+          "I designed the tipping flow as part of the existing checkout, adding preset options and a custom amount directly before the pay button. The goal was to make tipping feel natural rather than pushy. The first version offered 0%, 10%, 20%, and a custom amount, with 20% selected by default.",
+      },
+      {
+        type: "text",
+        heading: "What we learned and changed",
+        content:
+          'With 20% selected by default, tips increased GMV by approximately 4.5%. Public replies from creators revealed that the preselected amount could put pressure on their customers. We replaced 0% with "No tip", changed the options to 15%, 20%, and 25%, and made "No tip" the default. With a 0% default, tips increased GMV by around 0.7%, while the new default better reflected what creators wanted for their customers.',
       },
       {
         type: "image",
@@ -166,7 +179,7 @@ export const projects: Project[] = [
         type: "text",
         heading: "Outcome",
         content:
-          "Creators began finding unexpected tips in their Gumroad account balances, some even thought there was a bug. Soon, users were sharing their experiences in [Medium](https://harnarayan.medium.com/gumroad-tipping-the-best-feature-726e162ebaea). It quickly became one of Gumroad’s most appreciated and talked-about features that year.",
+          'Creators began finding unexpected tips in their Gumroad account balances; some even thought there was a bug. Soon, a user shared their experience <a href="https://harnarayan.medium.com/gumroad-tipping-the-best-feature-726e162ebaea" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">on Medium</a>.',
       },
       {
         type: "text",
@@ -177,11 +190,12 @@ export const projects: Project[] = [
   {
     slug: "gumroad-more-like-this",
     title: "More like this",
-    company: "Gumroad, Antiwork",
+    company: "Gumroad (Antiwork)",
     year: "2024",
     thumbnail: "/assets/morelikethis-preview.svg",
+    thumbnailScale: 0.72,
     description:
-      "Creators put a lot of work into building a catalogue. But once someone bought a product, there was no easy way to show them what else was worth getting. The sale was done and that was it.",
+      "The product team identified an opportunity after purchase. Creators invested in building a catalogue, but once a customer bought something, there was no simple way to help them discover what else might be relevant.",
     sections: [
       {
         type: "image",
@@ -190,26 +204,39 @@ export const projects: Project[] = [
       },
       {
         type: "text",
-        heading: "What I designed and shipped",
+        heading: "My role",
         content:
-          "A recommendations block creators can drop into any product page. Three products, configured right from the block settings. They can choose to show only their own products, a mix of their own and affiliated ones, or pull from Gumroad's affiliate catalogue. Simple to set up, and a natural way to keep customers discovering more. I designed it and built the frontend myself.",
+          "I created the prototype, designed the UI and its states, and built the frontend. I worked with engineering, who implemented the backend and connected the recommendations to the product catalogue.",
+      },
+      {
+        type: "text",
+        heading: "What we shipped",
+        content:
+          "A recommendations block creators could add to any product page. From the block settings, they could choose recommendations from their own products, their own and affiliated products, or Gumroad’s affiliate catalogue. The designs covered populated and empty results, reordering, settings, and deletion.",
+      },
+      {
+        type: "text",
+        heading: "Outcome",
+        content:
+          "After launch, we received positive feedback from creators using the feature.",
       },
     ],
   },
   {
     slug: "gumroad-team-members",
     title: "Team members",
-    company: "Gumroad, Antiwork",
+    company: "Gumroad (Antiwork)",
     year: "2023",
     thumbnail: "/assets/teams-preview.svg",
+    thumbnailScale: 0.68,
     description:
-      "Before this, if you needed someone to help run your Gumroad account, your only option was to hand them your email and password. No roles, no permissions, just full access or nothing. And if you were juggling multiple accounts yourself, you were logging in and out constantly.",
+      "Gumroad accounts were tied to a single email address. Creators who needed help with support, marketing, or accounting had no team model, while people managing several accounts had to keep logging in and out.",
     sections: [
       {
         type: "text",
-        heading: "What I designed",
+        heading: "My role",
         content:
-          "I led the design of Team Members. A simple way to invite people to co-admin your account and switch between accounts without ever logging out. The account switcher was the key interaction: simple, fast, one click from anywhere.",
+          "I led the design of Team Members. I mapped the owner and member flows, then designed invitations, pending and expired states, role-based permissions, removing or revoking access, email mismatch errors, and paths for both new and existing users. I iterated with the team on role clarity, sorting, the invitation form, and making Settings easier to find.",
       },
       {
         type: "image",
@@ -218,25 +245,27 @@ export const projects: Project[] = [
       },
       {
         type: "text",
+        heading: "What we shipped",
         content:
-          "Gumroad announced it in February 2023. Sahil wrote the launch post from the Gumroad account, without logging out of his personal one, which was kind of a nice way to show the feature working in the wild.",
+          "We launched co-admin invitations and account switching in February 2023. The wider permission model defined separate access for admins, marketers, support, and accountants across products, analytics, payouts, audience, and settings. Sahil demonstrated the switcher by writing the launch post from the Gumroad account without logging out of his personal one.",
       },
     ],
   },
   {
     slug: "gumroad-checkout-redesign",
     title: "Checkout Redesign",
-    company: "Gumroad, Antiwork",
+    company: "Gumroad (Antiwork)",
     year: "2022",
     thumbnail: "/assets/gumroad-preview.svg",
+    thumbnailScale: 0.95,
     description:
-      "The checkout is one of the most important pages on Gumroad. It was time to rebuild it from scratch.",
+      "The checkout is one of the most important pages on Gumroad. I worked on two major iterations: a rebuild in 2022 and a focused update in 2025.",
     sections: [
       {
         type: "text",
         heading: "The first redesign (2022)",
         content:
-          "I led the checkout redesign. Before, it was a single page built around buying one thing. The new version could handle multiple products, discounts, the whole cart experience. I also got my hands dirty with the code, integrating some of the new components into the team library.",
+          "I led the checkout redesign. Before, it was a single page built around buying one thing. The new version could handle multiple products, discounts, and the full cart experience. I also implemented the Storybook cart-item component and its styling, including the mobile states, and iterated on review feedback before it reached production.",
       },
       {
         type: "image",
@@ -245,9 +274,15 @@ export const projects: Project[] = [
       },
       {
         type: "text",
+        heading: "Creator feedback (2025)",
+        content:
+          "Feedback gathered by the team through conversations with creators highlighted three problems. Gifting a product was hard to discover. On mobile, the payment UI wasn’t responsive and had become too complex. And after adding a tip, the information hierarchy made the final total difficult to identify.",
+      },
+      {
+        type: "text",
         heading: "The update (2025)",
         content:
-          "Four years later, I came back to it. A polish pass, no big structural changes. We reorganised the information hierarchy, redesigned the payment method toggle, and moved the tipping section to a better spot. I designed it and pushed some of the code changes myself.",
+          "I redesigned the flow around those issues. Gifting moved closer to the product being gifted. The payment page was restructured so completing the payment became the final step, and the payment UI was updated to work responsively. I moved tipping before the total so the final amount was clear. I designed the update, then implemented the page restructure and payment UI in production.",
       },
       {
         type: "image",
@@ -262,8 +297,9 @@ export const projects: Project[] = [
     company: "Beezy",
     year: "2022",
     thumbnail: "/assets/nectar-preview.svg",
+    thumbnailScale: 1.3,
     description:
-      'At <a href="https://www.beezy.net/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Beezy</a> I finally got to do something I’d wanted to do since Liferay. Build a design system from scratch. No inherited decisions, no legacy components to work around. Just a blank Figma file and a team that needed consistency.',
+      'At <a href="https://www.beezy.net/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Beezy</a>, I built a design system from scratch. There were no inherited decisions or legacy components to work around, only a blank Figma file and a team that needed consistency.',
     sections: [
       {
         type: "text",
@@ -290,6 +326,7 @@ export const projects: Project[] = [
     company: "Beezy",
     year: "2021",
     thumbnail: "/assets/theatermode-preview.svg",
+    thumbnailScale: 0.63,
     description:
       'A feature I designed at <a href="https://www.beezy.net/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Beezy</a>, a modern intranet platform. Two weeks, one clear problem: Users had to download files just to read them. Then switch windows to comment. Then switch back. It was the kind of friction that adds up quietly until everyone just stops engaging.',
     sections: [
@@ -327,6 +364,7 @@ export const projects: Project[] = [
     company: "Liferay",
     year: "2020",
     thumbnail: "/assets/lexicon-preview.svg",
+    thumbnailScale: 1.15,
     description:
       "I joined Liferay fresh out of bootcamp. My first real design job, and I landed in a Design System team, which turned out to be the best possible place to start. It also lit something in me. I've been obsessed with design systems ever since.",
     sections: [
