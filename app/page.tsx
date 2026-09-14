@@ -34,6 +34,14 @@ type ExperienceEntry = {
 
 const EXPERIENCE: ExperienceEntry[] = [
   {
+    name: "Small bets (Personal projects)",
+    logo: "",
+    isLogomark: true,
+    url: null,
+    active: true,
+    date: "Present",
+  },
+  {
     name: "Gumroad (Antiwork)",
     logo: "/assets/Gumroad-logo.svg",
     url: "https://gumroad.com/",
@@ -60,6 +68,14 @@ const SMALL_BETS = [
     year: "now",
     thumbnail: "/assets/mealio-preview.svg",
     thumbnailScale: 0.63,
+  },
+  {
+    name: "Everground",
+    company: "Currently designing",
+    year: "now",
+    thumbnail: "/assets/everground-preview.svg",
+    thumbnailScale: 0.72,
+    url: "https://everground.app/",
   },
   {
     name: "Tatai",
@@ -338,19 +354,12 @@ export default function Home() {
             I&apos;m Laura.
           </h1>
           <p className="text-[17px] leading-[1.72] text-ink/80">
-            A
-            <span className=" text-accent"> Senior Product Designer </span>
-            based in Lagos, Portugal. I design and ship complex product
-            workflows, moving between product thinking, interaction design, and
-            production code. I work directly in{" "}
-            <span className=" text-accent">React</span> and{" "}
-            <span className=" text-accent">Tailwind</span>, reducing complexity
-            without losing the details that make a product feel considered.
-            <br />
-            <br />I started out as a primary school teacher before transitioning
-            into
+            A<span className=" text-accent"> Product Designer </span>
+            based in Lagos, Portugal. I like working across the whole product
+            process. Before product design, I was a primary school teacher.
+            I&apos;ve since worked across
             <span className=" text-accent"> product</span>,{" "}
-            <span className=" text-accent">UX</span>, and{" "}
+            <span className=" text-accent">design systems</span>, and{" "}
             <span className=" text-accent">front-end development</span>
             .
             <br />
@@ -373,12 +382,11 @@ export default function Home() {
             >
               Antiwork
             </a>
-            . <span className=" text-accent"> US O-1B visa holder</span>
             .
             <br />
             <br />
-            Outside of work, I&apos;m into running, CrossFit, nutrition, and
-            yoga, and I&apos;m also mum to Diego, 3.
+            Outside of work, I&apos;m into sports, nutrition, and yoga, and
+            I&apos;m also mum to Diego.
           </p>
         </motion.section>
 
@@ -525,7 +533,10 @@ export default function Home() {
         </motion.section>
 
         {/* ── 8. Footer ────────────────────────────────────────── */}
-        <motion.footer {...fadeUp(0.31)} className="pt-8 border-t border-divider">
+        <motion.footer
+          {...fadeUp(0.31)}
+          className="pt-8 border-t border-divider"
+        >
           {time && (
             <p className="text-base text-ink/50 leading-[25px]">
               {time}, Lagos, Portugal

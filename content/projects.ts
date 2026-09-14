@@ -252,6 +252,40 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "daylight-calculator",
+    title: "Daylight Calculator",
+    company: "White Arkitekter",
+    year: "2023",
+    thumbnail: "/assets/daylight-preview.svg",
+    thumbnailScale: 0.72,
+    description:
+      'The Daylight Calculator, developed by <a href="https://whitearkitekter.com/wisedaylight/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">White Arkitekter</a>, supports daylight assessments according to Swedish standards. It helps architects and urban planners evaluate and compare urban layouts using window dimensions, room height, room depth, and daylight access.',
+    sections: [
+      {
+        type: "image",
+        content: "/assets/daylightcalculator.jpg",
+        caption: "Daylight assessment across an urban layout",
+      },
+      {
+        type: "text",
+        heading: "The tool",
+        content:
+          "The tool supports early design work in high-density urban developments, helping teams assess compliance with Swedish daylight requirements before detailed interior configurations are available.",
+      },
+      {
+        type: "text",
+        heading: "My role",
+        content:
+          '<p class="mb-5">During this one-week project, I enhanced the visual design and addressed several UX issues:</p><ul class="list-disc pl-5 space-y-2"><li>Designing a project dashboard.</li><li>Enhancing the experience of creating a new project.</li><li>Implementing a visual indicator for model uploads.</li><li>Improving the presentation of model layers.</li><li>Enabling users to toggle the visibility of layers.</li><li>Helping users identify invalid objects within layers.</li><li>Allowing users to modify layer properties.</li><li>Making assessment results easier to understand.</li></ul>',
+      },
+      {
+        type: "image",
+        content: "/assets/whiteblog1.png",
+        caption: "Daylight Calculator interface explorations",
+      },
+    ],
+  },
+  {
     slug: "gumroad-checkout-redesign",
     title: "Checkout Redesign",
     company: "Gumroad (Antiwork)",
