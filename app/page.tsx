@@ -70,6 +70,14 @@ const SMALL_BETS = [
     thumbnailScale: 0.63,
   },
   {
+    name: "Everground",
+    company: "Currently designing",
+    year: "now",
+    thumbnail: "/assets/everground-preview.svg",
+    thumbnailScale: 0.72,
+    url: "https://everground.app/",
+  },
+  {
     name: "Tatai",
     company: "Coloring books",
     year: "2026",
