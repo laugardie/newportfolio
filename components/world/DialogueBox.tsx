@@ -78,7 +78,7 @@ function Conversation({ dialogue, onClose }: { dialogue: Dialogue; onClose: () =
         if (e.target !== e.currentTarget || (e.key !== "Enter" && e.key !== " ")) return;
         if (skipRef.current?.()) e.preventDefault();
       }}
-      className="max-h-[calc(100svh-48px)] overflow-y-auto rounded-lg border border-divider p-4 bg-bg text-ink outline-none"
+      className="max-h-[calc(100svh-48px)] overflow-y-auto border border-divider bg-white p-4 text-ink outline-none"
       style={
         {
           "--dialogue-accent": DIALOGUE_CONFIG.accent,
@@ -208,8 +208,8 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
               onClick={() => onChoose(option.next)}
               onFocus={() => setSelected(i)}
               onMouseEnter={() => done && select(i)}
-              className={`flex h-8 w-full items-center justify-center gap-1.5 rounded-lg px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default disabled:text-faint ${
-                active ? "bg-[var(--color-row-hover)] text-ink" : "text-ink"
+              className={`flex h-8 w-full items-center justify-center gap-1.5 px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default ${
+                active ? "bg-[var(--dialogue-accent)] text-white disabled:opacity-50" : "text-ink disabled:text-faint"
               }`}
             >
               <svg
