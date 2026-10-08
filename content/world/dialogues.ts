@@ -1,10 +1,10 @@
 // Conversations for places in /world. Each dialogue is a small graph of
-// messages; options point at the id of the message they lead to.
+// messages.
 
-export type DialogueOption = {
-  label: string;
-  next: string;
-};
+// An option either leads to another message (next) or opens a link (href).
+export type DialogueOption =
+  | { label: string; next: string; href?: never }
+  | { label: string; href: string; next?: never };
 
 export type DialogueMessage = {
   text: string;
@@ -26,10 +26,11 @@ export const homeDialogue: Dialogue = {
   start: "intro",
   messages: {
     intro: {
-      text: "Hey, I'm Laura. Welcome to my little corner of Lagos. I live here with my husband Daniel and our son Diego. It's also where I work.",
+      text: "Hey, I'm Casita. Laura lives here in Lagos with her husband Daniel and their son Diego. This is where she works, makes things, and occasionally gets interrupted by a very important drawing.",
       options: [
-        { label: "What do you do?", next: "work" },
+        { label: "What does Laura do?", next: "work" },
         { label: "What's life like here?", next: "life" },
+        { label: "Can I say hi to her?", next: "hi" },
       ],
     },
     work: {
@@ -39,6 +40,14 @@ export const homeDialogue: Dialogue = {
     life: {
       text: "Family life, working from home, and learning to surf. I'm much better at moving pixels than catching waves.",
       options: [backToStart],
+    },
+    hi: {
+      text: "Of course. I handle the welcoming. She handles the emails.",
+      options: [
+        { label: "Email Lau ↗", href: "mailto:hi@laugardie.com" },
+        { label: "Find her on LinkedIn ↗", href: "https://www.linkedin.com/in/laugardie/" },
+        { label: "Something else.", next: "intro" },
+      ],
     },
   },
 };

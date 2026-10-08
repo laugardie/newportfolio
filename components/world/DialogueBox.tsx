@@ -205,7 +205,11 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
               }}
               type="button"
               disabled={!done}
-              onClick={() => onChoose(option.next)}
+              onClick={() => {
+                if (option.href === undefined) onChoose(option.next);
+                else if (option.href.startsWith("mailto:")) window.location.href = option.href;
+                else window.open(option.href, "_blank", "noopener,noreferrer");
+              }}
               onFocus={() => setSelected(i)}
               onMouseEnter={() => done && select(i)}
               className={`flex h-8 w-full items-center justify-center gap-1.5 px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default ${
