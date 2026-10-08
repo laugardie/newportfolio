@@ -1,12 +1,12 @@
-<svg width="152" height="152" viewBox="0 0 152 152" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M76 26V9" stroke="#F4F4EF" stroke-width="8" stroke-linecap="round"/>
-<path d="M111.359 40.6401L123.379 28.6201" stroke="#F4F4EF" stroke-width="8" stroke-linecap="round"/>
-<path d="M126 76H143" stroke="#F4F4EF" stroke-width="8" stroke-linecap="round"/>
-<path d="M111.359 111.36L123.379 123.38" stroke="#F4F4EF" stroke-width="8" stroke-linecap="round"/>
-<path d="M76 126V143" stroke="#F4F4EF" stroke-width="8" stroke-linecap="round"/>
-<path d="M40.6411 111.36L28.6211 123.38" stroke="#F4F4EF" stroke-width="8" stroke-linecap="round"/>
-<path d="M26 76H9" stroke="#F4F4EF" stroke-width="8" stroke-linecap="round"/>
-<path d="M40.6411 40.6401L28.6211 28.6201" stroke="#F4F4EF" stroke-width="8" stroke-linecap="round"/>
-<path d="M76 106C92.5685 106 106 92.5685 106 76C106 59.4315 92.5685 46 76 46C59.4315 46 46 59.4315 46 76C46 92.5685 59.4315 106 76 106Z" fill="#A8C3AC"/>
-<path d="M76 110C94.7777 110 110 94.7777 110 76C110 57.2223 94.7777 42 76 42C57.2223 42 42 57.2223 42 76C42 94.7777 57.2223 110 76 110Z" stroke="#F4F4EF" stroke-width="8"/>
+<svg width="48" height="32" viewBox="-38.84 -0.59 229.50 153.00" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M76 26V9" stroke="#1F1F1F" stroke-width="5.98" stroke-linecap="round"/>
+<path d="M111.359 40.6401L123.379 28.6201" stroke="#1F1F1F" stroke-width="5.98" stroke-linecap="round"/>
+<path d="M126 76H143" stroke="#1F1F1F" stroke-width="5.98" stroke-linecap="round"/>
+<path d="M111.359 111.36L123.379 123.38" stroke="#1F1F1F" stroke-width="5.98" stroke-linecap="round"/>
+<path d="M76 126V143" stroke="#1F1F1F" stroke-width="5.98" stroke-linecap="round"/>
+<path d="M40.6411 111.36L28.6211 123.38" stroke="#1F1F1F" stroke-width="5.98" stroke-linecap="round"/>
+<path d="M26 76H9" stroke="#1F1F1F" stroke-width="5.98" stroke-linecap="round"/>
+<path d="M40.6411 40.6401L28.6211 28.6201" stroke="#1F1F1F" stroke-width="5.98" stroke-linecap="round"/>
+<path d="M76 106C92.5685 106 106 92.5685 106 76C106 59.4315 92.5685 46 76 46C59.4315 46 46 59.4315 46 76C46 92.5685 59.4315 106 76 106Z" fill="#FFFFFF"/>
+<path d="M76 110C94.7777 110 110 94.7777 110 76C110 57.2223 94.7777 42 76 42C57.2223 42 42 57.2223 42 76C42 94.7777 57.2223 110 76 110Z" stroke="#1F1F1F" stroke-width="5.98"/>
 </svg>

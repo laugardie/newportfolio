@@ -5,8 +5,6 @@ export type Exploration = {
   name: string;
   company: string;
   year: string;
-  thumbnail: string;
-  thumbnailScale?: number;
   description: string;
   sections: ProjectSection[];
 };
@@ -17,8 +15,6 @@ export const explorations: Exploration[] = [
     name: "Avatars",
     company: "Illustration System",
     year: "2021",
-    thumbnail: "/assets/avatars-preview.svg",
-    thumbnailScale: 0.72,
     description:
       "Avatars is a playful doodle-based illustration system I designed and built in Figma. The goal was to turn hand-drawn characters into a flexible, mix-and-match component system.",
     sections: [
@@ -46,10 +42,8 @@ export const explorations: Exploration[] = [
     name: "Goeat",
     company: "UX/UI Design",
     year: "2019",
-    thumbnail: "/assets/goeat-preview.svg",
-    thumbnailScale: 0.63,
     description:
-      "Goeat was my final project during Ironhack’s UX/UI Bootcamp. Over 10 days, I designed an app to help travelers discover authentic local dishes while bridging cultural and language gaps. The project was selected as a finalist and showcased at Madrid’s Hackshow.",
+      'Goeat was my final project during Ironhack’s UX/UI Bootcamp. Over 10 days, I designed an app to help travelers discover authentic local dishes while bridging cultural and language gaps. The project won 2nd place at Ironhack’s Madrid Hackshow in July 2019. You can watch <a href="https://www.youtube.com/watch?v=9el1pilj1lA" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">my presentation</a> on Ironhack’s YouTube channel.',
     sections: [
       {
         type: "text",
@@ -75,8 +69,6 @@ export const explorations: Exploration[] = [
     name: "Whatsapp polls",
     company: "Feature Design",
     year: "2019",
-    thumbnail: "/assets/whatsapp-preview.svg",
-    thumbnailScale: 0.63,
     description:
       "During Ironhack’s UX/UI Bootcamp, my colleague Miguel Durán Pardo and I collaborated on a 4-day sprint to design WhatsApp Polls, before WhatsApp introduced the feature. The goal was to simplify group decision-making in chats, reducing clutter and confusion.",
     sections: [
@@ -90,6 +82,12 @@ export const explorations: Exploration[] = [
         type: "image",
         content: "/assets/whatsappblog2.png",
         caption: "A sneak peek of the poll feature",
+      },
+      {
+        type: "text",
+        heading: "What happened next",
+        content:
+          'We published the concept in <a href="https://blog.prototypr.io/whatsapp-polls-c7c8789aaf26" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Prototypr</a> in July 2019. Over the next few years, other designers kept exploring the same idea in their own case studies, like this one on <a href="https://uxplanet.org/whatsapp-poll-a-case-study-of-a-conceptual-feature-13021bb619a" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">UX Planet</a>.<br /><br />In November 2022, WhatsApp released polls, first reported by <a href="https://wabetainfo.com/whatsapp-for-ios-22-23-76-whats-new/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">WABetaInfo</a>. It shared a lot with what we had prototyped three years earlier.',
       },
       {
         type: "text",

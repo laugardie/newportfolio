@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 import './globals.css'
 
 const dmSans = DM_Sans({
@@ -9,15 +9,8 @@ const dmSans = DM_Sans({
   display: 'swap',
 })
 
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['500', '600'],
-  variable: '--font-cormorant',
-  display: 'swap',
-})
-
 export const metadata: Metadata = {
-  title: 'Laura García — Product Designer',
+  title: 'Laura García Diéguez — Senior Product Designer',
   description:
     'Product designer crafting thoughtful digital experiences. Currently freelancing, previously Gumroad.',
 }
@@ -28,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${cormorant.variable}`}>
+    <html lang="en" className={dmSans.variable}>
       <body className="font-dm-sans bg-bg text-ink antialiased">
         {children}
         <Script

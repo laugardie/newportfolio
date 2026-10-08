@@ -6,6 +6,7 @@ export default function LogoLau({ size = 48 }: { size?: number }) {
   return (
     <div className="logo-mark">
     <svg width={size} height={size} viewBox="0 0 60 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3.5" y="3.5" width="53" height="53.3" fill="#FFFFFF" />
       {/* TL corner — delay 0 */}
       <motion.g
         initial={{ opacity: 0, scale: 0.5 }}

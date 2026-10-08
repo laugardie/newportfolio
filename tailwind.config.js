@@ -6,15 +6,17 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./content/**/*.{js,ts,tsx}",
   ],
-  darkMode: "media",
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
         bg: "var(--color-bg)",
         ink: "var(--color-ink)",
         "border-ink": "var(--color-ink)",
+        body: "var(--color-body)",
+        faint: "var(--color-faint)",
         muted: "var(--color-secondary)",
-        accent: "#A8C3AC",
+        accent: "var(--color-accent)",
         "accent-hover": "var(--color-accent-hover)",
         surface: "var(--color-surface)",
         divider: "var(--color-border)",
