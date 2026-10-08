@@ -4,13 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import DialogueBox, { DIALOGUE_CONFIG } from "@/components/world/DialogueBox";
 import { homeDialogue } from "@/content/world/dialogues";
 
-// Matches the viewBox of /world/computer-house.svg so the screen layer lines up.
-const VIEWBOX = "40 24 320 352";
-// Slightly larger than the hole in the casing; the bezel hides the overlap.
-const SCREEN_PATH =
-  "M136.2 116 Q136 106 146 106.6 L234 112.4 Q244 113 243.8 123 L242.2 183 Q242 193 232 192.5 L148 188.5 Q138 188 137.8 178 Z";
-
-const SCREEN_OFF = "#d3d4d0";
+// The screen mask has the same dimensions as the house image, so the
+// screen layer lines up exactly with the grey screen in the artwork.
+const SCREEN_MASK = "url(/world/computer-screen-mask.png)";
 const SCREEN_ON = DIALOGUE_CONFIG.accent;
 const VISITED_KEY = "world:home-visited";
 
@@ -41,7 +37,7 @@ export default function HomeComputer() {
   const screenOn = open || visited;
 
   return (
-    <div className="relative w-[min(380px,84vw,46svh)] min-w-[260px]">
+    <div className="relative w-[min(440px,86vw,56svh)] min-w-[260px]">
       <button
         ref={houseRef}
         type="button"
@@ -57,21 +53,28 @@ export default function HomeComputer() {
         >
           Home
         </span>
-        <svg aria-hidden viewBox={VIEWBOX} className="absolute inset-0 h-full w-full">
-          <path
-            d={SCREEN_PATH}
-            style={{ fill: screenOn ? SCREEN_ON : SCREEN_OFF }}
-            className="transition-[fill] duration-500 ease-out motion-reduce:transition-none"
-          />
-        </svg>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/world/computer-house.svg"
+          src="/world/computer-house.webp"
           alt=""
-          width={320}
-          height={352}
+          width={1000}
+          height={864}
           draggable={false}
-          className="relative block h-auto w-full select-none"
+          className="block h-auto w-full select-none"
+        />
+        {/* Screen layer: grey in the artwork underneath, purple once on. */}
+        <span
+          aria-hidden
+          style={{
+            backgroundColor: SCREEN_ON,
+            maskImage: SCREEN_MASK,
+            WebkitMaskImage: SCREEN_MASK,
+            maskSize: "100% 100%",
+            WebkitMaskSize: "100% 100%",
+          }}
+          className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-out motion-reduce:transition-none ${
+            screenOn ? "opacity-100" : "opacity-0"
+          }`}
         />
       </button>
 
