@@ -32,8 +32,8 @@
   }
 
   ::selection {
-    background: rgba(31, 31, 31, 0.12);
-    color: var(--color-ink);
+    background: #8c5ae7;
+    color: #ffffff;
   }
 
   a:focus-visible {
