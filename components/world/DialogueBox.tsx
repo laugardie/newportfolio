@@ -180,7 +180,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
       <p
         aria-hidden
         onClick={skip}
-        className={`mt-2 text-[15px] leading-[1.65] text-body ${done ? "" : "cursor-pointer"}`}
+        className={`mt-2 whitespace-pre-line text-[15px] leading-[1.65] text-body ${done ? "" : "cursor-pointer"}`}
       >
         {message.text.slice(0, shown)}
         <span className="invisible">{message.text.slice(shown)}</span>
