@@ -195,34 +195,29 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
             select(selected + (e.key === "ArrowDown" ? 1 : -1));
           }
         }}
-        className={`-mx-2 mt-3 flex flex-col ${done ? "" : "invisible"}`}
+        className="mt-3 flex flex-col gap-1"
       >
-        {message.options.map((option, i) => (
-          <button
-            key={option.label}
-            ref={(el) => {
-              optionRefs.current[i] = el;
-            }}
-            type="button"
-            onClick={() => onChoose(option.next)}
-            onFocus={() => setSelected(i)}
-            onMouseEnter={() => select(i)}
-            className={`flex h-10 w-full items-center gap-1.5 px-2 text-left text-[15px] outline-none transition-colors duration-150 ${
-              i === selected ? "text-[var(--dialogue-accent)]" : "text-ink"
-            }`}
-          >
-            <svg
-              aria-hidden
-              viewBox="0 0 8 10"
-              className={`h-2.5 w-2 shrink-0 fill-current transition-opacity duration-150 ${
-                i === selected ? "opacity-100" : "opacity-0"
+        {message.options.map((option, i) => {
+          const active = done && i === selected;
+          return (
+            <button
+              key={option.label}
+              ref={(el) => {
+                optionRefs.current[i] = el;
+              }}
+              type="button"
+              disabled={!done}
+              onClick={() => onChoose(option.next)}
+              onFocus={() => setSelected(i)}
+              onMouseEnter={() => done && select(i)}
+              className={`flex h-10 w-full items-center justify-center rounded-md px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default disabled:text-faint ${
+                active ? "bg-[var(--dialogue-accent)] text-white" : "text-ink"
               }`}
             >
-              <path d="M0 0 L8 5 L0 10 Z" />
-            </svg>
-            {option.label}
-          </button>
-        ))}
+              {option.label}
+            </button>
+          );
+        })}
       </div>
     </>
   );
