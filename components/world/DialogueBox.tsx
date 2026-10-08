@@ -139,6 +139,16 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
 
   const [shown, setShown] = useState(() => (reduceMotion || read.has(messageId) ? length : 0));
   const done = shown >= length;
+  // Like a game menu: one option is always selected once the text is in.
+  const [selected, setSelected] = useState(0);
+  const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const select = (index: number) => {
+    const count = message.options.length;
+    const next = (index + count) % count;
+    setSelected(next);
+    optionRefs.current[next]?.focus({ preventScroll: true });
+  };
 
   const skip = useCallback(() => {
     if (done) return false;
@@ -166,6 +176,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
   useEffect(() => {
     if (!done) return;
     read.add(messageId);
+    optionRefs.current[0]?.focus({ preventScroll: true });
   }, [done, read, messageId]);
 
   return (
@@ -180,18 +191,35 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
         <span className="invisible">{message.text.slice(shown)}</span>
       </p>
 
-      <div className={`-mx-2 mt-3 flex flex-col ${done ? "" : "invisible"}`}>
-        {message.options.map((option) => (
+      <div
+        onKeyDown={(e) => {
+          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+            e.preventDefault();
+            select(selected + (e.key === "ArrowDown" ? 1 : -1));
+          }
+        }}
+        className={`-mx-2 mt-3 flex flex-col ${done ? "" : "invisible"}`}
+      >
+        {message.options.map((option, i) => (
           <button
             key={option.label}
+            ref={(el) => {
+              optionRefs.current[i] = el;
+            }}
             type="button"
             onClick={() => onChoose(option.next)}
-            className="group flex min-h-[44px] w-full items-center gap-1.5 px-2 text-left text-[15px] text-ink outline-none transition-colors duration-150 hover:text-[var(--dialogue-accent)] focus-visible:text-[var(--dialogue-accent)]"
+            onFocus={() => setSelected(i)}
+            onMouseEnter={() => select(i)}
+            className={`flex min-h-[44px] w-full items-center gap-1.5 px-2 text-left text-[15px] outline-none transition-colors duration-150 ${
+              i === selected ? "text-[var(--dialogue-accent)]" : "text-ink"
+            }`}
           >
             <svg
               aria-hidden
               viewBox="0 0 8 10"
-              className="h-2.5 w-2 shrink-0 fill-current opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+              className={`h-2.5 w-2 shrink-0 fill-current transition-opacity duration-150 ${
+                i === selected ? "opacity-100" : "opacity-0"
+              }`}
             >
               <path d="M0 0 L8 5 L0 10 Z" />
             </svg>
