@@ -17,9 +17,6 @@ export const DIALOGUE_CONFIG = {
   charDelayMs: 20,
 };
 
-// Messages already shown during this page session, keyed "dialogue:message".
-const readMessages = new Set<string>();
-
 type Props = {
   dialogue: Dialogue;
   open: boolean;
@@ -70,6 +67,8 @@ function Conversation({ dialogue, onClose }: { dialogue: Dialogue; onClose: () =
   const [messageId, setMessageId] = useState(dialogue.start);
   const panelRef = useRef<HTMLDivElement>(null);
   const skipRef = useRef<(() => boolean) | null>(null);
+  // Messages already shown since this dialogue opened; they skip the typing.
+  const readRef = useRef(new Set<string>());
   const labelId = useId();
 
   return (
@@ -117,6 +116,7 @@ function Conversation({ dialogue, onClose }: { dialogue: Dialogue; onClose: () =
         messageId={messageId}
         panelRef={panelRef}
         skipRef={skipRef}
+        read={readRef.current}
         onChoose={setMessageId}
       />
     </div>
@@ -128,16 +128,16 @@ type MessageProps = {
   messageId: string;
   panelRef: React.RefObject<HTMLDivElement>;
   skipRef: React.MutableRefObject<(() => boolean) | null>;
+  read: Set<string>;
   onChoose: (next: string) => void;
 };
 
-function Message({ dialogue, messageId, panelRef, skipRef, onChoose }: MessageProps) {
+function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: MessageProps) {
   const message = dialogue.messages[messageId];
   const length = message.text.length;
-  const readKey = `${dialogue.id}:${messageId}`;
   const reduceMotion = useReducedMotion();
 
-  const [shown, setShown] = useState(() => (reduceMotion || readMessages.has(readKey) ? length : 0));
+  const [shown, setShown] = useState(() => (reduceMotion || read.has(messageId) ? length : 0));
   const done = shown >= length;
 
   const skip = useCallback(() => {
@@ -165,8 +165,8 @@ function Message({ dialogue, messageId, panelRef, skipRef, onChoose }: MessagePr
 
   useEffect(() => {
     if (!done) return;
-    readMessages.add(readKey);
-  }, [done, readKey]);
+    read.add(messageId);
+  }, [done, read, messageId]);
 
   return (
     <>
