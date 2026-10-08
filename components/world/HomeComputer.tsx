@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import DialogueBox, { DIALOGUE_CONFIG } from "@/components/world/DialogueBox";
 import { homeDialogue } from "@/content/world/dialogues";
 
@@ -8,33 +8,17 @@ import { homeDialogue } from "@/content/world/dialogues";
 // screen layer lines up exactly with the grey screen in the artwork.
 const SCREEN_MASK = "url(/world/computer-screen-mask.png)";
 const SCREEN_ON = DIALOGUE_CONFIG.accent;
-const VISITED_KEY = "world:home-visited";
 
 export default function HomeComputer() {
   const [open, setOpen] = useState(false);
-  const [visited, setVisited] = useState(false);
   const houseRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    try {
-      if (sessionStorage.getItem(VISITED_KEY) === "1") setVisited(true);
-    } catch {}
-  }, []);
-
-  const openDialogue = () => {
-    setOpen(true);
-    setVisited(true);
-    try {
-      sessionStorage.setItem(VISITED_KEY, "1");
-    } catch {}
-  };
+  const openDialogue = () => setOpen(true);
 
   const close = useCallback(() => {
     setOpen(false);
     houseRef.current?.focus();
   }, []);
-
-  const screenOn = open || visited;
 
   return (
     <div className="relative w-[min(440px,86vw,56svh)] min-w-[260px]">
@@ -62,7 +46,7 @@ export default function HomeComputer() {
           draggable={false}
           className="block h-auto w-full select-none"
         />
-        {/* Screen layer: grey in the artwork underneath, purple once on. */}
+        {/* Screen layer: grey in the artwork underneath, purple while the dialogue is open. */}
         <span
           aria-hidden
           style={{
@@ -73,7 +57,7 @@ export default function HomeComputer() {
             WebkitMaskSize: "100% 100%",
           }}
           className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-out motion-reduce:transition-none ${
-            screenOn ? "opacity-100" : "opacity-0"
+            open ? "opacity-100" : "opacity-0"
           }`}
         />
       </button>
