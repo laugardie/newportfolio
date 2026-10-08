@@ -25,7 +25,7 @@ export default function HomeComputer() {
       <button
         ref={houseRef}
         type="button"
-        aria-label="Home"
+        aria-label="Casita"
         aria-expanded={open}
         aria-haspopup="dialog"
         onClick={() => (open ? close() : openDialogue())}
@@ -35,7 +35,7 @@ export default function HomeComputer() {
           aria-hidden
           className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 text-sm text-faint opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none"
         >
-          Home
+          Casita
         </span>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
