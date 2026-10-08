@@ -207,7 +207,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
             onClick={() => onChoose(option.next)}
             onFocus={() => setSelected(i)}
             onMouseEnter={() => select(i)}
-            className={`flex h-9 w-full items-center gap-1.5 px-2 text-left text-[15px] outline-none transition-colors duration-150 ${
+            className={`flex h-10 w-full items-center gap-1.5 px-2 text-left text-[15px] outline-none transition-colors duration-150 ${
               i === selected ? "text-[var(--dialogue-accent)]" : "text-ink"
             }`}
           >
