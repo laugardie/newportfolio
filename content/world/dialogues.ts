@@ -22,7 +22,7 @@ const backToStart: DialogueOption = { label: "← Something else", next: "intro"
 
 export const homeDialogue: Dialogue = {
   id: "home",
-  label: "HOME",
+  label: "CASITA",
   start: "intro",
   messages: {
     intro: {
