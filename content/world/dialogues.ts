@@ -74,7 +74,7 @@ export const homeDialogue: Dialogue = {
     pizza: {
       text: "Yes. One of the perks of being Laura’s house. I can’t eat it, which feels like a fairly serious design flaw.",
       options: [
-        { label: "I came for the portfolio, now I’m hungry.", next: "making" },
+        { label: "I came for the portfolio, now I’m hungry. ↗", href: PORTFOLIO },
         { label: "I should say hi to her.", next: "hi" },
         somethingElse,
       ],
