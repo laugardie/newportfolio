@@ -139,7 +139,6 @@ function Message({ dialogue, messageId, panelRef, skipRef, onChoose }: MessagePr
 
   const [shown, setShown] = useState(() => (reduceMotion || readMessages.has(readKey) ? length : 0));
   const done = shown >= length;
-  const optionsRef = useRef<HTMLDivElement>(null);
 
   const skip = useCallback(() => {
     if (done) return false;
@@ -167,11 +166,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, onChoose }: MessagePr
   useEffect(() => {
     if (!done) return;
     readMessages.add(readKey);
-    // Keep keyboard users moving: hand focus to the first choice.
-    if (document.activeElement === panelRef.current) {
-      optionsRef.current?.querySelector("button")?.focus({ preventScroll: true });
-    }
-  }, [done, readKey, panelRef]);
+  }, [done, readKey]);
 
   return (
     <>
@@ -185,7 +180,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, onChoose }: MessagePr
         <span className="invisible">{message.text.slice(shown)}</span>
       </p>
 
-      <div ref={optionsRef} className={`-mx-2 mt-3 flex flex-col ${done ? "" : "invisible"}`}>
+      <div className={`-mx-2 mt-3 flex flex-col ${done ? "" : "invisible"}`}>
         {message.options.map((option) => (
           <button
             key={option.label}
