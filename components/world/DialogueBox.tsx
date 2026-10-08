@@ -198,7 +198,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
         className="mt-3 flex flex-col gap-1"
       >
         {message.options.map((option, i) => {
-          const active = done && i === selected;
+          const active = i === selected;
           return (
             <button
               key={option.label}
@@ -211,7 +211,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
               onFocus={() => setSelected(i)}
               onMouseEnter={() => done && select(i)}
               className={`flex h-8 w-full items-center justify-center gap-1.5 rounded-md px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default disabled:text-faint ${
-                active ? "bg-ink text-white" : "text-ink"
+                active ? "bg-[var(--color-row-hover)] text-ink" : "text-ink"
               }`}
             >
               <svg
