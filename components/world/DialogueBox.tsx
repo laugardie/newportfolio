@@ -10,7 +10,6 @@ export const DIALOGUE_CONFIG = {
   width: 600, // px, desktop
   gutter: 16, // px, side margins on small screens
   bottomOffset: 24, // px from the bottom of the viewport
-  radius: 10, // px
   accent: "#8c5ae7",
   charDelayMs: 20,
 };
@@ -79,10 +78,9 @@ function Conversation({ dialogue, onClose }: { dialogue: Dialogue; onClose: () =
         if (e.target !== e.currentTarget || (e.key !== "Enter" && e.key !== " ")) return;
         if (skipRef.current?.()) e.preventDefault();
       }}
-      className="max-h-[calc(100svh-48px)] overflow-y-auto border border-divider p-4 bg-bg text-ink outline-none"
+      className="max-h-[calc(100svh-48px)] overflow-y-auto rounded-lg border border-divider p-4 bg-bg text-ink outline-none"
       style={
         {
-          borderRadius: DIALOGUE_CONFIG.radius,
           "--dialogue-accent": DIALOGUE_CONFIG.accent,
         } as React.CSSProperties
       }
@@ -210,7 +208,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
               onClick={() => onChoose(option.next)}
               onFocus={() => setSelected(i)}
               onMouseEnter={() => done && select(i)}
-              className={`flex h-8 w-full items-center justify-center gap-1.5 rounded-md px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default disabled:text-faint ${
+              className={`flex h-8 w-full items-center justify-center gap-1.5 rounded-lg px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default disabled:text-faint ${
                 active ? "bg-[var(--color-row-hover)] text-ink" : "text-ink"
               }`}
             >
