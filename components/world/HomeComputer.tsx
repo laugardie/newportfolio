@@ -1,13 +1,13 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
-import DialogueBox, { DIALOGUE_CONFIG } from "@/components/world/DialogueBox";
+import DialogueBox from "@/components/world/DialogueBox";
 import { homeDialogue } from "@/content/world/dialogues";
 
 // The screen mask has the same dimensions as the house image, so the
 // screen layer lines up exactly with the grey screen in the artwork.
 const SCREEN_MASK = "url(/world/computer-screen-mask.png)";
-const SCREEN_ON = DIALOGUE_CONFIG.accent;
+const SCREEN_ON = "#ffffff";
 
 export default function HomeComputer() {
   const [open, setOpen] = useState(false);
@@ -46,7 +46,7 @@ export default function HomeComputer() {
           draggable={false}
           className="block h-auto w-full select-none"
         />
-        {/* Screen layer: grey in the artwork underneath, purple while the dialogue is open. */}
+        {/* Screen layer: grey in the artwork underneath, white while the dialogue is open. */}
         <span
           aria-hidden
           style={{
