@@ -210,10 +210,17 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
               onClick={() => onChoose(option.next)}
               onFocus={() => setSelected(i)}
               onMouseEnter={() => done && select(i)}
-              className={`flex h-10 w-full items-center justify-center rounded-md px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default disabled:text-faint ${
-                active ? "bg-[var(--dialogue-accent)] text-white" : "text-ink"
+              className={`flex h-8 w-full items-center justify-center gap-1.5 rounded-md px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default disabled:text-faint ${
+                active ? "bg-ink text-white" : "text-ink"
               }`}
             >
+              <svg
+                aria-hidden
+                viewBox="0 0 8 10"
+                className={`h-2.5 w-2 shrink-0 fill-current ${active ? "opacity-100" : "opacity-0"}`}
+              >
+                <path d="M0 0 L8 5 L0 10 Z" />
+              </svg>
               {option.label}
             </button>
           );
