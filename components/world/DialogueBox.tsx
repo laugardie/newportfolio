@@ -10,8 +10,6 @@ export const DIALOGUE_CONFIG = {
   width: 600, // px, desktop
   gutter: 16, // px, side margins on small screens
   bottomOffset: 24, // px from the bottom of the viewport
-  paddingX: 24, // px
-  paddingY: 20, // px
   radius: 10, // px
   accent: "#8c5ae7",
   charDelayMs: 20,
@@ -81,11 +79,10 @@ function Conversation({ dialogue, onClose }: { dialogue: Dialogue; onClose: () =
         if (e.target !== e.currentTarget || (e.key !== "Enter" && e.key !== " ")) return;
         if (skipRef.current?.()) e.preventDefault();
       }}
-      className="max-h-[calc(100svh-48px)] overflow-y-auto border border-divider bg-bg text-ink outline-none"
+      className="max-h-[calc(100svh-48px)] overflow-y-auto border border-divider p-4 bg-bg text-ink outline-none"
       style={
         {
           borderRadius: DIALOGUE_CONFIG.radius,
-          padding: `${DIALOGUE_CONFIG.paddingY}px ${DIALOGUE_CONFIG.paddingX}px`,
           "--dialogue-accent": DIALOGUE_CONFIG.accent,
         } as React.CSSProperties
       }
@@ -210,7 +207,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
             onClick={() => onChoose(option.next)}
             onFocus={() => setSelected(i)}
             onMouseEnter={() => select(i)}
-            className={`flex min-h-[44px] w-full items-center gap-1.5 px-2 text-left text-[15px] outline-none transition-colors duration-150 ${
+            className={`flex h-9 w-full items-center gap-1.5 px-2 text-left text-[15px] outline-none transition-colors duration-150 ${
               i === selected ? "text-[var(--dialogue-accent)]" : "text-ink"
             }`}
           >
