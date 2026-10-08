@@ -25,6 +25,7 @@ function useClock() {
 
 type ExperienceEntry = {
   name: string;
+  role: string;
   logo: string;
   isLogomark?: boolean;
   url: string | null;
@@ -34,27 +35,22 @@ type ExperienceEntry = {
 
 const EXPERIENCE: ExperienceEntry[] = [
   {
-    name: "Small bets (Personal projects)",
-    logo: "",
-    isLogomark: true,
-    url: null,
-    active: true,
-    date: "Present",
-  },
-  {
-    name: "Gumroad (Antiwork)",
+    name: "Gumroad",
+    role: "Senior Product Designer",
     logo: "/assets/Gumroad-logo.svg",
     url: "https://gumroad.com/",
-    date: "jul 2021 – mar 2026",
+    date: "jul 2021 – feb 2026",
   },
   {
     name: "Beezy",
+    role: "UX/UI Designer",
     logo: "/assets/Beezy-logo.svg",
     url: "https://www.beezy.net",
-    date: "jun 2020 – oct 2022",
+    date: "jun 2020 – aug 2021",
   },
   {
     name: "Liferay",
+    role: "Associate Product Designer",
     logo: "/assets/Liferay-logo.svg",
     url: "https://liferay.design/lexicon/",
     date: "oct 2019 – jun 2020",
@@ -63,34 +59,26 @@ const EXPERIENCE: ExperienceEntry[] = [
 
 const SMALL_BETS = [
   {
-    name: "Meal planner",
-    company: "Currently building",
+    name: "Fertility app",
+    company: "Designing and building",
     year: "now",
-    thumbnail: "/assets/mealio-preview.svg",
-    thumbnailScale: 0.63,
   },
   {
     name: "Everground",
-    company: "Currently designing",
+    company: "Designing and building",
     year: "now",
-    thumbnail: "/assets/everground-preview.svg",
-    thumbnailScale: 0.72,
     url: "https://everground.app/",
   },
   {
     name: "Tatai",
     company: "Coloring books",
     year: "2026",
-    thumbnail: "/assets/tatai-books.svg",
-    thumbnailScale: 0.75,
     url: "https://www.amazon.es/stores/author/B0H7SPB314?ingress=0&visitId=abe2539c-bbe6-4c53-88a0-a4d3e46984f2",
   },
   {
     name: "Habits",
     company: "tryhabits.app",
     year: "2026",
-    thumbnail: "/assets/habits-preview.svg",
-    thumbnailScale: 0.63,
     url: "https://tryhabits.app",
   },
 ];
@@ -99,8 +87,6 @@ const EXPLORATIONS = explorations.map((e) => ({
   name: e.name,
   company: e.company,
   year: e.year,
-  thumbnail: e.thumbnail,
-  thumbnailScale: e.thumbnailScale,
   url: `/explorations/${e.slug}`,
 }));
 
@@ -113,7 +99,7 @@ function fadeUp(delay = 0) {
 }
 
 const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted mb-6 leading-none">
+  <p className="text-[11px] uppercase tracking-[0.18em] text-muted mb-6 leading-none">
     {children}
   </p>
 );
@@ -177,7 +163,7 @@ function WorkRow({ project }: { project: Project }) {
   return (
     <motion.a
       href={`/work/${project.slug}`}
-      className="row-item flex items-center py-4 border-b border-divider -mx-3 px-3 cursor-pointer"
+      className="row-item flex items-center py-3.5 border-b border-divider -mx-3 px-3 cursor-pointer"
       initial="rest"
       whileHover="hover"
       animate="rest"
@@ -187,19 +173,18 @@ function WorkRow({ project }: { project: Project }) {
         variants={slideVariants}
         transition={slideTransition}
       >
-        <div className="relative flex-shrink-0 overflow-hidden w-16 h-11 sm:w-20 sm:h-14">
+        <div className="relative flex-shrink-0 w-12 h-8">
           <Image
             src={project.thumbnail}
             alt=""
             fill
             className="object-contain"
-            style={{ transform: `scale(${project.thumbnailScale ?? 1})` }}
           />
         </div>
         {/* Mobile: stacked name + company · year */}
         <div className="sm:hidden flex-1 min-w-0">
           <div className="text-base text-ink truncate">{project.title}</div>
-          <div className="text-xs text-ink/50">
+          <div className="text-sm text-faint">
             {project.company} · {project.year}
           </div>
         </div>
@@ -207,12 +192,12 @@ function WorkRow({ project }: { project: Project }) {
         <div className="hidden sm:flex items-baseline justify-between flex-1 min-w-0">
           <div className="flex items-baseline gap-1.5 min-w-0 mr-4">
             <span className="text-base text-ink">{project.title}</span>
-            <span className="text-base text-ink/50 whitespace-nowrap flex-shrink-0">
+            <span className="text-base text-faint whitespace-nowrap flex-shrink-0">
               · {project.company}
             </span>
           </div>
           <motion.span
-            className="text-xs text-ink tabular-nums flex-shrink-0"
+            className="text-sm text-ink tabular-nums flex-shrink-0"
             variants={fadeVariants}
             transition={fadeTransition}
           >
@@ -228,8 +213,6 @@ type ListItem = {
   name: string;
   company: string;
   year: string;
-  thumbnail: string;
-  thumbnailScale?: number;
   url?: string;
 };
 
@@ -245,30 +228,21 @@ function ListRow({ item }: { item: ListItem }) {
   return (
     <Tag
       {...linkProps}
-      className="row-item flex items-center py-4 border-b border-divider -mx-3 px-3"
+      className="row-item flex items-center py-3.5 border-b border-divider -mx-3 px-3"
       style={{ textDecoration: "none" }}
       initial="rest"
       whileHover="hover"
       animate="rest"
     >
       <motion.div
-        className="flex items-center gap-4 w-full"
+        className="flex items-center gap-4 w-full min-h-[2rem]"
         variants={slideVariants}
         transition={slideTransition}
       >
-        <div className="relative flex-shrink-0 overflow-hidden w-16 h-11 sm:w-20 sm:h-14">
-          <Image
-            src={item.thumbnail}
-            alt=""
-            fill
-            className="object-contain"
-            style={{ transform: `scale(${item.thumbnailScale ?? 1})` }}
-          />
-        </div>
         {/* Mobile: stacked name + company · year */}
         <div className="sm:hidden flex-1 min-w-0">
           <div className="text-base text-ink truncate">{item.name}</div>
-          <div className="text-xs text-ink/50">
+          <div className="text-sm text-faint">
             {item.company} · {item.year}
           </div>
         </div>
@@ -276,12 +250,12 @@ function ListRow({ item }: { item: ListItem }) {
         <div className="hidden sm:flex items-baseline justify-between flex-1 min-w-0">
           <div className="flex items-baseline gap-1.5 min-w-0 mr-4">
             <span className="text-base text-ink">{item.name}</span>
-            <span className="text-base text-ink/50 whitespace-nowrap flex-shrink-0">
+            <span className="text-base text-faint whitespace-nowrap flex-shrink-0">
               · {item.company}
             </span>
           </div>
           <motion.span
-            className="text-xs text-ink tabular-nums flex-shrink-0"
+            className="text-sm text-ink tabular-nums flex-shrink-0"
             variants={fadeVariants}
             transition={fadeTransition}
           >
@@ -349,19 +323,15 @@ export default function Home() {
         </div>
 
         {/* ── 2. Bio ───────────────────────────────────────────── */}
-        <motion.section {...fadeUp(0.06)} className="mb-24 sm:mb-28">
-          <h1 className="font-cormorant text-[3.5rem] sm:text-[4.5rem] font-medium tracking-[-0.035em] leading-[0.9] text-ink mb-9">
-            I&apos;m Laura.
+        <motion.section {...fadeUp(0.06)} className="mb-20">
+          <h1 className="text-5xl font-medium tracking-[-0.02em] leading-[1.05] text-ink mb-9">
+            Laura García Diéguez
           </h1>
-          <p className="text-[17px] leading-[1.72] text-ink/80">
-            A<span className=" text-accent"> Product Designer </span>
-            based in Lagos, Portugal. I like working across the whole product
+          <p className="text-[17px] leading-[1.72] text-body">
+            A Product Designer based in Lagos, Portugal. I like working across the whole product
             process. Before product design, I was a primary school teacher.
-            I&apos;ve since worked across
-            <span className=" text-accent"> product</span>,{" "}
-            <span className=" text-accent">design systems</span>, and{" "}
-            <span className=" text-accent">front-end development</span>
-            .
+            I&apos;ve since worked across product, design systems, and
+            front-end development.
             <br />
             <br />
             Previously at{" "}
@@ -392,7 +362,7 @@ export default function Home() {
 
         {/* ── 3. Experience ────────────────────────────────────── */}
         <motion.section {...fadeUp(0.12)} className="mb-24">
-          <SectionHeading>Experience</SectionHeading>
+          <SectionHeading>Places I&apos;ve worked</SectionHeading>
           <div>
             {EXPERIENCE.map((exp, i) => (
               <motion.a
@@ -414,18 +384,30 @@ export default function Home() {
                   variants={slideVariants}
                   transition={slideTransition}
                 >
-                  <div className="flex items-center gap-3">
-                    <div>
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="flex-shrink-0 w-12 flex justify-center">
                       {exp.isLogomark ? (
                         <LogoLau size={32} />
                       ) : (
                         <ExpLogo src={exp.logo} name={exp.name} />
                       )}
                     </div>
-                    <span className="text-base text-ink">{exp.name}</span>
+                    <div className="min-w-0">
+                      <span className="text-base text-ink">{exp.name}</span>
+                      <span className="hidden sm:inline text-base text-faint">
+                        {" "}
+                        · {exp.role}
+                      </span>
+                      <div className="sm:hidden text-sm text-faint">
+                        {exp.role}
+                      </div>
+                      <div className="sm:hidden text-sm text-faint">
+                        {exp.date}
+                      </div>
+                    </div>
                   </div>
                   <motion.div
-                    className="flex items-center gap-2 flex-shrink-0"
+                    className="hidden sm:flex items-center gap-2 flex-shrink-0"
                     variants={{
                       rest: { opacity: 0.5 },
                       hover: { opacity: 0.8 },
@@ -435,7 +417,7 @@ export default function Home() {
                     {exp.active && (
                       <div className="w-1.5 h-1.5 rounded-full bg-[#4A7A4A] flex-shrink-0" />
                     )}
-                    <span className="text-xs text-ink">{exp.date}</span>
+                    <span className="text-sm text-ink">{exp.date}</span>
                   </motion.div>
                 </motion.div>
               </motion.a>
@@ -445,7 +427,7 @@ export default function Home() {
 
         {/* ── 4. Work ──────────────────────────────────────────── */}
         <motion.section {...fadeUp(0.18)} id="work" className="mb-24">
-          <SectionHeading>Work</SectionHeading>
+          <SectionHeading>Case studies</SectionHeading>
           <div>
             {projects.map((project) => (
               <WorkRow key={project.slug} project={project} />
@@ -482,7 +464,7 @@ export default function Home() {
               className="group flex items-center gap-2.5"
               style={{ textDecoration: "none" }}
             >
-              <span className="text-base text-ink/50 w-4 text-center flex-shrink-0">
+              <span className="text-base text-faint w-4 text-center flex-shrink-0">
                 @
               </span>
               <span className="text-base text-accent underline decoration-accent underline-offset-[3px] [text-decoration-thickness:0.08em] group-hover:text-accent-hover group-hover:decoration-accent-hover transition-colors duration-150">
@@ -496,7 +478,7 @@ export default function Home() {
               className="group flex items-center gap-2.5"
               style={{ textDecoration: "none" }}
             >
-              <span className="text-base text-ink/50 w-4 text-center flex-shrink-0">
+              <span className="text-base text-faint w-4 text-center flex-shrink-0">
                 ↗
               </span>
               <span className="text-base text-accent underline decoration-accent underline-offset-[3px] [text-decoration-thickness:0.08em] group-hover:text-accent-hover group-hover:decoration-accent-hover transition-colors duration-150">
@@ -510,7 +492,7 @@ export default function Home() {
               className="group flex items-center gap-2.5"
               style={{ textDecoration: "none" }}
             >
-              <span className="text-base text-ink/50 w-4 text-center flex-shrink-0">
+              <span className="text-base text-faint w-4 text-center flex-shrink-0">
                 ↗
               </span>
               <span className="text-base text-accent underline decoration-accent underline-offset-[3px] [text-decoration-thickness:0.08em] group-hover:text-accent-hover group-hover:decoration-accent-hover transition-colors duration-150">
@@ -522,7 +504,7 @@ export default function Home() {
               className="group flex items-center gap-2.5"
               style={{ textDecoration: "none" }}
             >
-              <span className="text-base text-ink/50 w-4 text-center flex-shrink-0">
+              <span className="text-base text-faint w-4 text-center flex-shrink-0">
                 ↓
               </span>
               <span className="text-base text-accent underline decoration-accent underline-offset-[3px] [text-decoration-thickness:0.08em] group-hover:text-accent-hover group-hover:decoration-accent-hover transition-colors duration-150">
@@ -538,11 +520,11 @@ export default function Home() {
           className="pt-8 border-t border-divider"
         >
           {time && (
-            <p className="text-base text-ink/50 leading-[25px]">
+            <p className="text-base text-faint leading-[25px]">
               {time}, Lagos, Portugal
             </p>
           )}
-          <p className="text-base text-ink/50 leading-[25px]">
+          <p className="text-base text-faint leading-[25px]">
             Laura García Diéguez © 2026
           </p>
         </motion.footer>

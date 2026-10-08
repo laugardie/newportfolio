@@ -11,7 +11,6 @@ export type Project = {
   company: string;
   year: string;
   thumbnail: string;
-  thumbnailScale?: number;
   description: string;
   sections: ProjectSection[];
 };
@@ -20,51 +19,44 @@ export const projects: Project[] = [
   {
     slug: "flexile-github-integration",
     title: "Flexile GitHub Integration",
-    company: "Flexile (Antiwork)",
+    company: "Flexile",
     year: "2026",
     thumbnail: "/assets/flexile-preview.svg",
-    thumbnailScale: 1.15,
     description:
-      '<a href="https://flexile.com/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Flexile</a> is a contractor payments platform. Gumroad uses it to pay open source contributors. Both are part of <a href="https://antiwork.com/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Antiwork</a>.',
+      '<a href="https://flexile.com/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Flexile</a> is a contractor payments platform that Gumroad uses to pay open-source contributors. Both are part of <a href="https://antiwork.com/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Antiwork</a>.',
     sections: [
       {
         type: "text",
         heading: "The problem",
         content:
-          "Feedback from both admins and contributors pointed to two sides of the same problem. Admins had to manually verify that each contributor owned the PR they were invoicing for. Contributors couldn’t easily see the status of their PR or know exactly how much to invoice.",
+          'The invoicing flow relied on GitHub data that wasn’t available in Flexile. Admins had to check PRs manually, while contributors had to look up things like status and bounty before creating an invoice.',
       },
       {
         type: "text",
-        heading: "My role",
+        heading: "What I did",
         content:
-          "I started with a prototype to work through the core flow, then designed the UI and states. As the integration was implemented, I worked with engineering and open source contributors to address edge cases, review the implemented UI, and refine the details before release.",
-      },
-      {
-        type: "text",
-        heading: "What we shipped",
-        content:
-          "A GitHub integration that automatically surfaces whether a PR is merged, open, or closed. It verifies contributor ownership, pulls in the dollar label from GitHub, so contributors know exactly what to invoice and admins know exactly what to pay and who. And it flags if the PR was already paid in a previous invoice, so nothing gets paid twice.",
+          '<p class="mb-5">I first built a prototype in v0 to figure out the flow, then designed the UI in Figma. Once a company and a contractor connected their GitHub accounts, Flexile could check PR ownership and status, get the payment amount from GitHub labels, and detect if the PR had already been paid.</p><p class="mb-5">Some edge cases only became obvious once we started implementing it. For example, a PR could have more than one contributor and the bounty could be split between them.</p><p class="mb-5">Initially, every PR had a “verified” or “unverified” label. But in practice, it was too much. The labels added a lot of noise, took up space we needed for other information, and made admins scan the labels on every PR. I changed this to a small orange dot that only appeared when something needed to be reviewed.</p><p>The verification state was moved into a hover card with the rest of the PR information. I also added a short delay so the card wouldn’t keep popping up while someone moved their cursor across the invoice.</p>',
       },
       {
         type: "video",
-        content: "/assets/githubintegration.mp4",
+        content:
+          '/assets/githubintegration.mp4',
         caption: "GitHub integration in action",
       },
       {
         type: "text",
         heading: "Outcome",
         content:
-          'After launch, both admins and contributors responded positively to the clearer workflow.<br /><br />Here\'s the <a href="https://github.com/antiwork/flexile/issues/1507" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">GitHub issue</a> and the <a href="https://www.figma.com/design/3hnLTTti7oMlsj8VmQmWEL/Github-integration?node-id=1-63&t=328iNJD1Li018zjv-1" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Figma file</a> if you\'re curious.',
+          'What mattered most for admins was quickly finding the PRs that needed attention. This kept the invoice UI much calmer, while leaving the extra information there when someone actually needed it. After launch, both admins and contributors responded positively to the clearer workflow.<br /><br />Here\'s the <a href="https://www.figma.com/design/3hnLTTti7oMlsj8VmQmWEL/Github-integration?node-id=1-63&t=328iNJD1Li018zjv-1" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Figma file</a> if you\'re curious.',
       },
     ],
   },
   {
     slug: "gumroad-community",
     title: "Community",
-    company: "Gumroad (Antiwork)",
+    company: "Gumroad",
     year: "2025",
     thumbnail: "/assets/community-preview.svg",
-    thumbnailScale: 0.65,
     description:
       "Feedback gathered from creators and shared by the product team pointed to a clear gap. Creators wanted to communicate with their customers without sending them to third-party tools, while also giving customers a place to talk to each other.",
     sections: [
@@ -89,10 +81,9 @@ export const projects: Project[] = [
   {
     slug: "gumroad-design-system",
     title: "Gumroad Design System",
-    company: "Gumroad (Antiwork)",
+    company: "Gumroad",
     year: "2024",
     thumbnail: "/assets/gumroadDS-preview.svg",
-    thumbnailScale: 0.72,
     description:
       'In 2024, <a href="https://jchang.cc/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Jason</a> (Designer), <a href="https://x.com/MayaRainer_" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Maya</a> (Engineer), and I audited every component in our design system and published it to the Figma Community.',
     sections: [
@@ -105,130 +96,108 @@ export const projects: Project[] = [
         type: "text",
         heading: "The problem",
         content:
-          "Everything existed in both Figma and Storybook, but they'd quietly drifted apart. Names were different, things looked slightly off on each side, and it had gotten to a point where developers weren't sure what to follow. We also wanted to make the system public to attract talent, get more people engaging with what we were building, and eventually open source Gumroad entirely.",
+          'Everything existed in both Figma and Storybook, but they\'d quietly drifted apart. Names were different, things looked slightly off on each side, and it had gotten to a point where developers weren\'t sure what to follow. We also wanted to make the system public to attract talent, get more people engaging with what we were building, and eventually open source Gumroad entirely.',
       },
       {
         type: "text",
-        heading: "Approach",
+        heading: "What I did",
         content:
-          "We audited buttons, pills, alerts, modals, and every other component across Figma and Storybook. We identified visual differences, implementation gaps, and naming that only made sense to designers or developers, then chose terminology that worked for both.<br /><br />We rebuilt the components using Figma's newer properties and variables and documented them clearly so both sides could stay in sync. We also opened PRs to close the visual gaps in Storybook, so what designers handed off matched what developers built.",
-      },
-      {
-        type: "text",
-        heading: "My contribution",
-        content:
-          "We divided the audit by assigning components to each person. My scope included foundations such as brand, shadows, spacing, breakpoints, and border radius; icon and illustration systems; and components including buttons, alerts, pills, tooltips, modals, inputs, and the WYSIWYG editor. I shared colors and typography with Jason.<br /><br />Across those areas, I audited Figma against Storybook, rebuilt components using properties and variables, clarified naming and documentation, and contributed PRs to close visual gaps in the implementation.",
+          '<p class="mb-5">We audited buttons, pills, alerts, modals, and every other component across Figma and Storybook. We identified visual differences, implementation gaps, and naming that only made sense to designers or developers, then chose terminology that worked for both.<br /><br />We rebuilt the components using Figma\'s newer properties and variables and documented them clearly so both sides could stay in sync. We also opened PRs to close the visual gaps in Storybook, so what designers handed off matched what developers built.</p><p>We divided the audit by assigning components to each person. My scope included foundations such as brand, shadows, spacing, breakpoints, and border radius; icon and illustration systems; and components including buttons, alerts, pills, tooltips, modals, inputs, and the WYSIWYG editor. I shared colors and typography with Jason.<br /><br />Across those areas, I audited Figma against Storybook, rebuilt components using properties and variables, clarified naming and documentation, and contributed PRs to close visual gaps in the implementation.</p>',
       },
       {
         type: "image",
-        content: "/assets/ds-canvas.png",
+        content:
+          '/assets/ds-canvas.png',
         caption: "Design system canvas in Notion",
       },
       {
         type: "text",
         heading: "Outcome",
         content:
-          "We published the system to the Figma Community in August 2024. I also contributed implementation PRs that matched Figma and Storybook naming for pills, corrected the balance of the pill icon, and standardised alert typography.",
+          'We published the system to the <a href="https://www.figma.com/community/file/1405573618937136138" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Figma Community</a> in August 2024, where it has been used by more than 2.6k people. It was announced by <a href="https://x.com/shl/status/1823746825783763439" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Sahil</a> and <a href="https://x.com/gumroad/status/1824164280410968295" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Gumroad</a>, featured on <a href="https://fountn.design/resource/gumroad-design-system-community-beta/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Fountn</a> and <a href="https://swissdesign.systems/design-system-examples.html" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">swissdesign.systems</a>, and shown at Gumroad’s <a href="https://www.youtube.com/watch?v=EscH4kMT3gM&t=608s" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Q3 2024 public board meeting</a>.<br /><br />I also contributed implementation PRs that matched Figma and Storybook naming for pills, corrected the balance of the pill icon, and standardised alert typography.',
       },
     ],
   },
   {
     slug: "gumroad-tipping",
     title: "Tipping",
-    company: "Gumroad (Antiwork)",
+    company: "Gumroad",
     year: "2024",
     thumbnail: "/assets/tipping-preview.svg",
-    thumbnailScale: 0.6,
     description:
-      "Gumroad asked creators a simple question on Twitter: tipping, yes or no? Yes received the largest share of 377 votes. Less than three days later, tipping was live.",
+      'Gumroad asked creators a simple question on Twitter: tipping, yes or no? Yes received the largest share of 377 votes. Less than three days later, tipping was live.',
     sections: [
       {
         type: "text",
-        content: `<blockquote class="twitter-tweet"><p lang="en" dir="ltr">You said yes. Tipping is here! <a href="https://t.co/tkmxVFUrMb">https://t.co/tkmxVFUrMb</a></p>&mdash; Gumroad (@gumroad) <a href="https://twitter.com/gumroad/status/1822260682198311396?ref_src=twsrc%5Etfw">August 10, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`,
+        content:
+          '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">You said yes. Tipping is here! <a href="https://t.co/tkmxVFUrMb">https://t.co/tkmxVFUrMb</a></p>&mdash; Gumroad (@gumroad) <a href="https://twitter.com/gumroad/status/1822260682198311396?ref_src=twsrc%5Etfw">August 10, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
       },
       {
         type: "text",
-        heading: "The problem",
+        heading: "The context",
         content:
-          "Creators on Gumroad had no way to receive tips. Every sale was a fixed transaction, no room for a buyer to say 'hey, I loved this, here\'s a little extra.' For a platform built around supporting creators, that felt like a missed opportunity.",
-      },
-      {
-        type: "text",
-        heading: "My role",
-        content:
-          "I defined the problem and explored possible approaches with another designer. I then created the prototype and designed the UI. After launch, I followed public replies from creators and used them to shape the next iteration.",
+          '<p class="mb-5">Tipping was proposed by Sahil, Gumroad’s CEO. Gumroad was looking for new ways to increase GMV, and this was one of the features we decided to build. At that point, success mainly meant increasing GMV.</p><p>I was the designer responsible for the experience. Gumroad was a small team, so I worked very closely with Sahil throughout. I explored possible approaches with another designer, then created the prototype and designed the UI.</p>',
       },
       {
         type: "text",
         heading: "The first release",
         content:
-          "I designed the tipping flow as part of the existing checkout, adding preset options and a custom amount directly before the pay button. The goal was to make tipping feel natural rather than pushy. The first version offered 0%, 10%, 20%, and a custom amount, with 20% selected by default.",
+          '<p class="mb-5">I designed the tipping flow as part of the existing checkout, adding preset options and a custom amount directly before the pay button. The first version offered no tip, 10%, 20%, and a custom amount.</p><p>My initial recommendation was not to make tipping feel like an obligation. I come from a culture where tipping isn’t really part of everyday transactions, and a default 20% tip felt like it could put some pressure on customers. Sahil, coming from a US context where tipping is much more common, preferred 20% as the default. Since the main goal was to increase GMV, we went with it for the first release.</p>',
       },
       {
         type: "text",
-        heading: "What we learned and changed",
+        heading: "What changed",
         content:
-          'With 20% selected by default, tips increased GMV by approximately 4.5%. Public replies from creators revealed that the preselected amount could put pressure on their customers. We replaced 0% with "No tip", changed the options to 15%, 20%, and 25%, and made "No tip" the default. With a 0% default, tips increased GMV by around 0.7%, while the new default better reflected what creators wanted for their customers.',
+          '<div class="mb-5"><p class="mb-5">With 20% selected by default, tips increased GMV by around 4.5%. But after the launch, we started hearing from some creators who weren’t happy with the way tipping was presented. That led to a conversation with Sahil, and we agreed that while increasing GMV was important, listening to creators was more important than maximizing the lift.</p><p class="mb-5">We changed the default to “No tip”, which reduced the lift to around 0.7%.</p><p>I also suggested changing the tip amounts from 10% and 20% to 15%, 20%, and 25%, with “No tip” as the default. The idea was to make tipping feel less aggressive. I also thought that moving the lowest option from 10% to 15% might slightly increase the average tip, although we didn’t have evidence for that.</p></div><p>Creators began finding unexpected tips in their Gumroad account balances; some even thought there was a bug. Soon, a user shared their experience <a href="https://harnarayan.medium.com/gumroad-tipping-the-best-feature-726e162ebaea" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">on Medium</a>.</p>',
       },
       {
         type: "image",
-        content: "/assets/customtip.png",
+        content:
+          '/assets/customtip.png',
         caption: "Custom tip",
       },
       {
         type: "text",
-        heading: "Outcome",
         content:
-          'Creators began finding unexpected tips in their Gumroad account balances; some even thought there was a bug. Soon, a user shared their experience <a href="https://harnarayan.medium.com/gumroad-tipping-the-best-feature-726e162ebaea" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">on Medium</a>.',
-      },
-      {
-        type: "text",
-        content: `<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Looks like I am getting tipped at Gumroad! 💸<br><br>First I noticed I am getting sales for $17.99 and not $14.99. I thought something is wrong.<br><br>But it&#39;s just people giving me $3 tips😅<br><br>And just today I got a $5 dollar tip on my $50 book.<br><br>Nice little feature to help creators. Thanks…</p>&mdash; Josef Strzibny (@strzibnyj) <a href="https://twitter.com/strzibnyj/status/1827539962583249026?ref_src=twsrc%5Etfw">August 25, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`,
+          '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Looks like I am getting tipped at Gumroad! 💸<br><br>First I noticed I am getting sales for $17.99 and not $14.99. I thought something is wrong.<br><br>But it&#39;s just people giving me $3 tips😅<br><br>And just today I got a $5 dollar tip on my $50 book.<br><br>Nice little feature to help creators. Thanks…</p>&mdash; Josef Strzibny (@strzibnyj) <a href="https://twitter.com/strzibnyj/status/1827539962583249026?ref_src=twsrc%5Etfw">August 25, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
       },
     ],
   },
   {
     slug: "gumroad-more-like-this",
     title: "More like this",
-    company: "Gumroad (Antiwork)",
-    year: "2024",
+    company: "Gumroad",
+    year: "2023",
     thumbnail: "/assets/morelikethis-preview.svg",
-    thumbnailScale: 0.72,
     description:
-      "The product team identified an opportunity after purchase. Creators invested in building a catalogue, but once a customer bought something, there was no simple way to help them discover what else might be relevant.",
+      'Gumroad creators wanted a way to recommend other products on their product pages.',
     sections: [
       {
         type: "image",
-        content: "/assets/morelikethis.png",
+        content:
+          '/assets/morelikethis.png',
         caption: "More like this in the content editor",
       },
       {
         type: "text",
-        heading: "My role",
+        heading: "What I did",
         content:
-          "I created the prototype, designed the UI and its states, and built the frontend. I worked with engineering, who implemented the backend and connected the recommendations to the product catalogue.",
-      },
-      {
-        type: "text",
-        heading: "What we shipped",
-        content:
-          "A recommendations block creators could add to any product page. From the block settings, they could choose recommendations from their own products, their own and affiliated products, or Gumroad’s affiliate catalogue. The designs covered populated and empty results, reordering, settings, and deletion.",
+          '<p class="mb-5">My first approach gave creators a lot of control. They could choose how recommendations were displayed and manually select which products to show. It was flexible, but it felt like a lot of setup for something that should be fairly simple.</p><p class="mb-5">The layout stayed the same, and instead of choosing individual products, creators only had to decide where recommendations could come from: their own products, their own and affiliated products, or Gumroad’s affiliate catalogue. Gumroad handled the rest.</p><p>I built the prototype, designed the UI and implemented the entire frontend myself, while an engineer worked on the backend.</p>',
       },
       {
         type: "text",
         heading: "Outcome",
         content:
-          "After launch, we received positive feedback from creators using the feature.",
+          'The simpler version meant less setup for creators and a quick way to ship the feature and see if people actually needed more control. After launch, we received positive feedback from creators using it.',
       },
     ],
   },
   {
     slug: "gumroad-team-members",
     title: "Team members",
-    company: "Gumroad (Antiwork)",
+    company: "Gumroad",
     year: "2023",
     thumbnail: "/assets/teams-preview.svg",
-    thumbnailScale: 0.68,
     description:
       "Gumroad accounts were tied to a single email address. Creators who needed help with support, marketing, or accounting had no team model, while people managing several accounts had to keep logging in and out.",
     sections: [
@@ -257,41 +226,47 @@ export const projects: Project[] = [
     company: "White Arkitekter",
     year: "2023",
     thumbnail: "/assets/daylight-preview.svg",
-    thumbnailScale: 0.72,
     description:
-      'The Daylight Calculator, developed by <a href="https://whitearkitekter.com/wisedaylight/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">White Arkitekter</a>, supports daylight assessments according to Swedish standards. It helps architects and urban planners evaluate and compare urban layouts using window dimensions, room height, room depth, and daylight access.',
+      '<a href="https://whitearkitekter.com/wisedaylight/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">White Arkitekter</a> is a Swedish architecture firm. They had developed a daylight prediction method and an early version of a tool, WISE_daylight, that could estimate whether a room would meet the Swedish daylight requirements using a few parameters.<br /><br />They wanted to make the tool more useful as part of an architect’s workflow. The goal was a demo that could show the department what the tool could become and help them decide whether it was worth investing in building it. I had one week to design it.',
     sections: [
       {
         type: "image",
-        content: "/assets/daylightcalculator.jpg",
+        content:
+          '/assets/daylightcalculator.jpg',
         caption: "Daylight assessment across an urban layout",
       },
       {
         type: "text",
-        heading: "The tool",
+        heading: "How I worked",
         content:
-          "The tool supports early design work in high-density urban developments, helping teams assess compliance with Swedish daylight requirements before detailed interior configurations are available.",
+          '<div class="mb-5"><p class="mb-5">The project came through an architect who built tools for other architects there. On the first day, he explained how the method worked, how architects would use it, and what was difficult about the tools they were using. I spent the rest of the day looking at existing architecture tools to understand their conventions.</p><p>On days two and three, I made quick designs so we had something concrete to discuss rather than trying to define everything first. We used them in the second meeting to narrow the scope.</p></div><p>The tool had two types of calculations: a quick estimation and a full simulation. The simulation was slower, more expensive, and involved a review by an architect. It made more sense at the end of a project, when you need to prove the building meets the regulations. The estimation was more useful earlier, when architects are changing the design all the time, so that was what we focused on.</p>',
       },
       {
         type: "text",
-        heading: "My role",
+        heading: "What I designed",
         content:
-          '<p class="mb-5">During this one-week project, I enhanced the visual design and addressed several UX issues:</p><ul class="list-disc pl-5 space-y-2"><li>Designing a project dashboard.</li><li>Enhancing the experience of creating a new project.</li><li>Implementing a visual indicator for model uploads.</li><li>Improving the presentation of model layers.</li><li>Enabling users to toggle the visibility of layers.</li><li>Helping users identify invalid objects within layers.</li><li>Allowing users to modify layer properties.</li><li>Making assessment results easier to understand.</li></ul>',
+          '<p class="mb-5">The parts you need to get to an estimation and understand it:</p><ul class="list-disc pl-5 space-y-2"><li>Creating a project.</li><li>Uploading a model and seeing that it was being processed.</li><li>Checking which layers and objects were valid, so the architect could fix the model before running anything again.</li><li>Showing the results on the 3D model, with colors for each level.</li><li>Hovering over a room to see why it scored low and what you could change, like the room depth or the window size.</li></ul><p class="mt-5">A lot of these parts weren’t defined at the beginning, so I had to figure them out as we went.</p>',
       },
       {
         type: "image",
-        content: "/assets/whiteblog1.png",
+        content:
+          '/assets/whiteblog1.png',
         caption: "Daylight Calculator interface explorations",
+      },
+      {
+        type: "text",
+        heading: "Outcome",
+        content:
+          'I kept checking designs with the architect during the week. He was going to use the tool himself, so if something didn’t make sense he would tell me straight away. After the second meeting I iterated on the designs and handed everything over in a final meeting. A developer then built it as a web app based on my designs.',
       },
     ],
   },
   {
     slug: "gumroad-checkout-redesign",
     title: "Checkout Redesign",
-    company: "Gumroad (Antiwork)",
+    company: "Gumroad",
     year: "2022",
     thumbnail: "/assets/gumroad-preview.svg",
-    thumbnailScale: 0.95,
     description:
       "The checkout is one of the most important pages on Gumroad. I worked on two major iterations: a rebuild in 2022 and a focused update in 2025.",
     sections: [
@@ -316,7 +291,7 @@ export const projects: Project[] = [
         type: "text",
         heading: "The update (2025)",
         content:
-          "I redesigned the flow around those issues. Gifting moved closer to the product being gifted. The payment page was restructured so completing the payment became the final step, and the payment UI was updated to work responsively. I moved tipping before the total so the final amount was clear. I designed the update, then implemented the page restructure and payment UI in production.",
+          'I redesigned the flow around those issues. Gifting moved closer to the product being gifted. The payment page was restructured so completing the payment became the final step, and the payment UI was updated to work responsively. I moved tipping before the total so the final amount was clear. I designed the update, then implemented the page restructure and <a href="https://github.com/antiwork/gumroad/pull/3069" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">payment UI</a> in production.',
       },
       {
         type: "image",
@@ -326,12 +301,33 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "buidlguidl",
+    title: "BuidlGuidl",
+    company: "Ethereum community",
+    year: "2022",
+    thumbnail: "/assets/buidlguidl-preview.svg",
+    description:
+      '<a href="https://buidlguidl.com/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">BuidlGuidl</a> is a curated community of Ethereum builders creating products, prototypes, and tutorials for the web3 ecosystem. In March 2022, I spent a week designing parts of their app, and the designs were implemented in the <a href="https://app.buidlguidl.com/builders" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">BuidlGuidl app</a>.',
+    sections: [
+      {
+        type: "text",
+        heading: "What I designed",
+        content:
+          '<ul class="list-disc pl-5 space-y-2"><li>The MetaMask login.</li><li>The builders page, where you can browse everyone in the community.</li><li>The builds page, listing the projects builders had shipped.</li><li>The challenges pages, from the list to each individual challenge.</li><li>The profile page, with each builder’s activity.</li></ul>',
+      },
+      {
+        type: "image",
+        content: "/assets/buidlguidlblog1.png",
+        caption: "Challenges, builders, builds and profile pages",
+      },
+    ],
+  },
+  {
     slug: "nectar-design-system",
     title: "Nectar, Design System",
     company: "Beezy",
     year: "2022",
     thumbnail: "/assets/nectar-preview.svg",
-    thumbnailScale: 1.3,
     description:
       'At <a href="https://www.beezy.net/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Beezy</a>, I built a design system from scratch. There were no inherited decisions or legacy components to work around, only a blank Figma file and a team that needed consistency.',
     sections: [
@@ -360,7 +356,6 @@ export const projects: Project[] = [
     company: "Beezy",
     year: "2021",
     thumbnail: "/assets/theatermode-preview.svg",
-    thumbnailScale: 0.63,
     description:
       'A feature I designed at <a href="https://www.beezy.net/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Beezy</a>, a modern intranet platform. Two weeks, one clear problem: Users had to download files just to read them. Then switch windows to comment. Then switch back. It was the kind of friction that adds up quietly until everyone just stops engaging.',
     sections: [
@@ -398,7 +393,6 @@ export const projects: Project[] = [
     company: "Liferay",
     year: "2020",
     thumbnail: "/assets/lexicon-preview.svg",
-    thumbnailScale: 1.15,
     description:
       "I joined Liferay fresh out of bootcamp. My first real design job, and I landed in a Design System team, which turned out to be the best possible place to start. It also lit something in me. I've been obsessed with design systems ever since.",
     sections: [
@@ -418,7 +412,13 @@ export const projects: Project[] = [
         type: "text",
         heading: "Impact",
         content:
-          'I contributed to components like <a href="https://liferay.design/lexicon/core-components/buttons/action-buttons/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Action Buttons</a>, <a href="https://liferay.design/lexicon/core-components/dual-listbox/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Dual Listbox</a>, <a href="https://liferay.design/lexicon/core-components/keys/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Keys</a>, <a href="https://liferay.design/lexicon/core-components/labels/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Labels</a>, and <a href="https://liferay.design/lexicon/core-components/modals/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Modals</a>, and designed new icons. Small pieces of a big system, but that\'s where I learned that good design is mostly invisible and almost always collaborative.',
+          'I contributed to components like <a href="https://liferay.design/lexicon/core-components/buttons/action-buttons/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Action Buttons</a>, <a href="https://liferay.design/lexicon/core-components/dual-listbox/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Dual Listbox</a>, <a href="https://liferay.design/lexicon/core-components/keys/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Keys</a>, <a href="https://liferay.design/lexicon/core-components/labels/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Labels</a>, and <a href="https://liferay.design/lexicon/core-components/modals/" target="_blank" rel="noopener noreferrer" class="underline [text-decoration-thickness:0.08em] decoration-accent text-accent underline-offset-[3px] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Modals</a>, and designed new icons. Small pieces of a big system, but that\'s where I learned that good design is mostly invisible and almost always collaborative.<br /><br />I also wrote the documentation for these components in the design site\'s codebase, with <a href="https://github.com/liferay-design/design.liferay.com/pulls?q=is%3Apr+author%3Alaugardie+is%3Amerged" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">15 merged pull requests</a>.',
+      },
+      {
+        type: "text",
+        heading: "Adoption",
+        content:
+          'Lexicon is open source, so its reach goes beyond Liferay. The <a href="https://www.figma.com/community/file/961581638760900307/lexicon-design-system" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Lexicon Figma file</a> has more than 5.8k users, and the <a href="https://www.figma.com/community/file/869683830747037733/lexicon-icons" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Lexicon Icons file</a>, where I created and improved icons, has more than 7k. <a href="https://github.com/liferay/clay" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Clay</a>, its implementation, has over 500 forks on GitHub.<br /><br />It has also been featured in design system collections like <a href="https://adele.uxpin.com/liferay-lexicon" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">Adele by UXPin</a> and <a href="https://www.designsystems.com/open-design-systems/" target="_blank" rel="noopener noreferrer" class="underline decoration-accent text-accent underline-offset-[3px] [text-decoration-thickness:0.08em] hover:text-accent-hover hover:decoration-accent-hover transition-colors duration-150">designsystems.com</a>.',
       },
     ],
   },

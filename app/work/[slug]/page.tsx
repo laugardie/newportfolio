@@ -38,11 +38,11 @@ export default function WorkPage({ params }: Props) {
           <span className="group-hover:-translate-x-0.5 transition-transform">
             ←
           </span>
-          <span>work</span>
+          <span>case studies</span>
         </Link>
 
         {/* Title */}
-        <h1 className="font-cormorant text-[3.5rem] sm:text-[4.5rem] font-medium leading-[0.92] tracking-[-0.035em] text-ink mb-5">
+        <h1 className="text-[2.5rem] sm:text-[3.25rem] font-medium leading-[1] tracking-[-0.04em] text-ink mb-5">
           {project.title}
         </h1>
 
@@ -53,7 +53,7 @@ export default function WorkPage({ params }: Props) {
 
         {/* Description */}
         <p
-          className="text-[17px] leading-[1.75] text-ink/80 mb-20"
+          className="text-[17px] leading-[1.75] text-body mb-20"
           dangerouslySetInnerHTML={renderTextContent(project.description)}
         />
 
@@ -114,12 +114,12 @@ export default function WorkPage({ params }: Props) {
             return (
               <div key={i}>
                 {section.heading && (
-                  <h2 className="font-cormorant text-3xl font-semibold tracking-[-0.015em] text-ink mb-4">
+                  <h2 className="text-2xl tracking-[-0.02em] text-ink mb-4">
                     {section.heading}
                   </h2>
                 )}
                 <div
-                  className="text-[17px] leading-[1.75] text-ink/80"
+                  className="text-[17px] leading-[1.75] text-body"
                   dangerouslySetInnerHTML={renderTextContent(section.content)}
                 />
               </div>
@@ -127,11 +127,11 @@ export default function WorkPage({ params }: Props) {
           })}
         </div>
 
-        {/* More work */}
+        {/* More case studies */}
         {others.length > 0 && (
           <div className="mt-20 pt-16 border-t border-divider">
-            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted mb-6">
-              More work
+            <p className="text-[11px] uppercase tracking-[0.18em] text-muted mb-6">
+              More case studies
             </p>
             <div>
               {others.map((p) => (
@@ -145,11 +145,11 @@ export default function WorkPage({ params }: Props) {
                     <div className="flex items-baseline justify-between w-full transition-transform duration-200 ease-out group-hover:translate-x-1">
                       <div className="flex items-baseline gap-1.5 min-w-0 mr-4">
                         <span className="text-base text-ink">{p.title}</span>
-                        <span className="text-base text-ink/50 flex-shrink-0">
+                        <span className="text-base text-faint flex-shrink-0">
                           · {p.company}
                         </span>
                       </div>
-                      <span className="text-xs text-ink/50 group-hover:text-ink/80 transition-colors duration-200 tabular-nums flex-shrink-0">
+                      <span className="text-xs text-faint group-hover:text-body transition-colors duration-200 tabular-nums flex-shrink-0">
                         {p.year}
                       </span>
                     </div>
