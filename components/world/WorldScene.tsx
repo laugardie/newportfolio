@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import DialogueBox from "@/components/world/DialogueBox";
 import HomeComputer from "@/components/world/HomeComputer";
-import PlaceholderPlayer, { PLAYER_ART } from "@/components/world/PlaceholderPlayer";
+import Player, { PLAYER_ART, type Facing } from "@/components/world/Player";
 import {
   distance,
   findPath,
@@ -72,6 +72,10 @@ export default function WorldScene() {
   const [nearby, setNearby] = useState(false);
   const nearbyRef = useRef(false);
   const [hovered, setHovered] = useState(false);
+  const [walking, setWalking] = useState(false);
+  const walkingRef = useRef(false);
+  const [facing, setFacing] = useState<Facing>("right");
+  const facingRef = useRef<Facing>("right");
 
   const player = useRef({
     position: { ...PLAYER_CONFIG.spawn },
@@ -235,6 +239,17 @@ export default function WorldScene() {
         nearbyRef.current = isNearby;
         setNearby(isNearby);
       }
+      const moved = state.position.x - before.x;
+      const isWalking = distance(before, state.position) > step * 0.1;
+      if (isWalking !== walkingRef.current) {
+        walkingRef.current = isWalking;
+        setWalking(isWalking);
+      }
+      const isFacing: Facing = moved < -0.01 ? "left" : moved > 0.01 ? "right" : facingRef.current;
+      if (isFacing !== facingRef.current) {
+        facingRef.current = isFacing;
+        setFacing(isFacing);
+      }
       if (state.position !== before) paint();
     };
 
@@ -379,7 +394,7 @@ export default function WorldScene() {
                 zIndex: depth(player.current.position.y),
               }}
             >
-              <PlaceholderPlayer scale={PLAYER_CONFIG.scale * s} />
+              <Player scale={PLAYER_CONFIG.scale * s} walking={walking && !open} facing={facing} />
             </div>
           </div>
         )}

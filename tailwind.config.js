@@ -53,6 +53,15 @@ module.exports = {
       screens: {
         "3xl": "2200px",
       },
+      keyframes: {
+        "walk-bob": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(-2.5px)" },
+        },
+      },
+      animation: {
+        "walk-bob": "walk-bob 0.36s ease-in-out infinite alternate",
+      },
     },
   },
   plugins: [],
