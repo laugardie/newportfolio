@@ -18,7 +18,7 @@ import { locations as definitions, resolveLocation, type Location } from "@/cont
 
 // Tweak the player here. Distances are in world units.
 export const PLAYER_CONFIG = {
-  speed: 200, // per second, the same in every direction
+  speed: 260, // per second, the same in every direction
   scale: 1.3, // size of the player artwork
   radius: 9, // collision circle around the feet
   reach: 50, // how close to an interaction point counts as "at the door"
