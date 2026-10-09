@@ -14,7 +14,12 @@ import {
   pushOut,
   type Vec,
 } from "@/components/world/geometry";
-import { locations as definitions, resolveLocation, type Location } from "@/content/world/locations";
+import {
+  locations as definitions,
+  grounds,
+  resolveLocation,
+  type Location,
+} from "@/content/world/locations";
 
 // Tweak the player here. Distances are in world units.
 export const PLAYER_CONFIG = {
@@ -63,6 +68,26 @@ const locationAt = (p: Vec): Location | null =>
   locations
     .filter((l) => insidePolygon(p, l.world.hitArea))
     .sort((a, b) => b.world.depthY - a.world.depthY)[0] ?? null;
+
+// Locations the visitor has talked to, kept between visits in this browser.
+const VISITED_KEY = "world:visited";
+
+const loadVisited = (): Set<string> => {
+  try {
+    const stored = JSON.parse(window.localStorage.getItem(VISITED_KEY) ?? "[]");
+    return new Set(Array.isArray(stored) ? stored.filter((id) => typeof id === "string") : []);
+  } catch {
+    return new Set();
+  }
+};
+
+const saveVisited = (visited: Set<string>) => {
+  try {
+    window.localStorage.setItem(VISITED_KEY, JSON.stringify(Array.from(visited)));
+  } catch {
+    // Storage can be unavailable (private windows, blocked site data); the checks just won't persist.
+  }
+};
 
 const MOVE_KEYS: Record<string, Vec> = {
   ArrowUp: { x: 0, y: -1 },
@@ -116,6 +141,7 @@ export default function WorldScene() {
   const [nearby, setNearby] = useState<string | null>(null);
   const nearbyRef = useRef<Location | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [visited, setVisited] = useState<Set<string>>(() => new Set());
   const [walking, setWalking] = useState(false);
   const walkingRef = useRef(false);
   const [facing, setFacing] = useState<Facing>("right");
@@ -191,6 +217,14 @@ export default function WorldScene() {
     setActive(location);
     openRef.current = true;
     setOpen(true);
+    if (location.tracksVisit) {
+      setVisited((current) => {
+        if (current.has(location.id)) return current;
+        const next = new Set(current).add(location.id);
+        saveVisited(next);
+        return next;
+      });
+    }
   }, []);
 
   const close = useCallback(() => {
@@ -241,6 +275,7 @@ export default function WorldScene() {
 
   useEffect(() => {
     sceneRef.current?.focus({ preventScroll: true });
+    setVisited(loadVisited());
   }, []);
 
   // Movement loop.
@@ -426,8 +461,8 @@ export default function WorldScene() {
         style={{ cursor: hovered && !open ? "pointer" : undefined }}
       >
         <p id="world-instructions" className="sr-only">
-          Walk with the arrow keys or W, A, S and D, or click the ground. Press E next to Casita’s door or
-          Boardie on the beach to talk, or focus either one and press Enter.
+          Walk with the arrow keys or W, A, S and D, or click the ground. Press E next to Casita’s door,
+          Boardie on the beach, or Sprout’s greenhouse and the garden beds to talk, or focus one and press Enter.
         </p>
 
         {view && (
@@ -440,6 +475,25 @@ export default function WorldScene() {
               height: WORLD.height * s,
             }}
           >
+            {grounds.map((ground) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={ground.art.src}
+                src={ground.art.src}
+                alt=""
+                width={ground.art.width}
+                height={ground.art.height}
+                draggable={false}
+                className="absolute block h-auto select-none"
+                style={{
+                  left: ground.position.x * s,
+                  top: ground.position.y * s,
+                  width: ground.width * s,
+                  zIndex: 1,
+                }}
+              />
+            ))}
+
             {locations.map((location) => (
               <div
                 key={location.id}
@@ -459,6 +513,7 @@ export default function WorldScene() {
                   location={location}
                   open={open && active.id === location.id}
                   highlighted={nearby === location.id || (hovered === location.id && !open)}
+                  visited={visited.has(location.id)}
                   onClick={(event) => {
                     // Pointer clicks are handled by the scene; this is keyboard and
                     // assistive-technology activation, which opens the location directly.

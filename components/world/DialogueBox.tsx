@@ -113,6 +113,7 @@ function Conversation({ dialogue, onClose }: { dialogue: Dialogue; onClose: () =
         skipRef={skipRef}
         read={readRef.current}
         onChoose={setMessageId}
+        onClose={onClose}
       />
     </div>
   );
@@ -125,9 +126,10 @@ type MessageProps = {
   skipRef: React.MutableRefObject<(() => boolean) | null>;
   read: Set<string>;
   onChoose: (next: string) => void;
+  onClose: () => void;
 };
 
-function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: MessageProps) {
+function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose, onClose }: MessageProps) {
   const message = dialogue.messages[messageId];
   const length = message.text.length;
   const reduceMotion = useReducedMotion();
@@ -206,7 +208,8 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
               type="button"
               disabled={!done}
               onClick={() => {
-                if (option.href === undefined) onChoose(option.next);
+                if (option.close) onClose();
+                else if (option.href === undefined) onChoose(option.next);
                 else if (option.href.startsWith("mailto:")) window.location.href = option.href;
                 else window.open(option.href, "_blank", "noopener,noreferrer");
               }}
