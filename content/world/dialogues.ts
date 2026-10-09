@@ -31,118 +31,107 @@ export const homeDialogue: Dialogue = {
   start: "welcome",
   messages: {
     welcome: {
-      text: "Hey, I’m Casita. Laura lives here in Lagos with her husband Daniel and their son Diego. This is where she works, makes things, and occasionally gets interrupted by a very important drawing.",
+      text: "Hey, I’m Casita. Lau lives here in Lagos with her husband Daniel and their son Diego. This is where she works, makes things, and occasionally gets interrupted by a very important drawing.",
       options: [
-        { label: "What does Laura do?", next: "work" },
+        { label: "What does Lau do?", next: "work" },
         { label: "What’s life like here?", next: "life" },
         { label: "Can I say hi to her?", next: "hi" },
       ],
     },
     work: {
-      text: "She’s a product designer. She works out how things should work, designs the details, and gets into the code to help bring them to life. She’s worked on Gumroad, Beezy and Liferay. She loves Design Systems. I mostly provide the walls and somewhere to plug things in.",
+      text: "She’s a product designer. She figures out how things should work, designs the details, and gets into the code to help bring them to life.\n\nI provide the walls and somewhere to plug things in.",
       options: [
-        { label: "Has she always been a designer?", next: "teacher" },
-        { label: "What’s she making now?", next: "making" },
         { label: "Show me her work. ↗", href: PORTFOLIO },
-        somethingElse,
-      ],
-    },
-    teacher: {
-      text: "She used to teach primary school. Four years of explaining things to small humans before moving into product design. Different audience, same concern: “Does this actually make sense to anyone else?”",
-      options: [
-        { label: "What’s she making now?", next: "making" },
-        { label: "I’d like to see her work. ↗", href: PORTFOLIO },
-        somethingElse,
-      ],
-    },
-    making: {
-      text: "She’s working on a fertility app, Everground for workouts, and Habits for tracking the things you want to keep doing. There’s also Tatai, her children’s colouring books, and this little world. I get a front-row seat to all of it.",
-      options: [
-        { label: "Does she code too?", next: "code" },
+        { label: "Let me see her GitHub. ↗", href: GITHUB },
         { label: "Can I talk to her about a project?", next: "hi" },
         somethingElse,
       ],
     },
     life: {
-      text: "Laura works from here, trains with Daniel, and has a bit of a homemade pizza obsession. There are kettlebells and children’s drawings. It’s a home first. The office fits around it.\n\nWhen she’s out, there’s a good chance she’s at the beach. She’s learning to surf. I’d go with her, but… house.",
+      text: "A lot gets made here. Digital things by Lau, drawings by Diego. His work usually makes it onto the wall faster.\n\nThere’s also training with Daniel and a fairly serious homemade pizza habit. Between the kettlebells and the toys, walking across the room is sometimes a workout of its own.",
       options: [
         { label: "Wait, homemade pizza?", next: "pizza" },
-        { label: "What’s she making besides pizza?", next: "making" },
-        somethingElse,
-      ],
-    },
-    pizza: {
-      text: "Yes. One of the perks of being Laura’s house. I can’t eat it, which feels like a fairly serious design flaw.",
-      options: [
-        { label: "I came for the portfolio, now I’m hungry. ↗", href: PORTFOLIO },
-        { label: "I should say hi to her.", next: "hi" },
-        somethingElse,
-      ],
-    },
-    code: {
-      text: "She does. She’s worked directly in React and Tailwind alongside engineers, taking designs through to the actual product. She likes being involved when the thing gets built. Moving a button in Figma is only the beginning.",
-      options: [
-        { label: "Let me see her GitHub. ↗", href: GITHUB },
-        { label: "Show me the finished work. ↗", href: PORTFOLIO },
-        { label: "Can I talk to her about a project?", next: "hi" },
+        { label: "Where’s Lau now?", next: "where" },
         somethingElse,
       ],
     },
     hi: {
-      text: "Of course. Have a project in mind, a question, or just fancy saying hello? Send her a message. I’d pass it on myself, but my keyboard is a doorstep.",
+      text: "Of course. Have a project in mind, a question, or just fancy saying hello?\n\nI’d pass your message on myself, but my keyboard is a doorstep.",
       options: [
-        { label: "Email Laura. ↗", href: EMAIL },
+        { label: "Email Lau. ↗", href: EMAIL },
         { label: "Find her on LinkedIn. ↗", href: LINKEDIN },
         somethingElse,
       ],
     },
+    pizza: {
+      text: "Yes. You might have spotted the oven outside. It gets considerably more compliments than my architecture.\n\nGo say hello. Ask about the pizza.",
+      options: [
+        { label: "Back to home life.", next: "life" },
+        somethingElse,
+      ],
+    },
+    where: {
+      text: "If she’s not here, try the beach. Boardie usually knows what she’s up to.\n\nI’d come with you, but I’m quite attached to this spot.",
+      options: [
+        { label: "Who’s Boardie?", next: "boardie" },
+        somethingElse,
+      ],
+    },
+    boardie: {
+      text: "The surfboard down by the water. Very patient. Has a lot to say for someone with no mouth.\n\nYou two should meet.",
+      options: [somethingElse],
+    },
   },
 };
 
-// Draft copy, waiting on Laura's review.
 export const beachDialogue: Dialogue = {
   id: "beach",
   label: "BOARDIE",
   start: "welcome",
   messages: {
     welcome: {
-      text: "Oh, hi. I’m Boardie, Laura’s surfboard. Most days I lean on this rock and wait for her to finish work. She’s learning to surf, so we spend a lot of time together in the white water.",
+      text: "Hey, I’m Boardie. Lau’s learning to surf. I’m learning to be patient.\n\nThis is our little corner for things she hasn’t figured out yet. Some involve code. Some involve falling into the Atlantic.",
       options: [
-        { label: "How’s she getting on?", next: "progress" },
-        { label: "Why surfing?", next: "why" },
-        { label: "Where’s Laura now?", next: "where" },
+        { label: "What’s she learning?", next: "learning" },
+        { label: "Can she actually surf?", next: "surf" },
+        { label: "Why so many different things?", next: "why" },
       ],
     },
-    progress: {
-      text: "Honestly? Better every time. She paddles, pops up, falls off, laughs, and tries again. The ocean gives very direct feedback. I just try to stay the right way up.",
+    learning: {
+      text: "Surfing, building more of her own ideas in code, and learning about nutrition. Her browser tabs are quite a mix.\n\nThis little world is part of it. Every new thing she wants to add becomes another thing to figure out.",
       options: [
-        { label: "Sounds a bit like her work.", next: "work" },
+        { label: "Tell me about the surfing.", next: "surf" },
+        { label: "Nutrition?", next: "nutrition" },
+        { label: "What’s she building?", next: "building" },
+        somethingElse,
+      ],
+    },
+    surf: {
+      text: "She’s learning. We’ve had some standing-up moments. I try not to get too excited.\n\nMostly, we paddle out, give it a go, and get very familiar with the water.",
+      options: [
+        { label: "What else is she learning?", next: "learning" },
         somethingElse,
       ],
     },
     why: {
-      text: "Lagos has beaches like this one: rocks, stone arches, and water that changes colour every hour. Live this close to the sea and it starts asking questions. Also, there are no screens out there. Casita takes that personally.",
+      text: "Usually, she wants to understand something. Then she reads about it, tries it, and ends up with more questions than she started with.\n\nI have one subject. Waves. Keeps things manageable.",
       options: [
-        { label: "How’s she getting on?", next: "progress" },
-        { label: "Where’s Laura now?", next: "where" },
+        { label: "Nutrition, for example?", next: "nutrition" },
+        { label: "What’s she building?", next: "building" },
         somethingElse,
       ],
     },
-    work: {
-      text: "Same habit, different medium. Try something, see what happens, adjust. Casita knows more about the design side. I mostly know about waves.",
+    nutrition: {
+      text: "She’s been digging into nutrition, especially fertility and PCOS. Reading, asking questions, and trying to understand the science behind the advice.\n\nI don’t contribute much to those conversations. My experience is mostly with salt water.",
       options: [
-        { label: "Show me her work. ↗", href: PORTFOLIO },
-        { label: "Where’s Laura now?", next: "where" },
+        { label: "Is she making something with that?", next: "building" },
+        { label: "What else is she learning?", next: "learning" },
         somethingElse,
       ],
     },
-    where: {
-      text: "Probably up at Casita, working on something. You can say hi from here, though. Tell her the swell looks good.",
-      options: [
-        { label: "Email Laura. ↗", href: EMAIL },
-        { label: "Find her on LinkedIn. ↗", href: LINKEDIN },
-        somethingElse,
-      ],
+    building: {
+      text: "Take a wander over to the little vegetable garden. Each patch has one of her small projects growing in it, including a nutrition app she’s working on.\n\nI’d show you around, but they’ve asked me to keep the salt water away from the plants.",
+      options: [somethingElse],
     },
   },
 };
