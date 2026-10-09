@@ -58,9 +58,15 @@ module.exports = {
           from: { transform: "translateY(0)" },
           to: { transform: "translateY(-2.5px)" },
         },
+        "run-cycle": {
+          from: { backgroundPosition: "0% 0" },
+          to: { backgroundPosition: "100% 0" },
+        },
       },
       animation: {
         "walk-bob": "walk-bob 0.36s ease-in-out infinite alternate",
+        // One cycle of the run strip: 6 frames, ends included.
+        "run-cycle": "run-cycle 0.5s steps(6, jump-none) infinite",
       },
     },
   },

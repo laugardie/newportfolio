@@ -76,6 +76,9 @@ export default function WorldScene() {
   const walkingRef = useRef(false);
   const [facing, setFacing] = useState<Facing>("right");
   const facingRef = useRef<Facing>("right");
+  // Moving mostly sideways shows the side-on run; mostly up or down shows her back.
+  const [side, setSide] = useState(false);
+  const sideRef = useRef(false);
 
   const player = useRef({
     position: { ...PLAYER_CONFIG.spawn },
@@ -240,6 +243,7 @@ export default function WorldScene() {
         setNearby(isNearby);
       }
       const moved = state.position.x - before.x;
+      const movedY = state.position.y - before.y;
       const isWalking = distance(before, state.position) > step * 0.1;
       if (isWalking !== walkingRef.current) {
         walkingRef.current = isWalking;
@@ -249,6 +253,11 @@ export default function WorldScene() {
       if (isFacing !== facingRef.current) {
         facingRef.current = isFacing;
         setFacing(isFacing);
+      }
+      const isSide = Math.abs(moved) >= Math.abs(movedY) * 0.5;
+      if (isWalking && isSide !== sideRef.current) {
+        sideRef.current = isSide;
+        setSide(isSide);
       }
       if (state.position !== before) paint();
     };
@@ -394,7 +403,7 @@ export default function WorldScene() {
                 zIndex: depth(player.current.position.y),
               }}
             >
-              <Player scale={PLAYER_CONFIG.scale * s} walking={walking && !open} facing={facing} />
+              <Player scale={PLAYER_CONFIG.scale * s} walking={walking && !open} side={side} facing={facing} />
             </div>
           </div>
         )}
