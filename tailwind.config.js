@@ -53,6 +53,19 @@ module.exports = {
       screens: {
         "3xl": "2200px",
       },
+      keyframes: {
+        // Walks a sprite strip from its first cell to its last.
+        "sprite-strip": {
+          from: { backgroundPosition: "0% 0" },
+          to: { backgroundPosition: "100% 0" },
+        },
+      },
+      animation: {
+        // One loop of each strip at its frame count, ends included.
+        "run-cycle": "sprite-strip 0.5s steps(6, jump-none) infinite",
+        "idle-cycle": "sprite-strip 2.75s steps(22, jump-none) infinite",
+        "run-vertical": "sprite-strip 1s steps(12, jump-none) infinite",
+      },
     },
   },
   plugins: [],

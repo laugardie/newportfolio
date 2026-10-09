@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import DialogueBox from "@/components/world/DialogueBox";
 import HomeComputer from "@/components/world/HomeComputer";
-import PlaceholderPlayer, { PLAYER_ART } from "@/components/world/PlaceholderPlayer";
+import Player, { PLAYER_ART, type Facing, type Heading } from "@/components/world/Player";
 import {
   distance,
   findPath,
@@ -72,6 +72,13 @@ export default function WorldScene() {
   const [nearby, setNearby] = useState(false);
   const nearbyRef = useRef(false);
   const [hovered, setHovered] = useState(false);
+  const [walking, setWalking] = useState(false);
+  const walkingRef = useRef(false);
+  const [facing, setFacing] = useState<Facing>("right");
+  const facingRef = useRef<Facing>("right");
+  // Moving mostly sideways shows the side-on run, otherwise the up or down run.
+  const [heading, setHeading] = useState<Heading>("side");
+  const headingRef = useRef<Heading>("side");
 
   const player = useRef({
     position: { ...PLAYER_CONFIG.spawn },
@@ -235,6 +242,24 @@ export default function WorldScene() {
         nearbyRef.current = isNearby;
         setNearby(isNearby);
       }
+      const moved = state.position.x - before.x;
+      const movedY = state.position.y - before.y;
+      const isWalking = distance(before, state.position) > step * 0.1;
+      if (isWalking !== walkingRef.current) {
+        walkingRef.current = isWalking;
+        setWalking(isWalking);
+      }
+      const isFacing: Facing = moved < -0.01 ? "left" : moved > 0.01 ? "right" : facingRef.current;
+      if (isFacing !== facingRef.current) {
+        facingRef.current = isFacing;
+        setFacing(isFacing);
+      }
+      const isHeading: Heading =
+        Math.abs(moved) >= Math.abs(movedY) * 0.5 ? "side" : movedY < 0 ? "up" : "down";
+      if (isWalking && isHeading !== headingRef.current) {
+        headingRef.current = isHeading;
+        setHeading(isHeading);
+      }
       if (state.position !== before) paint();
     };
 
@@ -379,7 +404,7 @@ export default function WorldScene() {
                 zIndex: depth(player.current.position.y),
               }}
             >
-              <PlaceholderPlayer scale={PLAYER_CONFIG.scale * s} />
+              <Player scale={PLAYER_CONFIG.scale * s} walking={walking && !open} heading={heading} facing={facing} />
             </div>
           </div>
         )}
