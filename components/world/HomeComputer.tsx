@@ -34,7 +34,7 @@ const HomeComputer = forwardRef<HTMLButtonElement, Props>(function HomeComputer(
     >
       <span
         aria-hidden
-        className={`pointer-events-none absolute -top-9 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-sm bg-black px-2 py-1 text-sm leading-none text-white transition-opacity duration-200 group-focus-visible:opacity-100 motion-reduce:transition-none ${
+        className={`pointer-events-none absolute -top-9 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-sm bg-black px-1.5 py-1 text-sm leading-none text-white transition-opacity duration-200 group-focus-visible:opacity-100 motion-reduce:transition-none ${
           highlighted ? "opacity-100" : "opacity-0"
         }`}
       >
