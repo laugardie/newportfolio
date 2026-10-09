@@ -64,7 +64,7 @@ export const homeDialogue: Dialogue = {
       ],
     },
     life: {
-      text: "Laura works from here, trains with Daniel, and has a bit of a homemade pizza obsession. There are kettlebells and children’s drawings. It’s a home first. The office fits around it.\n\nWhen she’s out, there’s a good chance she’s at the beach. She’s learning to surf. I’m more of a stay-on-land type.",
+      text: "Laura works from here, trains with Daniel, and has a bit of a homemade pizza obsession. There are kettlebells and children’s drawings. It’s a home first. The office fits around it.\n\nWhen she’s out, there’s a good chance she’s at the beach. She’s learning to surf. I’d go with her, but… house.",
       options: [
         { label: "Wait, homemade pizza?", next: "pizza" },
         { label: "What’s she making besides pizza?", next: "making" },
