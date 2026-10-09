@@ -15,6 +15,27 @@ type Props = {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
+const percent = (value: number, total: number) => `${(value / total) * 100}%`;
+
+// An illustration, cut down to its `layer` when it has one. The cut-out scales
+// with the artwork, so it stays on its object at any size.
+export function ArtworkImage({ art, layer }: Pick<Location, "art" | "layer">) {
+  const clipPath =
+    layer && `polygon(${layer.map((p) => `${percent(p.x, art.width)} ${percent(p.y, art.height)}`).join(", ")})`;
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={art.src}
+      alt=""
+      width={art.width}
+      height={art.height}
+      draggable={false}
+      style={clipPath ? { clipPath, WebkitClipPath: clipPath } : undefined}
+      className="block h-auto w-full select-none"
+    />
+  );
+}
+
 // A location's artwork and its keyboard-focusable control. Pointer input is
 // handled by the scene (so the transparent parts of the image stay walkable),
 // which is why the button ignores pointer events.
@@ -23,22 +44,9 @@ const LocationView = forwardRef<HTMLButtonElement, Props>(function LocationView(
   ref,
 ) {
   const { art, control, openMask, layer } = location;
-  const percent = (value: number, total: number) => `${(value / total) * 100}%`;
-  // Scales with the artwork, so the cut-out stays on its object at any size.
-  const clipPath =
-    layer && `polygon(${layer.map((p) => `${percent(p.x, art.width)} ${percent(p.y, art.height)}`).join(", ")})`;
   return (
     <div className="relative">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={art.src}
-        alt=""
-        width={art.width}
-        height={art.height}
-        draggable={false}
-        style={clipPath ? { clipPath, WebkitClipPath: clipPath } : undefined}
-        className="block h-auto w-full select-none"
-      />
+      <ArtworkImage art={art} layer={layer} />
       {/* The mask matches the artwork's dimensions, so this layer lines up exactly:
           the artwork shows underneath, white while the dialogue is open. */}
       {openMask && (
