@@ -54,10 +54,6 @@ module.exports = {
         "3xl": "2200px",
       },
       keyframes: {
-        "walk-bob": {
-          from: { transform: "translateY(0)" },
-          to: { transform: "translateY(-2.5px)" },
-        },
         // Walks a sprite strip from its first cell to its last.
         "sprite-strip": {
           from: { backgroundPosition: "0% 0" },
@@ -65,10 +61,10 @@ module.exports = {
         },
       },
       animation: {
-        "walk-bob": "walk-bob 0.36s ease-in-out infinite alternate",
         // One loop of each strip at its frame count, ends included.
         "run-cycle": "sprite-strip 0.5s steps(6, jump-none) infinite",
         "idle-cycle": "sprite-strip 2.75s steps(22, jump-none) infinite",
+        "run-vertical": "sprite-strip 1s steps(12, jump-none) infinite",
       },
     },
   },

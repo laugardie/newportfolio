@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import DialogueBox from "@/components/world/DialogueBox";
 import HomeComputer from "@/components/world/HomeComputer";
-import Player, { PLAYER_ART, type Facing } from "@/components/world/Player";
+import Player, { PLAYER_ART, type Facing, type Heading } from "@/components/world/Player";
 import {
   distance,
   findPath,
@@ -76,9 +76,9 @@ export default function WorldScene() {
   const walkingRef = useRef(false);
   const [facing, setFacing] = useState<Facing>("right");
   const facingRef = useRef<Facing>("right");
-  // Moving mostly sideways shows the side-on run; mostly up or down shows her back.
-  const [side, setSide] = useState(false);
-  const sideRef = useRef(false);
+  // Moving mostly sideways shows the side-on run, otherwise the up or down run.
+  const [heading, setHeading] = useState<Heading>("side");
+  const headingRef = useRef<Heading>("side");
 
   const player = useRef({
     position: { ...PLAYER_CONFIG.spawn },
@@ -254,10 +254,11 @@ export default function WorldScene() {
         facingRef.current = isFacing;
         setFacing(isFacing);
       }
-      const isSide = Math.abs(moved) >= Math.abs(movedY) * 0.5;
-      if (isWalking && isSide !== sideRef.current) {
-        sideRef.current = isSide;
-        setSide(isSide);
+      const isHeading: Heading =
+        Math.abs(moved) >= Math.abs(movedY) * 0.5 ? "side" : movedY < 0 ? "up" : "down";
+      if (isWalking && isHeading !== headingRef.current) {
+        headingRef.current = isHeading;
+        setHeading(isHeading);
       }
       if (state.position !== before) paint();
     };
@@ -403,7 +404,7 @@ export default function WorldScene() {
                 zIndex: depth(player.current.position.y),
               }}
             >
-              <Player scale={PLAYER_CONFIG.scale * s} walking={walking && !open} side={side} facing={facing} />
+              <Player scale={PLAYER_CONFIG.scale * s} walking={walking && !open} heading={heading} facing={facing} />
             </div>
           </div>
         )}
