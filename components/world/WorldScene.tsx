@@ -25,8 +25,8 @@ import {
 
 // Tweak the player here. Distances are in world units.
 export const PLAYER_CONFIG = {
-  speed: 200, // per second, the same in every direction
-  scale: 1, // size of the player artwork
+  speed: 260, // per second, the same in every direction
+  scale: 1.3, // size of the player artwork
   radius: 9, // collision circle around the feet
   reach: 50, // how close to an interaction point counts as "at the door"
   spawn: { x: 1380, y: 1180 },
@@ -42,7 +42,7 @@ export const CAMERA_CONFIG = {
   scale: (viewportWidth: number) => Math.min(1, Math.max(0.6, viewportWidth / 1100)),
   follow: 6, // how quickly the camera catches up (higher is snappier)
   // Points the camera at the player's middle rather than their feet.
-  lookUp: 36,
+  lookUp: 47,
 };
 const ROUTE_MARGIN = 6; // how wide routes give the footprint corners
 
