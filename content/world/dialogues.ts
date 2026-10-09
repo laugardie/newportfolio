@@ -98,3 +98,51 @@ export const homeDialogue: Dialogue = {
     },
   },
 };
+
+// Draft copy, waiting on Laura's review.
+export const beachDialogue: Dialogue = {
+  id: "beach",
+  label: "BOARDIE",
+  start: "welcome",
+  messages: {
+    welcome: {
+      text: "Oh, hi. I’m Boardie, Laura’s surfboard. Most days I lean on this rock and wait for her to finish work. She’s learning to surf, so we spend a lot of time together in the white water.",
+      options: [
+        { label: "How’s she getting on?", next: "progress" },
+        { label: "Why surfing?", next: "why" },
+        { label: "Where’s Laura now?", next: "where" },
+      ],
+    },
+    progress: {
+      text: "Honestly? Better every time. She paddles, pops up, falls off, laughs, and tries again. The ocean gives very direct feedback. I just try to stay the right way up.",
+      options: [
+        { label: "Sounds a bit like her work.", next: "work" },
+        somethingElse,
+      ],
+    },
+    why: {
+      text: "Lagos has beaches like this one: rocks, little caves, and water that changes colour every hour. Live this close to the sea and it starts asking questions. Also, there are no screens out there. Casita takes that personally.",
+      options: [
+        { label: "How’s she getting on?", next: "progress" },
+        { label: "Where’s Laura now?", next: "where" },
+        somethingElse,
+      ],
+    },
+    work: {
+      text: "Same habit, different medium. Try something, see what happens, adjust. Casita knows more about the design side. I mostly know about waves.",
+      options: [
+        { label: "Show me her work. ↗", href: PORTFOLIO },
+        { label: "Where’s Laura now?", next: "where" },
+        somethingElse,
+      ],
+    },
+    where: {
+      text: "Probably up at Casita, working on something. You can say hi from here, though. Tell her the swell looks good.",
+      options: [
+        { label: "Email Laura. ↗", href: EMAIL },
+        { label: "Find her on LinkedIn. ↗", href: LINKEDIN },
+        somethingElse,
+      ],
+    },
+  },
+};

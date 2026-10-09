@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import DialogueBox from "@/components/world/DialogueBox";
-import HomeComputer from "@/components/world/HomeComputer";
+import LocationView from "@/components/world/LocationView";
 import Player, { PLAYER_ART, type Facing, type Heading } from "@/components/world/Player";
 import {
   distance,
@@ -13,7 +14,7 @@ import {
   pushOut,
   type Vec,
 } from "@/components/world/geometry";
-import { casita as casitaDefinition, resolveLocation } from "@/content/world/locations";
+import { locations as definitions, resolveLocation, type Location } from "@/content/world/locations";
 
 // Tweak the player here. Distances are in world units.
 export const PLAYER_CONFIG = {
@@ -24,14 +25,20 @@ export const PLAYER_CONFIG = {
   spawn: { x: 520, y: 640 },
 };
 
-// The world is a fixed design area. The camera stays on its centre and scales
-// it to fit the viewport (never above 1×); any extra screen space is more ground.
+// The world is a fixed design area the player can walk around in. The camera
+// follows the player, so the world moves past as they walk.
 const WORLD = { width: 960, height: 900 };
-const EDGE = 8; // keeps the player off the very edge of the screen
+const EDGE = 8; // keeps the player off the very edge of the world
+export const CAMERA_CONFIG = {
+  // World units per screen pixel: 1× on wide screens, down to 0.6× on phones.
+  scale: (viewportWidth: number) => Math.min(1, Math.max(0.6, viewportWidth / 1100)),
+  follow: 6, // how quickly the camera catches up (higher is snappier)
+  // Points the camera at the player's middle rather than their feet.
+  lookUp: 36,
+};
 const ROUTE_MARGIN = 6; // how wide routes give the footprint corners
 
-const casita = resolveLocation(casitaDefinition);
-const locations = [casita];
+const locations = definitions.map(resolveLocation);
 const blocked = locations.map((l) => inflate(l.world.footprint, PLAYER_CONFIG.radius));
 const corners = locations.map((l) =>
   inflate(l.world.footprint, PLAYER_CONFIG.radius + ROUTE_MARGIN),
@@ -40,6 +47,22 @@ const corners = locations.map((l) =>
 // Layers are sorted by the ground y of the feet / depth anchor. The offset keeps
 // z-indexes positive when the player walks above the design area.
 const depth = (y: number) => String(10000 + Math.round(y));
+
+// The closest location whose interaction point is within reach.
+const nearbyLocation = (p: Vec): Location | null => {
+  let best: Location | null = null;
+  for (const location of locations) {
+    const gap = distance(p, location.world.interaction);
+    if (gap <= PLAYER_CONFIG.reach && (!best || gap < distance(p, best.world.interaction))) best = location;
+  }
+  return best;
+};
+
+// Where hit areas overlap, the frontmost location wins.
+const locationAt = (p: Vec): Location | null =>
+  locations
+    .filter((l) => insidePolygon(p, l.world.hitArea))
+    .sort((a, b) => b.world.depthY - a.world.depthY)[0] ?? null;
 
 const MOVE_KEYS: Record<string, Vec> = {
   ArrowUp: { x: 0, y: -1 },
@@ -54,6 +77,12 @@ const MOVE_KEYS: Record<string, Vec> = {
 
 type View = { width: number; height: number; scale: number };
 
+const cameraTarget = ({ x, y }: Vec): Vec => ({ x, y: y - CAMERA_CONFIG.lookUp });
+
+// Moves the world so the camera point sits in the middle of the screen.
+const worldTransform = (camera: Vec, v: View) =>
+  `translate3d(${v.width / 2 - camera.x * v.scale}px, ${v.height / 2 - camera.y * v.scale}px, 0)`;
+
 // Places the player artwork so its feet sit on the given world point.
 const playerTransform = ({ x, y }: Vec, viewScale: number) => {
   const s = PLAYER_CONFIG.scale;
@@ -63,15 +92,19 @@ const playerTransform = ({ x, y }: Vec, viewScale: number) => {
 export default function WorldScene() {
   const sceneRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<HTMLDivElement>(null);
-  const casitaRef = useRef<HTMLButtonElement>(null);
+  const worldRef = useRef<HTMLDivElement>(null);
+  const locationRefs = useRef(new Map<string, HTMLButtonElement>());
 
   const [view, setView] = useState<View | null>(null);
   const viewRef = useRef<View | null>(null);
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
-  const [nearby, setNearby] = useState(false);
-  const nearbyRef = useRef(false);
-  const [hovered, setHovered] = useState(false);
+  // The location whose dialogue is open (kept after closing so it can animate out).
+  const [active, setActive] = useState<Location>(locations[0]);
+  const activeRef = useRef<Location>(locations[0]);
+  const [nearby, setNearby] = useState<string | null>(null);
+  const nearbyRef = useRef<Location | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
   const [walking, setWalking] = useState(false);
   const walkingRef = useRef(false);
   const [facing, setFacing] = useState<Facing>("right");
@@ -86,23 +119,24 @@ export default function WorldScene() {
     // Location to talk to once the current path ends.
     pending: null as string | null,
   });
+  const camera = useRef(cameraTarget(PLAYER_CONFIG.spawn));
+  const reduceMotion = useReducedMotion();
+  const reduceMotionRef = useRef(reduceMotion);
+  reduceMotionRef.current = reduceMotion;
   const keys = useRef(new Set<string>());
-  const returnFocus = useRef<"scene" | "casita">("scene");
+  // Where focus goes when the dialogue closes: the scene, or the location's control.
+  const returnFocus = useRef<"scene" | "location">("scene");
 
-  // Walkable area: whatever part of the world is on screen.
+  // Walkable area: the world, so the player's artwork stays inside it.
   const clamp = useCallback((p: Vec): Vec => {
-    const v = viewRef.current;
-    if (!v) return p;
-    const halfWidth = v.width / 2 / v.scale;
-    const halfHeight = v.height / 2 / v.scale;
     const s = PLAYER_CONFIG.scale;
-    const left = WORLD.width / 2 - halfWidth + PLAYER_ART.width * s * 0.5 + EDGE;
-    const right = WORLD.width / 2 + halfWidth - PLAYER_ART.width * s * 0.5 - EDGE;
-    const top = WORLD.height / 2 - halfHeight + PLAYER_ART.feetY * s + EDGE;
-    const bottom = WORLD.height / 2 + halfHeight - (PLAYER_ART.height - PLAYER_ART.feetY) * s - EDGE;
+    const left = PLAYER_ART.width * s * 0.5 + EDGE;
+    const right = WORLD.width - PLAYER_ART.width * s * 0.5 - EDGE;
+    const top = PLAYER_ART.feetY * s + EDGE;
+    const bottom = WORLD.height - (PLAYER_ART.height - PLAYER_ART.feetY) * s - EDGE;
     return {
-      x: left > right ? WORLD.width / 2 : Math.min(Math.max(p.x, left), right),
-      y: top > bottom ? WORLD.height / 2 : Math.min(Math.max(p.y, top), bottom),
+      x: Math.min(Math.max(p.x, left), right),
+      y: Math.min(Math.max(p.y, top), bottom),
     };
   }, []);
 
@@ -121,11 +155,29 @@ export default function WorldScene() {
     el.style.zIndex = depth(position.y);
   }, []);
 
-  const openDialogue = useCallback((via: "scene" | "casita") => {
+  // Eases the camera towards the player (or jumps there with reduced motion).
+  const follow = useCallback((dt: number | null) => {
+    const world = worldRef.current;
+    const v = viewRef.current;
+    if (!world || !v) return;
+    const target = cameraTarget(player.current.position);
+    const current = camera.current;
+    const t = dt === null || reduceMotionRef.current ? 1 : 1 - Math.exp(-CAMERA_CONFIG.follow * dt);
+    const next = { x: current.x + (target.x - current.x) * t, y: current.y + (target.y - current.y) * t };
+    // Close enough: settle exactly so the world stops repainting.
+    camera.current = distance(next, target) < 0.05 ? target : next;
+    if (current.x !== camera.current.x || current.y !== camera.current.y || dt === null) {
+      world.style.transform = worldTransform(camera.current, v);
+    }
+  }, []);
+
+  const openDialogue = useCallback((location: Location, via: "scene" | "location") => {
     player.current.path = [];
     player.current.pending = null;
     keys.current.clear();
     returnFocus.current = via;
+    activeRef.current = location;
+    setActive(location);
     openRef.current = true;
     setOpen(true);
   }, []);
@@ -133,7 +185,8 @@ export default function WorldScene() {
   const close = useCallback(() => {
     openRef.current = false;
     setOpen(false);
-    const target = returnFocus.current === "casita" ? casitaRef.current : sceneRef.current;
+    const target =
+      returnFocus.current === "location" ? locationRefs.current.get(activeRef.current.id) : sceneRef.current;
     target?.focus({ preventScroll: true });
   }, []);
 
@@ -158,7 +211,7 @@ export default function WorldScene() {
       setView({
         width,
         height,
-        scale: Math.min(width / WORLD.width, height / WORLD.height, 1),
+        scale: CAMERA_CONFIG.scale(width),
       });
     };
     measure();
@@ -172,7 +225,8 @@ export default function WorldScene() {
     if (!view) return;
     player.current.position = settle(player.current.position);
     paint();
-  }, [view, settle, paint]);
+    follow(null);
+  }, [view, settle, paint, follow]);
 
   useEffect(() => {
     sceneRef.current?.focus({ preventScroll: true });
@@ -189,6 +243,7 @@ export default function WorldScene() {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
       const state = player.current;
+      follow(dt);
       if (openRef.current || !viewRef.current) return;
 
       const step = PLAYER_CONFIG.speed * dt;
@@ -232,15 +287,15 @@ export default function WorldScene() {
           const location = locations.find((l) => l.id === state.pending);
           state.pending = null;
           if (location && distance(state.position, location.world.interaction) <= PLAYER_CONFIG.reach) {
-            openDialogue("scene");
+            openDialogue(location, "scene");
           }
         }
       }
 
-      const isNearby = distance(state.position, casita.world.interaction) <= PLAYER_CONFIG.reach;
+      const isNearby = nearbyLocation(state.position);
       if (isNearby !== nearbyRef.current) {
         nearbyRef.current = isNearby;
-        setNearby(isNearby);
+        setNearby(isNearby?.id ?? null);
       }
       const moved = state.position.x - before.x;
       const movedY = state.position.y - before.y;
@@ -265,10 +320,10 @@ export default function WorldScene() {
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [settle, paint, openDialogue]);
+  }, [settle, paint, follow, openDialogue]);
 
-  // "E" talks to Casita from the door (or with Casita focused), and closes
-  // the conversation again, matching the shortcut shown in the label.
+  // "E" talks to the nearby location (or the focused one), and closes the
+  // conversation again, matching the shortcut shown in the label.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key.toLowerCase() !== "e") return;
@@ -280,10 +335,11 @@ export default function WorldScene() {
         close();
         return;
       }
-      const casitaFocused = document.activeElement === casitaRef.current;
-      if (!nearbyRef.current && !casitaFocused) return;
+      const focused = locations.find((l) => locationRefs.current.get(l.id) === document.activeElement);
+      const location = focused ?? nearbyRef.current;
+      if (!location) return;
       event.preventDefault();
-      openDialogue(casitaFocused ? "casita" : "scene");
+      openDialogue(location, focused ? "location" : "scene");
     };
     const onWindowBlur = () => keys.current.clear();
     window.addEventListener("keydown", onKeyDown);
@@ -300,8 +356,8 @@ export default function WorldScene() {
     if (!v || !scene) return null;
     const rect = scene.getBoundingClientRect();
     return {
-      x: WORLD.width / 2 + (event.clientX - (rect.left + rect.width / 2)) / v.scale,
-      y: WORLD.height / 2 + (event.clientY - (rect.top + rect.height / 2)) / v.scale,
+      x: camera.current.x + (event.clientX - (rect.left + rect.width / 2)) / v.scale,
+      y: camera.current.y + (event.clientY - (rect.top + rect.height / 2)) / v.scale,
     };
   };
 
@@ -309,19 +365,19 @@ export default function WorldScene() {
     if (!event.isPrimary || event.button !== 0) return;
     const point = toWorld(event);
     if (!point) return;
-    const onCasita = insidePolygon(point, casita.world.hitArea);
+    const location = locationAt(point);
     if (openRef.current) {
-      if (onCasita) close();
+      if (location === activeRef.current) close();
       return;
     }
-    if (onCasita) walkTo(casita.world.interaction, casita.id);
+    if (location) walkTo(location.world.interaction, location.id);
     else walkTo(point, null);
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse") return;
     const point = toWorld(event);
-    setHovered(!!point && insidePolygon(point, casita.world.hitArea));
+    setHovered((point && locationAt(point)?.id) ?? null);
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -351,7 +407,7 @@ export default function WorldScene() {
         aria-describedby="world-instructions"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
-        onPointerLeave={() => setHovered(false)}
+        onPointerLeave={() => setHovered(null)}
         onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
         onBlur={onBlur}
@@ -359,42 +415,49 @@ export default function WorldScene() {
         style={{ cursor: hovered && !open ? "pointer" : undefined }}
       >
         <p id="world-instructions" className="sr-only">
-          Walk with the arrow keys or W, A, S and D, or click the ground. Press E at Casita’s door to talk,
-          or focus Casita and press Enter.
+          Walk with the arrow keys or W, A, S and D, or click the ground. Press E next to Casita’s door or
+          Boardie on the beach to talk, or focus either one and press Enter.
         </p>
 
         {view && (
           <div
-            className="absolute isolate"
+            ref={worldRef}
+            className="absolute left-0 top-0 isolate will-change-transform"
             style={{
-              left: view.width / 2 - (WORLD.width / 2) * s,
-              top: view.height / 2 - (WORLD.height / 2) * s,
+              transform: worldTransform(camera.current, view),
               width: WORLD.width * s,
               height: WORLD.height * s,
             }}
           >
-            <div
-              className="absolute"
-              style={{
-                left: casita.position.x * s,
-                top: casita.position.y * s,
-                width: casita.width * s,
-                zIndex: depth(casita.world.depthY),
-              }}
-            >
-              <HomeComputer
-                ref={casitaRef}
-                open={open}
-                highlighted={nearby || (hovered && !open)}
-                onClick={(event) => {
-                  // Pointer clicks are handled by the scene; this is keyboard and
-                  // assistive-technology activation, which opens Casita directly.
-                  if (event.detail !== 0) return;
-                  if (openRef.current) close();
-                  else openDialogue("casita");
+            {locations.map((location) => (
+              <div
+                key={location.id}
+                className="absolute"
+                style={{
+                  left: location.position.x * s,
+                  top: location.position.y * s,
+                  width: location.width * s,
+                  zIndex: depth(location.world.depthY),
                 }}
-              />
-            </div>
+              >
+                <LocationView
+                  ref={(el) => {
+                    if (el) locationRefs.current.set(location.id, el);
+                    else locationRefs.current.delete(location.id);
+                  }}
+                  location={location}
+                  open={open && active.id === location.id}
+                  highlighted={nearby === location.id || (hovered === location.id && !open)}
+                  onClick={(event) => {
+                    // Pointer clicks are handled by the scene; this is keyboard and
+                    // assistive-technology activation, which opens the location directly.
+                    if (event.detail !== 0) return;
+                    if (openRef.current && activeRef.current === location) close();
+                    else openDialogue(location, "location");
+                  }}
+                />
+              </div>
+            ))}
 
             <div
               ref={playerRef}
@@ -411,7 +474,7 @@ export default function WorldScene() {
       </div>
 
       {/* Outside the scene so dialogue clicks and keys never reach the scene handlers. */}
-      <DialogueBox dialogue={casita.dialogue} open={open} onClose={close} />
+      <DialogueBox key={active.id} dialogue={active.dialogue} open={open} onClose={close} />
     </>
   );
 }

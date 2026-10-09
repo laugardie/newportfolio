@@ -5,10 +5,14 @@
 // coordinates off it); `resolveLocation` turns them into world units.
 
 import type { Polygon, Vec } from "@/components/world/geometry";
-import { homeDialogue, type Dialogue } from "@/content/world/dialogues";
+import { beachDialogue, homeDialogue, type Dialogue } from "@/content/world/dialogues";
+
+export type Rect = { x: number; y: number; width: number; height: number };
 
 export type LocationDefinition = {
   id: string;
+  // Shown in the hover/focus label and read out by screen readers.
+  name: string;
   dialogue: Dialogue;
   art: { src: string; width: number; height: number };
   // Where the artwork's top-left corner sits in the world, and how wide it is drawn.
@@ -24,10 +28,16 @@ export type LocationDefinition = {
   interaction: Vec;
   // Rough silhouette that counts as clicking the location.
   hitArea: Polygon;
+  // The keyboard-focusable box the label sits above. Defaults to the whole artwork.
+  control?: Rect;
+  // Mask (same size as the artwork) of the part that turns white while the
+  // dialogue is open.
+  openMask?: string;
 };
 
 export const casita: LocationDefinition = {
   id: "casita",
+  name: "Casita",
   dialogue: homeDialogue,
   art: { src: "/world/computer-house.webp", width: 1000, height: 864 },
   position: { x: 220, y: 150 },
@@ -59,7 +69,52 @@ export const casita: LocationDefinition = {
     { x: 115, y: 720 },
     { x: 165, y: 650 },
   ],
+  openMask: "/world/computer-screen-mask.png",
 };
+
+// The beach in the bottom-right corner. Boardie, the surfboard leaning on the
+// rocks, is the one you talk to.
+export const beach: LocationDefinition = {
+  id: "beach",
+  name: "Boardie",
+  dialogue: beachDialogue,
+  art: { src: "/world/beach.webp", width: 1445, height: 766 },
+  position: { x: 515, y: 652 },
+  width: 440,
+  // Rocks, board and water: everything but the strip of sand at the front.
+  footprint: [
+    { x: 10, y: 450 },
+    { x: 80, y: 320 },
+    { x: 500, y: 250 },
+    { x: 1100, y: 250 },
+    { x: 1380, y: 370 },
+    { x: 1445, y: 560 },
+    { x: 1400, y: 690 },
+    { x: 1150, y: 765 },
+    { x: 850, y: 735 },
+    { x: 170, y: 640 },
+  ],
+  // Anywhere between the back of the rocks and the front of the footprint.
+  depthY: 600,
+  // On the sand in front of the board.
+  interaction: { x: 470, y: 745 },
+  // The board, with some room around it so it's easy to tap.
+  hitArea: [
+    { x: 385, y: 270 },
+    { x: 430, y: 275 },
+    { x: 495, y: 380 },
+    { x: 545, y: 520 },
+    { x: 550, y: 640 },
+    { x: 490, y: 665 },
+    { x: 435, y: 630 },
+    { x: 360, y: 470 },
+    { x: 350, y: 330 },
+  ],
+  control: { x: 370, y: 290, width: 160, height: 350 },
+  openMask: "/world/beach-board-mask.png",
+};
+
+export const locations = [casita, beach];
 
 export type Location = LocationDefinition & {
   height: number;
