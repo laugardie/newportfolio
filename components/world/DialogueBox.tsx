@@ -180,7 +180,7 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
       <p
         aria-hidden
         onClick={skip}
-        className={`mt-2 text-[15px] leading-[1.65] text-body ${done ? "" : "cursor-pointer"}`}
+        className={`mt-2 whitespace-pre-line text-[15px] leading-[1.65] text-body ${done ? "" : "cursor-pointer"}`}
       >
         {message.text.slice(0, shown)}
         <span className="invisible">{message.text.slice(shown)}</span>
@@ -205,9 +205,17 @@ function Message({ dialogue, messageId, panelRef, skipRef, read, onChoose }: Mes
               }}
               type="button"
               disabled={!done}
-              onClick={() => onChoose(option.next)}
+              onClick={() => {
+                if (option.href === undefined) onChoose(option.next);
+                else if (option.href.startsWith("mailto:")) window.location.href = option.href;
+                else window.open(option.href, "_blank", "noopener,noreferrer");
+              }}
               onFocus={() => setSelected(i)}
-              onMouseEnter={() => done && select(i)}
+              // Only a real pointer movement selects. An option that appears under a
+              // resting cursor (after choosing an option) must not steal the selection.
+              onPointerMove={(e) => {
+                if (done && !active && (e.movementX !== 0 || e.movementY !== 0)) select(i);
+              }}
               className={`flex h-8 w-full items-center justify-center gap-1.5 px-3 text-center text-[15px] outline-none transition-colors duration-150 disabled:cursor-default ${
                 active ? "bg-[var(--dialogue-accent)] text-white disabled:opacity-50" : "text-ink disabled:text-faint"
               }`}

@@ -1,9 +1,4 @@
-import type { Metadata } from "next";
 import HomeComputer from "@/components/world/HomeComputer";
-
-export const metadata: Metadata = {
-  title: "Home, a little online.",
-};
 
 export default function WorldPage() {
   return (
