@@ -121,7 +121,7 @@ export const beachDialogue: Dialogue = {
       ],
     },
     why: {
-      text: "Lagos has beaches like this one: rocks, little caves, and water that changes colour every hour. Live this close to the sea and it starts asking questions. Also, there are no screens out there. Casita takes that personally.",
+      text: "Lagos has beaches like this one: rocks, stone arches, and water that changes colour every hour. Live this close to the sea and it starts asking questions. Also, there are no screens out there. Casita takes that personally.",
       options: [
         { label: "How’s she getting on?", next: "progress" },
         { label: "Where’s Laura now?", next: "where" },

@@ -39,10 +39,9 @@ export const CAMERA_CONFIG = {
 const ROUTE_MARGIN = 6; // how wide routes give the footprint corners
 
 const locations = definitions.map(resolveLocation);
-const blocked = locations.map((l) => inflate(l.world.footprint, PLAYER_CONFIG.radius));
-const corners = locations.map((l) =>
-  inflate(l.world.footprint, PLAYER_CONFIG.radius + ROUTE_MARGIN),
-);
+const footprints = locations.flatMap((l) => l.world.footprints);
+const blocked = footprints.map((f) => inflate(f, PLAYER_CONFIG.radius));
+const corners = footprints.map((f) => inflate(f, PLAYER_CONFIG.radius + ROUTE_MARGIN));
 
 // Layers are sorted by the ground y of the feet / depth anchor. The offset keeps
 // z-indexes positive when the player walks above the design area.
