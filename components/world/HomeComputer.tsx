@@ -49,7 +49,7 @@ export default function HomeComputer() {
       >
         <span
           aria-hidden
-          className="pointer-events-none absolute -top-9 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-sm bg-black px-2 py-1 text-sm leading-none text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none"
+          className="pointer-events-none absolute -top-9 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-sm bg-black px-2 py-1 text-[6px] leading-none text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none"
         >
           <kbd className="rounded-sm border border-white/30 px-1 font-sans text-xs leading-4">
             E
