@@ -40,7 +40,7 @@ export const casita: LocationDefinition = {
   name: "Casita",
   dialogue: homeDialogue,
   art: { src: "/world/computer-house.webp", width: 1000, height: 864 },
-  position: { x: 220, y: 150 },
+  position: { x: 1070, y: 720 },
   width: 520,
   // The base of the computer: front edge, right side, and the hidden back corners.
   footprints: [
@@ -74,15 +74,15 @@ export const casita: LocationDefinition = {
   openMask: "/world/computer-screen-mask.png",
 };
 
-// The beach in the bottom-right corner. Boardie, the surfboard leaning on the
+// The beach, flush with the bottom-right corner of the world. Boardie, the surfboard leaning on the
 // rocks, is the one you talk to.
 export const beach: LocationDefinition = {
   id: "beach",
   name: "Boardie",
   dialogue: beachDialogue,
   art: { src: "/world/beach.webp", width: 1704, height: 781 },
-  position: { x: 440, y: 652 },
-  width: 520,
+  position: { x: 1600, y: 1350 },
+  width: 1200,
   footprints: [
     // The trees and the strip of grass behind them.
     [

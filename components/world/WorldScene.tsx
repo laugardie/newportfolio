@@ -22,12 +22,13 @@ export const PLAYER_CONFIG = {
   scale: 1, // size of the player artwork
   radius: 9, // collision circle around the feet
   reach: 50, // how close to an interaction point counts as "at the door"
-  spawn: { x: 520, y: 640 },
+  spawn: { x: 1380, y: 1180 },
 };
 
 // The world is a fixed design area the player can walk around in. The camera
-// follows the player, so the world moves past as they walk.
-const WORLD = { width: 960, height: 900 };
+// follows the player, so the world moves past as they walk, and stops at the
+// world's edges (so the beach sits in the screen's bottom-right corner).
+const WORLD = { width: 2800, height: 1900 };
 const EDGE = 8; // keeps the player off the very edge of the world
 export const CAMERA_CONFIG = {
   // World units per screen pixel: 1× on wide screens, down to 0.6× on phones.
@@ -76,7 +77,18 @@ const MOVE_KEYS: Record<string, Vec> = {
 
 type View = { width: number; height: number; scale: number };
 
-const cameraTarget = ({ x, y }: Vec): Vec => ({ x, y: y - CAMERA_CONFIG.lookUp });
+// Where the camera wants to be: on the player, but never past the world's
+// edges. A world smaller than the screen stays centred.
+const cameraTarget = ({ x, y }: Vec, v: View): Vec => {
+  const halfWidth = v.width / 2 / v.scale;
+  const halfHeight = v.height / 2 / v.scale;
+  const fit = (value: number, half: number, size: number) =>
+    half * 2 >= size ? size / 2 : Math.min(Math.max(value, half), size - half);
+  return {
+    x: fit(x, halfWidth, WORLD.width),
+    y: fit(y - CAMERA_CONFIG.lookUp, halfHeight, WORLD.height),
+  };
+};
 
 // Moves the world so the camera point sits in the middle of the screen.
 const worldTransform = (camera: Vec, v: View) =>
@@ -118,7 +130,7 @@ export default function WorldScene() {
     // Location to talk to once the current path ends.
     pending: null as string | null,
   });
-  const camera = useRef(cameraTarget(PLAYER_CONFIG.spawn));
+  const camera = useRef<Vec>({ ...PLAYER_CONFIG.spawn });
   const reduceMotion = useReducedMotion();
   const reduceMotionRef = useRef(reduceMotion);
   reduceMotionRef.current = reduceMotion;
@@ -159,7 +171,7 @@ export default function WorldScene() {
     const world = worldRef.current;
     const v = viewRef.current;
     if (!world || !v) return;
-    const target = cameraTarget(player.current.position);
+    const target = cameraTarget(player.current.position, v);
     const current = camera.current;
     const t = dt === null || reduceMotionRef.current ? 1 : 1 - Math.exp(-CAMERA_CONFIG.follow * dt);
     const next = { x: current.x + (target.x - current.x) * t, y: current.y + (target.y - current.y) * t };
