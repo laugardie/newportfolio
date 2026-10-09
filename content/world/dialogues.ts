@@ -56,7 +56,7 @@ export const homeDialogue: Dialogue = {
       ],
     },
     making: {
-      text: "There’s a fertility app in the works, Everground for workouts, and Tatai colouring books for kids. She likes making things she’d use herself. And now she’s given her house a voice. I’m trying not to let it go to my roof.",
+      text: "She’s working on a fertility app, Everground for workouts, and Habits for tracking the things you want to keep doing. There’s also Tatai, her children’s colouring books, and this little world. I get a front-row seat to all of it.",
       options: [
         { label: "Does she code too?", next: "code" },
         { label: "Can I talk to her about a project?", next: "hi" },
