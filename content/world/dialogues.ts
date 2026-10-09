@@ -1,10 +1,12 @@
 // Conversations for places in /world. Each dialogue is a small graph of
 // messages.
 
-// An option either leads to another message (next) or opens a link (href).
+// An option leads to another message (next), opens a link (href) or closes
+// the conversation (close).
 export type DialogueOption =
-  | { label: string; next: string; href?: never }
-  | { label: string; href: string; next?: never };
+  | { label: string; next: string; href?: never; close?: never }
+  | { label: string; href: string; next?: never; close?: never }
+  | { label: string; close: true; next?: never; href?: never };
 
 export type DialogueMessage = {
   text: string;
@@ -23,7 +25,16 @@ const GITHUB = "https://github.com/laugardie";
 const EMAIL = "mailto:hi@laugardie.com";
 const LINKEDIN = "https://www.linkedin.com/in/laugardie/";
 
+// Small bets. A project's link is only offered when it has one.
+const PROJECT_URLS: { nutrition?: string; everground?: string; habits?: string; tatai?: string } = {
+  everground: "https://everground.app/",
+  habits: "https://tryhabits.app",
+  tatai: "https://www.amazon.es/stores/author/B0H7SPB314?ingress=0&visitId=abe2539c-bbe6-4c53-88a0-a4d3e46984f2",
+};
+
 const somethingElse: DialogueOption = { label: "Something else.", next: "welcome" };
+
+const link = (label: string, href: string | undefined): DialogueOption[] => (href ? [{ label, href }] : []);
 
 export const homeDialogue: Dialogue = {
   id: "home",
@@ -132,6 +143,126 @@ export const beachDialogue: Dialogue = {
     building: {
       text: "Take a wander over to the little vegetable garden. Each patch has one of her small projects growing in it, including a nutrition app she’s working on.\n\nI’d show you around, but they’ve asked me to keep the salt water away from the plants.",
       options: [somethingElse],
+    },
+  },
+};
+
+// The garden's greenhouse. Sprout narrates the whole garden, including the beds.
+export const sproutDialogue: Dialogue = {
+  id: "sprout",
+  label: "SPROUT",
+  start: "sprout_welcome",
+  messages: {
+    sprout_welcome: {
+      text: "Hey, I’m Sprout. Lau’s small bets start here.\n\nUsually with ‘I wish this existed.’ Then a sketch, a rough version, and a suspicious number of adjustments.",
+      options: [
+        { label: "What’s a small bet?", next: "sprout_small_bet" },
+        { label: "What’s growing here?", next: "sprout_growing" },
+        { label: "I’ll have a look around.", close: true },
+      ],
+    },
+    sprout_small_bet: {
+      text: "An idea she cares enough about to try. Something of her own, where she gets to make the decisions and find out what happens.\n\nThe ‘small’ part is meant to keep things manageable. I occasionally have to remind her.",
+      options: [
+        { label: "Do they all work out?", next: "sprout_experiments" },
+        { label: "Something else.", next: "sprout_welcome" },
+      ],
+    },
+    sprout_growing: {
+      text: "Four little experiments: a nutrition app, Everground for workouts, Habits, and Tatai colouring books.\n\nEach has its own patch outside. Feel free to wander between the beds. Preferably not through the tomatoes.",
+      options: [
+        { label: "I’ll take a look.", close: true },
+        { label: "Something else.", next: "sprout_welcome" },
+      ],
+    },
+    sprout_experiments: {
+      text: "We’ll see. That’s the bet.\n\nPutting an idea out into the world is how she finds out whether it makes sense to anyone else.\n\nI mostly check that she’s watered it.",
+      options: [
+        { label: "What’s growing here?", next: "sprout_growing" },
+        { label: "Something else.", next: "sprout_welcome" },
+      ],
+    },
+  },
+};
+
+const backToGarden: DialogueOption = { label: "Back to the garden.", close: true };
+
+export const nutritionDialogue: Dialogue = {
+  id: "nutrition",
+  label: "NUTRITION APP",
+  start: "nutrition_welcome",
+  messages: {
+    nutrition_welcome: {
+      text: "This patch is a nutrition app Lau’s working on, focused on eating well while trying to conceive.\n\nMeal plans, recipes, and shopping lists. The carrots approve of being included.",
+      options: [
+        { label: "Why did she start it?", next: "nutrition_why" },
+        ...link("Take a closer look. ↗", PROJECT_URLS.nutrition),
+        backToGarden,
+      ],
+    },
+    nutrition_why: {
+      text: "She wanted to make the everyday part easier: deciding what to cook, buying what you need, and putting a meal together.\n\nLess figuring out dinner from scratch. More having a plan you can actually use.",
+      options: [{ label: "Back to the project.", next: "nutrition_welcome" }, backToGarden],
+    },
+  },
+};
+
+export const evergroundDialogue: Dialogue = {
+  id: "everground",
+  label: "EVERGROUND",
+  start: "everground_welcome",
+  messages: {
+    everground_welcome: {
+      text: "This is Everground, a workout app being built by Lau’s husband, Daniel. She helps with the design and contributes a few pull requests along the way.\n\nA shared interest in training has apparently become a shared interest in discussing buttons.",
+      options: [
+        { label: "What does it do?", next: "everground_about" },
+        ...link("Take a closer look. ↗", PROJECT_URLS.everground),
+        backToGarden,
+      ],
+    },
+    everground_about: {
+      text: "It’s a place to find workouts, save favourites, and organise your training.\n\nDaniel’s building it. Lau helps shape how it looks and works. I provide the tomatoes. Everyone has a role.",
+      options: [{ label: "Back to the project.", next: "everground_welcome" }, backToGarden],
+    },
+  },
+};
+
+export const habitsDialogue: Dialogue = {
+  id: "habits",
+  label: "HABITS",
+  start: "habits_welcome",
+  messages: {
+    habits_welcome: {
+      text: "This little patch is Habits, a project for tracking the things you want to keep doing.\n\nSmall actions, repeated. A familiar concept around here.",
+      options: [
+        { label: "Why the seedlings?", next: "habits_seedlings" },
+        ...link("Take a closer look. ↗", PROJECT_URLS.habits),
+        backToGarden,
+      ],
+    },
+    habits_seedlings: {
+      text: "One enthusiastic watering won’t do it. You have to keep showing up.\n\nThese little ones seemed like the right neighbours for a habit tracker.",
+      options: [{ label: "Back to the project.", next: "habits_welcome" }, backToGarden],
+    },
+  },
+};
+
+export const tataiDialogue: Dialogue = {
+  id: "tatai",
+  label: "TATAI",
+  start: "tatai_welcome",
+  messages: {
+    tatai_welcome: {
+      text: "Tatai is Lau’s collection of children’s colouring books. Dinosaurs, insects, and sea creatures, waiting for someone with crayons.\n\nThe pumpkins asked to be in the next one.",
+      options: [
+        { label: "What’s inside the books?", next: "tatai_books" },
+        ...link("See the books. ↗", PROJECT_URLS.tatai),
+        backToGarden,
+      ],
+    },
+    tatai_books: {
+      text: "Pages for children to colour and make their own.\n\nA dinosaur can be purple. An octopus can be orange. I try to allow the same freedom here, but the tomatoes are quite traditional.",
+      options: [{ label: "Back to the project.", next: "tatai_welcome" }, backToGarden],
     },
   },
 };

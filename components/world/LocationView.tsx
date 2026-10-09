@@ -4,12 +4,14 @@ import { forwardRef } from "react";
 import type { Location } from "@/content/world/locations";
 
 const OPEN_COLOR = "#ffffff";
+const VISITED_COLOR = "#8c5ae7";
 
 type Props = {
   location: Location;
   open: boolean;
   // Shows the label: the player is close by or the pointer is over the location.
   highlighted: boolean;
+  visited: boolean;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
@@ -17,11 +19,14 @@ type Props = {
 // handled by the scene (so the transparent parts of the image stay walkable),
 // which is why the button ignores pointer events.
 const LocationView = forwardRef<HTMLButtonElement, Props>(function LocationView(
-  { location, open, highlighted, onClick },
+  { location, open, highlighted, visited, onClick },
   ref,
 ) {
-  const { art, control, openMask } = location;
+  const { art, control, openMask, layer } = location;
   const percent = (value: number, total: number) => `${(value / total) * 100}%`;
+  // Scales with the artwork, so the cut-out stays on its object at any size.
+  const clipPath =
+    layer && `polygon(${layer.map((p) => `${percent(p.x, art.width)} ${percent(p.y, art.height)}`).join(", ")})`;
   return (
     <div className="relative">
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -31,6 +36,7 @@ const LocationView = forwardRef<HTMLButtonElement, Props>(function LocationView(
         width={art.width}
         height={art.height}
         draggable={false}
+        style={clipPath ? { clipPath, WebkitClipPath: clipPath } : undefined}
         className="block h-auto w-full select-none"
       />
       {/* The mask matches the artwork's dimensions, so this layer lines up exactly:
@@ -53,7 +59,7 @@ const LocationView = forwardRef<HTMLButtonElement, Props>(function LocationView(
       <button
         ref={ref}
         type="button"
-        aria-label={location.name}
+        aria-label={visited ? `${location.name}, visited` : location.name}
         aria-keyshortcuts="E"
         aria-expanded={open}
         aria-haspopup="dialog"
@@ -80,6 +86,18 @@ const LocationView = forwardRef<HTMLButtonElement, Props>(function LocationView(
             E
           </kbd>
           {location.name}
+          {visited && (
+            <svg aria-hidden viewBox="0 0 12 12" className="h-3 w-3 shrink-0" style={{ color: VISITED_COLOR }}>
+              <path
+                d="M2.5 6.5 L5 9 L9.5 3.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
         </span>
       </button>
     </div>

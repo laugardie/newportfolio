@@ -5,19 +5,32 @@
 // coordinates off it); `resolveLocation` turns them into world units.
 
 import type { Polygon, Vec } from "@/components/world/geometry";
-import { beachDialogue, homeDialogue, type Dialogue } from "@/content/world/dialogues";
+import {
+  beachDialogue,
+  evergroundDialogue,
+  habitsDialogue,
+  homeDialogue,
+  nutritionDialogue,
+  sproutDialogue,
+  tataiDialogue,
+  type Dialogue,
+} from "@/content/world/dialogues";
 
 export type Rect = { x: number; y: number; width: number; height: number };
 
-export type LocationDefinition = {
+// An illustration placed in the world: where its top-left corner sits and how
+// wide it is drawn.
+export type Artwork = {
+  art: { src: string; width: number; height: number };
+  position: Vec;
+  width: number;
+};
+
+export type LocationDefinition = Artwork & {
   id: string;
   // Shown in the hover/focus label and read out by screen readers.
   name: string;
   dialogue: Dialogue;
-  art: { src: string; width: number; height: number };
-  // Where the artwork's top-left corner sits in the world, and how wide it is drawn.
-  position: Vec;
-  width: number;
   // Ground areas the player can't walk through. Each one convex, in artwork pixels.
   footprints: Polygon[];
   // Ground line for layering: the player draws behind the location when
@@ -33,6 +46,12 @@ export type LocationDefinition = {
   // Mask (same size as the artwork) of the part that turns white while the
   // dialogue is open.
   openMask?: string;
+  // For locations that share one illustration: the part of it that belongs to
+  // this location. Only that cut-out is drawn at the location's depth; the
+  // whole illustration lies flat on the ground (see `grounds`).
+  layer?: Polygon;
+  // Remembers the visit and shows a check next to the label once it's been talked to.
+  tracksVisit?: boolean;
 };
 
 export const casita: LocationDefinition = {
@@ -170,7 +189,224 @@ export const beach: LocationDefinition = {
   openMask: "/world/beach-board-mask.png",
 };
 
-export const locations = [casita, beach];
+// The "Small bets" garden in the bottom-left corner: Sprout's greenhouse and
+// four raised beds, one per project, all in one illustration. The soil paths
+// between them are walkable.
+const garden: Artwork = {
+  art: { src: "/world/garden.webp", width: 1639, height: 960 },
+  position: { x: 40, y: 1130 },
+  width: 1300,
+};
+
+export const sprout: LocationDefinition = {
+  ...garden,
+  id: "sprout",
+  name: "Sprout",
+  dialogue: sproutDialogue,
+  footprints: [
+    [
+      { x: 158, y: 628 },
+      { x: 522, y: 650 },
+      { x: 618, y: 548 },
+      { x: 255, y: 525 },
+    ],
+  ],
+  depthY: 588,
+  // On the sand in front of the door.
+  interaction: { x: 350, y: 692 },
+  hitArea: [
+    { x: 150, y: 372 },
+    { x: 295, y: 198 },
+    { x: 453, y: 112 },
+    { x: 628, y: 262 },
+    { x: 622, y: 548 },
+    { x: 526, y: 658 },
+    { x: 152, y: 634 },
+  ],
+  layer: [
+    { x: 148, y: 372 },
+    { x: 293, y: 196 },
+    { x: 453, y: 110 },
+    { x: 630, y: 260 },
+    { x: 624, y: 548 },
+    { x: 527, y: 660 },
+    { x: 150, y: 636 },
+  ],
+  control: { x: 150, y: 115, width: 475, height: 540 },
+  tracksVisit: true,
+};
+
+// Back row, left: carrots.
+export const nutritionBed: LocationDefinition = {
+  ...garden,
+  id: "nutrition",
+  name: "Nutrition app",
+  dialogue: nutritionDialogue,
+  footprints: [
+    [
+      { x: 686, y: 498 },
+      { x: 1012, y: 525 },
+      { x: 1063, y: 402 },
+      { x: 715, y: 400 },
+    ],
+  ],
+  depthY: 462,
+  // On the path in front of the bed.
+  interaction: { x: 850, y: 553 },
+  hitArea: [
+    { x: 684, y: 450 },
+    { x: 700, y: 330 },
+    { x: 760, y: 282 },
+    { x: 1000, y: 285 },
+    { x: 1066, y: 350 },
+    { x: 1066, y: 405 },
+    { x: 1014, y: 528 },
+    { x: 684, y: 502 },
+  ],
+  layer: [
+    { x: 682, y: 450 },
+    { x: 698, y: 328 },
+    { x: 758, y: 280 },
+    { x: 1002, y: 283 },
+    { x: 1068, y: 348 },
+    { x: 1068, y: 406 },
+    { x: 1015, y: 530 },
+    { x: 682, y: 504 },
+  ],
+  control: { x: 686, y: 285, width: 378, height: 240 },
+  tracksVisit: true,
+};
+
+// Back row, right: cherry tomatoes.
+export const evergroundBed: LocationDefinition = {
+  ...garden,
+  id: "everground",
+  name: "Everground",
+  dialogue: evergroundDialogue,
+  footprints: [
+    [
+      { x: 1095, y: 529 },
+      { x: 1448, y: 554 },
+      { x: 1472, y: 440 },
+      { x: 1150, y: 430 },
+    ],
+  ],
+  depthY: 492,
+  interaction: { x: 1270, y: 582 },
+  hitArea: [
+    { x: 1092, y: 478 },
+    { x: 1100, y: 415 },
+    { x: 1128, y: 255 },
+    { x: 1160, y: 225 },
+    { x: 1405, y: 236 },
+    { x: 1455, y: 318 },
+    { x: 1476, y: 390 },
+    { x: 1476, y: 442 },
+    { x: 1452, y: 557 },
+    { x: 1092, y: 533 },
+  ],
+  layer: [
+    { x: 1090, y: 478 },
+    { x: 1098, y: 415 },
+    { x: 1126, y: 253 },
+    { x: 1158, y: 223 },
+    { x: 1407, y: 234 },
+    { x: 1457, y: 316 },
+    { x: 1478, y: 390 },
+    { x: 1478, y: 442 },
+    { x: 1453, y: 559 },
+    { x: 1090, y: 535 },
+  ],
+  control: { x: 1095, y: 228, width: 378, height: 327 },
+  tracksVisit: true,
+};
+
+// Front row, left: seedlings.
+export const habitsBed: LocationDefinition = {
+  ...garden,
+  id: "habits",
+  name: "Habits",
+  dialogue: habitsDialogue,
+  footprints: [
+    [
+      { x: 574, y: 719 },
+      { x: 921, y: 747 },
+      { x: 978, y: 600 },
+      { x: 662, y: 582 },
+    ],
+  ],
+  depthY: 665,
+  interaction: { x: 750, y: 777 },
+  hitArea: [
+    { x: 570, y: 664 },
+    { x: 654, y: 522 },
+    { x: 976, y: 540 },
+    { x: 982, y: 602 },
+    { x: 924, y: 750 },
+    { x: 570, y: 724 },
+  ],
+  layer: [
+    { x: 568, y: 664 },
+    { x: 653, y: 520 },
+    { x: 978, y: 538 },
+    { x: 984, y: 602 },
+    { x: 925, y: 752 },
+    { x: 568, y: 726 },
+  ],
+  control: { x: 572, y: 522, width: 406, height: 226 },
+  tracksVisit: true,
+};
+
+// Front row, right: pumpkins.
+export const tataiBed: LocationDefinition = {
+  ...garden,
+  id: "tatai",
+  name: "Tatai",
+  dialogue: tataiDialogue,
+  footprints: [
+    [
+      { x: 1015, y: 763 },
+      { x: 1434, y: 793 },
+      { x: 1452, y: 640 },
+      { x: 1078, y: 600 },
+    ],
+  ],
+  depthY: 700,
+  interaction: { x: 1220, y: 817 },
+  hitArea: [
+    { x: 1012, y: 700 },
+    { x: 1068, y: 548 },
+    { x: 1140, y: 537 },
+    { x: 1240, y: 537 },
+    { x: 1360, y: 556 },
+    { x: 1452, y: 582 },
+    { x: 1518, y: 640 },
+    { x: 1518, y: 702 },
+    { x: 1482, y: 728 },
+    { x: 1437, y: 797 },
+    { x: 1012, y: 768 },
+  ],
+  layer: [
+    { x: 1010, y: 700 },
+    { x: 1066, y: 546 },
+    { x: 1140, y: 535 },
+    { x: 1240, y: 535 },
+    { x: 1360, y: 554 },
+    { x: 1453, y: 580 },
+    { x: 1520, y: 638 },
+    { x: 1520, y: 704 },
+    { x: 1484, y: 730 },
+    { x: 1438, y: 799 },
+    { x: 1010, y: 770 },
+  ],
+  control: { x: 1015, y: 540, width: 500, height: 255 },
+  tracksVisit: true,
+};
+
+export const locations = [casita, beach, sprout, nutritionBed, evergroundBed, habitsBed, tataiBed];
+
+// Illustrations drawn flat on the ground, under the player and every location.
+export const grounds: Artwork[] = [garden];
 
 export type Location = LocationDefinition & {
   height: number;
