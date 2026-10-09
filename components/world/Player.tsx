@@ -1,14 +1,17 @@
 // The player's illustrated character. The scene only needs PLAYER_ART's size
 // and the point where the feet touch the ground.
 
-// Standing / walking up and down: seen from behind, cut out of the /world mockup.
+// Walking up and down: seen from behind, cut out of the /world mockup.
 const SOURCE = { src: "/world/player.webp", width: 103, height: 287, feetX: 62, feetY: 283 };
-// Running sideways: a strip of equal cells, facing right, feet on the same point in each.
-const RUN = { src: "/world/player-run.webp", frames: 6, cellWidth: 150, height: 187, feetX: 86, feetY: 183 };
+
+// Animation strips: equal cells side by side, facing right, feet on the same
+// point in every cell. `figure` is the head-to-feet height in pixels.
+type Strip = { src: string; frames: number; cellWidth: number; height: number; feetX: number; feetY: number; figure: number };
+const IDLE: Strip = { src: "/world/player-idle.webp", frames: 22, cellWidth: 79, height: 223, feetX: 36, feetY: 219, figure: 216 };
+const RUN: Strip = { src: "/world/player-run.webp", frames: 6, cellWidth: 150, height: 187, feetX: 86, feetY: 183, figure: 181 };
 
 const HEIGHT = 72; // world units at scale 1
 const k = HEIGHT / SOURCE.height;
-const runK = HEIGHT / 181; // the run frames' head-to-feet height in pixels
 
 export const PLAYER_ART = {
   width: SOURCE.width * k, // world units at scale 1
@@ -24,8 +27,26 @@ type Props = { scale: number; walking: boolean; side: boolean; facing: Facing };
 export default function Player({ scale, walking, side, facing }: Props) {
   const feetX = PLAYER_ART.feetX * scale;
   const feetY = PLAYER_ART.feetY * scale;
-  const running = walking && side;
-  const run = runK * scale;
+  const pose = !walking ? "idle" : side ? "run" : "back";
+
+  // Strips stay mounted (hidden when unused) so they're loaded before they're needed.
+  const strip = (s: Strip, active: boolean, animation: string) => {
+    const z = (HEIGHT / s.figure) * scale;
+    return (
+      <div
+        className={`absolute bg-no-repeat ${active ? `${animation} motion-reduce:animate-none` : "invisible"}`}
+        style={{
+          left: feetX - s.feetX * z,
+          top: feetY - s.feetY * z,
+          width: s.cellWidth * z,
+          height: s.height * z,
+          backgroundImage: `url(${s.src})`,
+          backgroundSize: `${s.frames * s.cellWidth * z}px ${s.height * z}px`,
+        }}
+      />
+    );
+  };
+
   return (
     <div
       aria-hidden
@@ -45,9 +66,7 @@ export default function Player({ scale, walking, side, facing }: Props) {
           transformOrigin: `${feetX}px ${feetY}px`,
         }}
       >
-        <div
-          className={running ? "invisible" : walking ? "animate-walk-bob motion-reduce:animate-none" : undefined}
-        >
+        <div className={pose === "back" ? "animate-walk-bob motion-reduce:animate-none" : "invisible"}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={SOURCE.src}
@@ -58,18 +77,8 @@ export default function Player({ scale, walking, side, facing }: Props) {
             className="relative block max-w-none"
           />
         </div>
-        {/* Always mounted (hidden when unused) so the strip is loaded before she first runs. */}
-        <div
-          className={`absolute bg-no-repeat ${running ? "animate-run-cycle motion-reduce:animate-none" : "invisible"}`}
-          style={{
-            left: feetX - RUN.feetX * run,
-            top: feetY - RUN.feetY * run,
-            width: RUN.cellWidth * run,
-            height: RUN.height * run,
-            backgroundImage: `url(${RUN.src})`,
-            backgroundSize: `${RUN.frames * RUN.cellWidth * run}px ${RUN.height * run}px`,
-          }}
-        />
+        {strip(IDLE, pose === "idle", "animate-idle-cycle")}
+        {strip(RUN, pose === "run", "animate-run-cycle")}
       </div>
     </div>
   );

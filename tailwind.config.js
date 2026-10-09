@@ -58,15 +58,17 @@ module.exports = {
           from: { transform: "translateY(0)" },
           to: { transform: "translateY(-2.5px)" },
         },
-        "run-cycle": {
+        // Walks a sprite strip from its first cell to its last.
+        "sprite-strip": {
           from: { backgroundPosition: "0% 0" },
           to: { backgroundPosition: "100% 0" },
         },
       },
       animation: {
         "walk-bob": "walk-bob 0.36s ease-in-out infinite alternate",
-        // One cycle of the run strip: 6 frames, ends included.
-        "run-cycle": "run-cycle 0.5s steps(6, jump-none) infinite",
+        // One loop of each strip at its frame count, ends included.
+        "run-cycle": "sprite-strip 0.5s steps(6, jump-none) infinite",
+        "idle-cycle": "sprite-strip 2.75s steps(22, jump-none) infinite",
       },
     },
   },
