@@ -147,7 +147,10 @@ export const beachDialogue: Dialogue = {
   },
 };
 
-// The garden's greenhouse. Sprout narrates the whole garden, including the beds.
+// The garden's greenhouse. Sprout is the only one in the garden you talk to,
+// so it tells you about every bed too.
+const anotherBed: DialogueOption = { label: "Tell me about another bed.", next: "sprout_growing" };
+
 export const sproutDialogue: Dialogue = {
   id: "sprout",
   label: "SPROUT",
@@ -158,6 +161,7 @@ export const sproutDialogue: Dialogue = {
       options: [
         { label: "What’s a small bet?", next: "sprout_small_bet" },
         { label: "What’s growing here?", next: "sprout_growing" },
+        { label: "Who drew on your window?", next: "sprout_drawing" },
         { label: "I’ll have a look around.", close: true },
       ],
     },
@@ -169,9 +173,12 @@ export const sproutDialogue: Dialogue = {
       ],
     },
     sprout_growing: {
-      text: "Four little experiments: a nutrition app, Everground for workouts, Habits, and Tatai colouring books.\n\nEach has its own patch outside. Feel free to wander between the beds. Preferably not through the tomatoes.",
+      text: "Four little experiments, one in each bed: a nutrition app, Everground for workouts, Habits, and Tatai colouring books.\n\nAsk me about any of them. I keep an eye on all four.",
       options: [
-        { label: "I’ll take a look.", close: true },
+        { label: "The carrots: the nutrition app.", next: "nutrition_welcome" },
+        { label: "The tomatoes: Everground.", next: "everground_welcome" },
+        { label: "The seedlings: Habits.", next: "habits_welcome" },
+        { label: "The pumpkins: Tatai.", next: "tatai_welcome" },
         { label: "Something else.", next: "sprout_welcome" },
       ],
     },
@@ -182,87 +189,60 @@ export const sproutDialogue: Dialogue = {
         { label: "Something else.", next: "sprout_welcome" },
       ],
     },
-  },
-};
-
-const backToGarden: DialogueOption = { label: "Back to the garden.", close: true };
-
-export const nutritionDialogue: Dialogue = {
-  id: "nutrition",
-  label: "NUTRITION APP",
-  start: "nutrition_welcome",
-  messages: {
+    sprout_drawing: {
+      text: "Diego. He decided I looked a bit plain and fixed it.\n\nIt’s the only thing in this garden nobody is allowed to water.",
+      options: [
+        { label: "What’s growing here?", next: "sprout_growing" },
+        { label: "Something else.", next: "sprout_welcome" },
+      ],
+    },
     nutrition_welcome: {
-      text: "This patch is a nutrition app Lau’s working on, focused on eating well while trying to conceive.\n\nMeal plans, recipes, and shopping lists. The carrots approve of being included.",
+      text: "The carrots’ bed is a nutrition app Lau’s working on, focused on eating well while trying to conceive.\n\nMeal plans, recipes, and shopping lists. The carrots approve of being included.",
       options: [
         { label: "Why did she start it?", next: "nutrition_why" },
         ...link("Take a closer look. ↗", PROJECT_URLS.nutrition),
-        backToGarden,
+        anotherBed,
       ],
     },
     nutrition_why: {
       text: "She wanted to make the everyday part easier: deciding what to cook, buying what you need, and putting a meal together.\n\nLess figuring out dinner from scratch. More having a plan you can actually use.",
-      options: [{ label: "Back to the project.", next: "nutrition_welcome" }, backToGarden],
+      options: [{ label: "Back to the nutrition app.", next: "nutrition_welcome" }, anotherBed],
     },
-  },
-};
-
-export const evergroundDialogue: Dialogue = {
-  id: "everground",
-  label: "EVERGROUND",
-  start: "everground_welcome",
-  messages: {
     everground_welcome: {
-      text: "This is Everground, a workout app being built by Lau’s husband, Daniel. She helps with the design and contributes a few pull requests along the way.\n\nA shared interest in training has apparently become a shared interest in discussing buttons.",
+      text: "The tomatoes are Everground, a workout app being built by Lau’s husband, Daniel. She helps with the design and contributes a few pull requests along the way.\n\nA shared interest in training has apparently become a shared interest in discussing buttons.",
       options: [
         { label: "What does it do?", next: "everground_about" },
         ...link("Take a closer look. ↗", PROJECT_URLS.everground),
-        backToGarden,
+        anotherBed,
       ],
     },
     everground_about: {
       text: "It’s a place to find workouts, save favourites, and organise your training.\n\nDaniel’s building it. Lau helps shape how it looks and works. I provide the tomatoes. Everyone has a role.",
-      options: [{ label: "Back to the project.", next: "everground_welcome" }, backToGarden],
+      options: [{ label: "Back to Everground.", next: "everground_welcome" }, anotherBed],
     },
-  },
-};
-
-export const habitsDialogue: Dialogue = {
-  id: "habits",
-  label: "HABITS",
-  start: "habits_welcome",
-  messages: {
     habits_welcome: {
-      text: "This little patch is Habits, a project for tracking the things you want to keep doing.\n\nSmall actions, repeated. A familiar concept around here.",
+      text: "The seedlings are Habits, a project for tracking the things you want to keep doing.\n\nSmall actions, repeated. A familiar concept around here.",
       options: [
         { label: "Why the seedlings?", next: "habits_seedlings" },
         ...link("Take a closer look. ↗", PROJECT_URLS.habits),
-        backToGarden,
+        anotherBed,
       ],
     },
     habits_seedlings: {
       text: "One enthusiastic watering won’t do it. You have to keep showing up.\n\nThese little ones seemed like the right neighbours for a habit tracker.",
-      options: [{ label: "Back to the project.", next: "habits_welcome" }, backToGarden],
+      options: [{ label: "Back to Habits.", next: "habits_welcome" }, anotherBed],
     },
-  },
-};
-
-export const tataiDialogue: Dialogue = {
-  id: "tatai",
-  label: "TATAI",
-  start: "tatai_welcome",
-  messages: {
     tatai_welcome: {
-      text: "Tatai is Lau’s collection of children’s colouring books. Dinosaurs, insects, and sea creatures, waiting for someone with crayons.\n\nThe pumpkins asked to be in the next one.",
+      text: "The pumpkins are Tatai, Lau’s collection of children’s colouring books. Dinosaurs, insects, and sea creatures, waiting for someone with crayons.\n\nThe pumpkins asked to be in the next one.",
       options: [
         { label: "What’s inside the books?", next: "tatai_books" },
         ...link("See the books. ↗", PROJECT_URLS.tatai),
-        backToGarden,
+        anotherBed,
       ],
     },
     tatai_books: {
       text: "Pages for children to colour and make their own.\n\nA dinosaur can be purple. An octopus can be orange. I try to allow the same freedom here, but the tomatoes are quite traditional.",
-      options: [{ label: "Back to the project.", next: "tatai_welcome" }, backToGarden],
+      options: [{ label: "Back to Tatai.", next: "tatai_welcome" }, anotherBed],
     },
   },
 };

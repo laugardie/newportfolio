@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import DialogueBox from "@/components/world/DialogueBox";
-import LocationView from "@/components/world/LocationView";
+import LocationView, { ArtworkImage } from "@/components/world/LocationView";
 import Player, { PLAYER_ART, type Facing, type Heading } from "@/components/world/Player";
 import {
   distance,
@@ -17,7 +17,9 @@ import {
 import {
   locations as definitions,
   grounds,
+  props as propDefinitions,
   resolveLocation,
+  resolveProp,
   type Location,
 } from "@/content/world/locations";
 
@@ -45,7 +47,8 @@ export const CAMERA_CONFIG = {
 const ROUTE_MARGIN = 6; // how wide routes give the footprint corners
 
 const locations = definitions.map(resolveLocation);
-const footprints = locations.flatMap((l) => l.world.footprints);
+const props = propDefinitions.map(resolveProp);
+const footprints = [...locations, ...props].flatMap((l) => l.world.footprints);
 const blocked = footprints.map((f) => inflate(f, PLAYER_CONFIG.radius));
 const corners = footprints.map((f) => inflate(f, PLAYER_CONFIG.radius + ROUTE_MARGIN));
 
@@ -462,7 +465,7 @@ export default function WorldScene() {
       >
         <p id="world-instructions" className="sr-only">
           Walk with the arrow keys or W, A, S and D, or click the ground. Press E next to Casita’s door,
-          Boardie on the beach, or Sprout’s greenhouse and the garden beds to talk, or focus one and press Enter.
+          Boardie on the beach, or Sprout’s greenhouse to talk, or focus one and press Enter.
         </p>
 
         {view && (
@@ -492,6 +495,21 @@ export default function WorldScene() {
                   zIndex: 1,
                 }}
               />
+            ))}
+
+            {props.map((prop) => (
+              <div
+                key={prop.id}
+                className="pointer-events-none absolute"
+                style={{
+                  left: prop.position.x * s,
+                  top: prop.position.y * s,
+                  width: prop.width * s,
+                  zIndex: depth(prop.world.depthY),
+                }}
+              >
+                <ArtworkImage art={prop.art} layer={prop.layer} />
+              </div>
             ))}
 
             {locations.map((location) => (
