@@ -45,14 +45,14 @@ const EXPERIENCE: ExperienceEntry[] = [
     name: "Beezy",
     role: "UX/UI Designer",
     logo: "/assets/Beezy-logo.svg",
-    url: "https://www.beezy.net",
+    url: "https://www.appspace.com/microsoft/",
     date: "jun 2020 – aug 2021",
   },
   {
     name: "Liferay",
     role: "Associate Product Designer",
     logo: "/assets/Liferay-logo.svg",
-    url: "https://liferay.design/lexicon/",
+    url: "https://design.liferay.com/lexicon",
     date: "oct 2019 – jun 2020",
   },
 ];
