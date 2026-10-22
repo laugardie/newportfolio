@@ -14,6 +14,7 @@
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "delaunator": "^5.1.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "framer-motion": "^12.5.0",
@@ -22,9 +23,12 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.2",
+    "three": "^0.186.1",
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@types/delaunator": "^5.0.3",
+    "@types/three": "^0.186.0",
     "next-router-mock": "^0.9.9"
   }
 }
