@@ -384,26 +384,36 @@ function mountGummies(container: HTMLElement) {
     scene.add(blob)
   })
 
-  // Still image: render only after a size change.
+  // Still image: render only when the size or pixel ratio changes (or the GL context comes back).
   let lastWidth = 0
+  let lastDpr = 0
   let frame = 0
   const draw = () => {
     frame = 0
     const width = container.clientWidth
-    if (!width || width === lastWidth) return
+    const dpr = Math.min(window.devicePixelRatio, 2)
+    if (!width || (width === lastWidth && dpr === lastDpr)) return
     lastWidth = width
+    lastDpr = dpr
     camera.zoom = width < NARROW ? 1.1 : 1
     camera.updateProjectionMatrix()
+    renderer.setPixelRatio(dpr)
     renderer.setSize(width, Math.round(width / ASPECT), false)
     renderer.render(scene, camera)
   }
   const schedule = () => { if (!frame) frame = requestAnimationFrame(draw) }
   const observer = new ResizeObserver(schedule)
   observer.observe(container)
+  // A window resize also fires when the page moves to a screen with a different pixel ratio.
+  window.addEventListener('resize', schedule)
+  const onRestored = () => { lastWidth = 0; schedule() }
+  renderer.domElement.addEventListener('webglcontextrestored', onRestored)
   draw()
 
   return () => {
     observer.disconnect()
+    window.removeEventListener('resize', schedule)
+    renderer.domElement.removeEventListener('webglcontextrestored', onRestored)
     if (frame) cancelAnimationFrame(frame)
     const materials = new Set<THREE.Material>()
     scene.traverse(obj => {
