@@ -1,7 +1,7 @@
 "use client";
 
 import { Tweet } from "react-tweet";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   AnimatePresence,
   animate,
@@ -14,12 +14,12 @@ import {
 
 // `openable` cards have a sheet with more context behind them.
 // The sheet opens with a quiet line of facts and, when the sections don't say it themselves, what the
-// project is (`name` + `intro`).
-type About = { name?: string; intro?: string; kind: string; meta: string[] };
+// project is (`name` + `intro`). `link` points to where the work lives today.
+type About = { name?: string; intro?: string; kind: string; meta: string[]; link?: { label: string; href: string } };
 // A tile shows a piece of work on a grey card with a short caption under it, a light pass rather than
 // a case study. Its images are 2x exports shown at their natural size; `wide` spans two columns, as
 // tall as the others at 11:4. A `full` tile is a whole screen: it spans the row and sets the screen in
-// the card at the row's width. A tile with no images yet shows a placeholder.
+// the card at the row's width, with the frame and shadow it was exported with. A tile with no images yet shows a placeholder.
 type Tile = { name: string; note?: string; images: string[]; wide?: boolean; full?: boolean; bottom?: boolean };
 // Every page reads the same way: a few short sections, each with an optional heading and paragraph of
 // context followed by the work that shows it.
@@ -45,32 +45,32 @@ type Card = {
 
 const CARDS: Card[] = [
   {
-    title: "From Seville to Lagos.",
+    title: "From Seville to Lagos",
     body: "Born and raised in Seville, Spain. Now calling Lagos, Portugal home.",
     image: "/assets/resend-seville.jpg",
   },
   {
-    title: "Not very good at sitting still.",
-    body: "CrossFit, running, kettlebells, yoga… you name it.",
+    title: "Sometimes upside down",
+    body: "CrossFit, running, kettlebells, yoga… It’s how I feel good.",
     image: "/assets/resend-yoga.jpg",
   },
   {
-    title: "Cooking is my happy place.",
-    body: "Trying new recipes is one of my favorite ways to switch off.",
+    title: "Happiest in the kitchen",
+    body: "Trying new recipes is my favorite way to switch off.",
     image: "/assets/resend-cooking.jpg",
   },
   {
-    title: "I love making things.",
-    body: "Not just apps! My latest project was an astronaut helmet for my son.",
+    title: "I love DIY",
+    body: "My latest project was an astronaut helmet for my son.",
     image: "/assets/resend-astronaut.jpg",
   },
   {
-    title: "From teaching to design.",
+    title: "From teaching to design",
     body: "Before getting into design, I was actually a primary school teacher for four years.",
     image: "/assets/resend-liferay.jpg",
   },
   {
-    title: "Lexicon, Liferay’s design system.",
+    title: "Lexicon",
     body: "My first job as a designer was at Liferay, where I worked on Lexicon, their design system.",
     image: "/assets/resend-lexicon.jpg",
     openable: true,
@@ -79,6 +79,7 @@ const CARDS: Card[] = [
       intro: "Designing, refining, and documenting the building blocks of a design system.",
       kind: "Liferay / Lexicon",
       meta: ["Design System Designer", "Oct 2019 – Jun 2020"],
+      link: { label: "View documentation", href: "https://design.liferay.com/lexicon/get-started/" },
     },
     // Three columns: wide tiles take two, alternating sides so the rows don't stack the same way.
     sections: [
@@ -127,67 +128,66 @@ const CARDS: Card[] = [
     ],
   },
   {
-    title: "Beezy, intranets for Microsoft 365.",
-    body: "Next came Beezy, where I designed Theater mode, a way to view and discuss any file without leaving the page.",
+    title: "Beezy",
+    body: "Shipping features, and helping with their design system.",
     image: "/assets/resend-beezy.jpg",
     openable: true,
-    about: {
-      name: "Theater mode.",
-      intro:
-        "A way to view and discuss any file without leaving the page. I left Beezy before it shipped, so this is the design as I handed it off.",
-      kind: "Beezy",
-      meta: ["Product Designer", "Jun 2020 – Aug 2021"],
-    },
-    story: [
-      { figures: [{ image: "/assets/beezy/theatre-hero.jpg", caption: "Theater mode, open on a PDF.", bleed: true }] },
+    about: { kind: "Beezy", meta: ["Product Designer", "Jun 2020 – Aug 2021"] },
+    sections: [
       {
-        heading: "The problem",
-        body: [
-          "People had to download files just to read them. Then switch windows to comment. Then switch back. The kind of friction that adds up quietly, until everyone just stops engaging.",
+        heading: "Theater mode",
+        body: "A way to view and discuss any file without leaving the page.",
+        tiles: [
+          {
+            name: "Modal and comments",
+            note: "The file on the left, the conversation on the right.",
+            images: ["/assets/beezy/theater-mode-2.png"],
+            full: true,
+          },
+          {
+            name: "Attachments",
+            note: "Every file in the post, one click apart.",
+            images: ["/assets/beezy/attachments.png"],
+          },
+          { name: "Articles", note: "Long reads, at a comfortable width.", images: ["/assets/beezy/articles.png"] },
+          {
+            name: "Comments",
+            note: "Empty, someone writing, and reactions.",
+            images: ["/assets/beezy/comments-2.png"],
+          },
         ],
       },
       {
-        heading: "The idea",
-        body: [
-          "A modal that lets you view anything, documents, images, videos or PDFs, without leaving the page. Comment in real time, react, flip through attachments. Stay in the flow.",
-        ],
-      },
-      {
-        figures: [
-          { image: "/assets/beezy/theatre.png", caption: "The file on the left, the conversation on the right." },
-        ],
-      },
-      {
-        heading: "What I designed",
-        points: [
-          ["One modal, every file type.", "Images, docs, videos and PDFs, all handled the same way."],
-          ["Side-by-side comments.", "Content on the left, conversation on the right. No context switching."],
-          ["Content thumbnails.", "Everything attached in a row, to jump between files without hunting."],
-          ["Distraction-free mode.", "Hide the comments, and it's just you and the content."],
-        ],
-      },
-      {
-        figures: [
-          { image: "/assets/beezy/file-types.png", caption: "One modal for every kind of file." },
-          { image: "/assets/beezy/comments.png", caption: "From the first comment to a live conversation." },
-        ],
-      },
-      {
-        figures: [
-          { image: "/assets/beezy/thumbnails.png", caption: "Every attachment in a row." },
-          { image: "/assets/beezy/focus.png", caption: "Comments hidden, just the content." },
-        ],
-      },
-      {
-        heading: "What I learned",
-        body: [
-          "Two weeks is not a lot of time. You get very good at cutting scope quickly. The features that made it in were the ones that solved the actual problem, everything else waited.",
+        heading: "Design system",
+        tiles: [
+          {
+            name: "Article editor",
+            note: "Writing, with the formatting toolbar.",
+            images: ["/assets/beezy/editor-article.jpg"],
+            full: true,
+          },
+          {
+            name: "Galleries",
+            note: "Images with captions.",
+            images: ["/assets/beezy/editor-gallery.jpg"],
+          },
+          {
+            name: "Insert menu",
+            note: "Adding a new block in the editor.",
+            images: ["/assets/beezy/insert-menu.png"],
+            bottom: true,
+          },
+          {
+            name: "Image block toolbars",
+            note: "Layout, caption, replace and delete.",
+            images: ["/assets/beezy/image-block.png"],
+          },
         ],
       },
     ],
   },
   {
-    title: "Gumroad, almost five years.",
+    title: "Gumroad",
     body: "Then Gumroad, designing the tools creators use to sell their work online.",
     image: "/assets/resend-gumroad.jpg",
     openable: true,
@@ -287,7 +287,7 @@ const CARDS: Card[] = [
     ],
   },
   {
-    title: "Flexile.",
+    title: "Flexile",
     body: "Alongside Gumroad, I helped design Flexile, a product to pay contractors and manage equity.",
     image: "/assets/resend-flexile.jpg",
     openable: true,
@@ -346,7 +346,7 @@ const CARDS: Card[] = [
         body: ["Every pull request had a label. Now only the ones that need a look get a dot:"],
         points: [
           ["Already paid", "on another invoice."],
-          ["Not by the person invoicing,", "or they're only a co-author."],
+          ["Not by the person invoicing.", ""],
           ["The amount doesn't match", "the bounty label."],
         ],
       },
@@ -566,6 +566,13 @@ export default function ResendDeck() {
   const [peek, setPeek] = useState(0);
   // The image opened full screen from a page, to see the work up close.
   const [zoom, setZoom] = useState<string | null>(null);
+  // Once ←/→ has moved off the image that was opened, the zoom fades out rather than settling into a
+  // card that may be off screen.
+  const [zoomMoved, setZoomMoved] = useState(false);
+  const openZoom = (src: string) => {
+    setZoomMoved(false);
+    setZoom(src);
+  };
   // The peek sits level with the mouse, so it can be clicked where it shows up, and trails it a little.
   const peekY = useSpring(0, { stiffness: 400, damping: 40 });
   const followPeek = (e: React.MouseEvent<HTMLElement>, jump = false) => {
@@ -617,6 +624,28 @@ export default function ResendDeck() {
   const about = CARDS[active].about;
   const sections = CARDS[active].sections;
   const story = CARDS[active].story;
+  // Zoomed in, ←/→ step through the page's images in the order they appear, each with its caption.
+  const zoomables = useMemo(() => {
+    const all: { src: string; name?: string; note?: string }[] = [
+      ...(sections ?? []).flatMap((sec) => sec.tiles.flatMap((t) => t.images.map((src) => ({ src, ...t })))),
+      ...(story ?? []).flatMap((b) =>
+        "figures" in b
+          ? b.figures.flatMap((f) => (f.image && !f.image.endsWith(".mp4") ? [{ src: f.image, note: f.caption }] : []))
+          : [],
+      ),
+    ];
+    return all.filter((z, i) => all.findIndex((o) => o.src === z.src) === i);
+  }, [sections, story]);
+  const zoomed = zoomables.find((z) => z.src === zoom);
+  const stepZoom = useCallback(
+    (delta: number) => {
+      if (!zoom || zoomables.length < 2) return;
+      const i = zoomables.findIndex((z) => z.src === zoom);
+      setZoomMoved(true);
+      setZoom(zoomables[(i + delta + zoomables.length) % zoomables.length].src);
+    },
+    [zoom, zoomables],
+  );
 
   // The focused card sits centred in the stage at full size.
   const measureCard = useCallback(() => {
@@ -715,6 +744,8 @@ export default function ResendDeck() {
     const onKey = (e: KeyboardEvent) => {
       if (zoom) {
         if (e.key === "Escape") setZoom(null);
+        else if (e.key === "ArrowRight") stepZoom(1);
+        else if (e.key === "ArrowLeft") stepZoom(-1);
         return;
       }
       if (!open) return;
@@ -731,7 +762,7 @@ export default function ResendDeck() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, paged, step, enter, leave, go, zoom]);
+  }, [open, paged, step, enter, leave, go, zoom, stepZoom]);
 
   return (
     <main className="relative flex h-[100dvh] flex-col items-center overflow-hidden select-none">
@@ -874,7 +905,7 @@ export default function ResendDeck() {
                       initial={{ opacity: 0, y: 4 }}
                       animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } }}
                       exit={{ opacity: 0, y: -4, transition: { duration: 0.15 } }}
-                      className="flex max-w-sm flex-col gap-4 text-center"
+                      className="flex max-w-sm flex-col gap-4 text-center select-text"
                     >
                       <p className="text-base text-ink">{CARDS[active].title}</p>
                       <p className="text-base leading-relaxed text-faint [text-wrap:balance]">{CARDS[active].body}</p>
@@ -981,6 +1012,19 @@ export default function ResendDeck() {
                           <span className="font-semibold">{about.name}</span> {about.intro}
                         </p>
                       )}
+                      {about.link && (
+                        <a
+                          href={about.link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex w-fit items-center gap-1 text-base text-ink"
+                        >
+                          <span className="underline decoration-divider underline-offset-4 transition-colors duration-200 group-hover:decoration-ink">
+                            {about.link.label}
+                          </span>
+                          <span aria-hidden>↗</span>
+                        </a>
+                      )}
                     </motion.div>
                   </header>
                 )}
@@ -1018,10 +1062,10 @@ export default function ResendDeck() {
                                     srcSet={`${src} 2x`}
                                     alt=""
                                     draggable={false}
-                                    onClick={() => setZoom(src)}
+                                    onClick={() => openZoom(src)}
                                     className={
                                       t.full
-                                        ? "w-full cursor-pointer rounded-2xl shadow-[0_24px_48px_-24px_rgba(0,0,0,0.2)]"
+                                        ? "w-full cursor-pointer"
                                         : "min-h-0 max-w-full cursor-pointer object-contain"
                                     }
                                   />
@@ -1063,7 +1107,7 @@ export default function ResendDeck() {
                                   src={f.image}
                                   alt=""
                                   draggable={false}
-                                  onClick={() => setZoom(f.image ?? null)}
+                                  onClick={() => f.image && openZoom(f.image)}
                                   className={`cursor-pointer ${f.bleed || f.plain ? "w-full" : "max-h-full min-h-0 max-w-full object-contain"}`}
                                 />
                               )}
@@ -1181,18 +1225,68 @@ export default function ResendDeck() {
         {zoom && (
           <motion.div
             key="zoom"
-            exit={{ opacity: 1 }}
-            className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center p-10"
+            exit={zoomMoved ? { opacity: 0, transition: { duration: reduce ? 0 : 0.2 } } : { opacity: 1 }}
+            className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center px-10 pb-28 pt-10"
           >
             <motion.img
-              layoutId={`zoom:${zoom}`}
-              transition={zoomMotion}
+              key={zoom}
+              layoutId={zoomMoved ? undefined : `zoom:${zoom}`}
+              initial={zoomMoved ? { opacity: 0 } : false}
+              animate={{ opacity: 1 }}
+              transition={zoomMoved ? { duration: reduce ? 0 : 0.2 } : zoomMotion}
               src={zoom}
               alt=""
               draggable={false}
               onClick={() => setZoom(null)}
               className="pointer-events-auto max-h-full max-w-full cursor-pointer object-contain"
             />
+          </motion.div>
+        )}
+        {zoomed && (zoomed.name || zoomed.note) && (
+          <motion.div
+            key="zoom-caption"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduce ? 0 : 0.2, ease: EASE }}
+            className="pointer-events-none fixed inset-x-0 bottom-10 z-50 flex flex-col items-center gap-1 text-base"
+          >
+            {zoomed.name && <span className="text-ink">{zoomed.name}</span>}
+            {zoomed.note && <span className="text-faint">{zoomed.note}</span>}
+          </motion.div>
+        )}
+        {zoom && zoomables.length > 1 && (
+          <motion.div
+            key="zoom-nav"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduce ? 0 : 0.2, ease: EASE }}
+            className="pointer-events-none fixed inset-0 z-50"
+          >
+            {[-1, 1].map((d) => (
+              <button
+                key={d}
+                type="button"
+                aria-label={d < 0 ? "Previous image" : "Next image"}
+                onClick={() => stepZoom(d)}
+                className={`pointer-events-auto absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-[0_2px_8px_rgba(0,0,0,0.12)] backdrop-blur transition-colors duration-200 hover:bg-white ${d < 0 ? "left-5" : "right-5"}`}
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d={d < 0 ? "M8.5 3 4.5 7l4 4" : "M5.5 3l4 4-4 4"} />
+                </svg>
+              </button>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
