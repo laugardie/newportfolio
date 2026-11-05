@@ -278,7 +278,7 @@ const CARDS: Card[] = [
         heading: "Moving the tip, a year later",
         body: ["I designed changes based on feedback:"],
         points: [
-          ["Position", "Above Pay, you had to look back left to see what you'd pay."],
+          ["Position.", "Above Pay, you had to look back left to see what you'd pay."],
           ["“No tip” instead of 0%.", ""],
           ["15, 20 and 25%,", "so the middle options feel fair."],
         ],
