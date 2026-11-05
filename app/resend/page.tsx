@@ -20,7 +20,18 @@ type About = { name?: string; intro?: string; kind: string; meta: string[]; link
 // a case study. Its images are 2x exports shown at their natural size; `wide` spans two columns, as
 // tall as the others at 11:4. A `full` tile is a whole screen: it spans the row and sets the screen in
 // the card at the row's width, with the frame and shadow it was exported with. A tile with no images yet shows a placeholder.
-type Tile = { name: string; note?: string; images: string[]; wide?: boolean; full?: boolean; bottom?: boolean };
+// An `embed` tile shows a live page, like a Figma file, filling the card instead of an image. A video plays
+// once: a `phone` recording at a phone's height, any other at the card's width.
+type Tile = {
+  name: string;
+  note?: string;
+  images: string[];
+  wide?: boolean;
+  full?: boolean;
+  bottom?: boolean;
+  embed?: string;
+  phone?: boolean;
+};
 // Every page reads the same way: a few short sections, each with an optional heading and paragraph of
 // context followed by the work that shows it.
 type Section = { heading?: string; body?: string; tiles: Tile[] };
@@ -41,6 +52,8 @@ type Card = {
   about?: About;
   sections?: Section[];
   story?: Block[];
+  // The closing page is just its icon and a thank-you, centred, without the structure of a project page.
+  closing?: boolean;
 };
 
 const CARDS: Card[] = [
@@ -79,7 +92,10 @@ const CARDS: Card[] = [
       intro: "Designing, refining, and documenting the building blocks of a design system.",
       kind: "Liferay / Lexicon",
       meta: ["Design System Designer", "Oct 2019 – Jun 2020"],
-      link: { label: "View documentation", href: "https://design.liferay.com/lexicon/get-started/" },
+      link: {
+        label: "View documentation",
+        href: "https://design.liferay.com/lexicon/core-components/buttons/action-buttons/",
+      },
     },
     // Three columns: wide tiles take two, alternating sides so the rows don't stack the same way.
     sections: [
@@ -166,11 +182,7 @@ const CARDS: Card[] = [
             images: ["/assets/beezy/editor-article.jpg"],
             full: true,
           },
-          {
-            name: "Galleries",
-            note: "Images with captions.",
-            images: ["/assets/beezy/editor-gallery.jpg"],
-          },
+          { name: "Galleries", note: "Images with captions.", images: ["/assets/beezy/editor-gallery.jpg"] },
           {
             name: "Insert menu",
             note: "Adding a new block in the editor.",
@@ -188,7 +200,7 @@ const CARDS: Card[] = [
   },
   {
     title: "Gumroad",
-    body: "Then Gumroad, designing the tools creators use to sell their work online.",
+    body: "Designing the tools creators use to sell their work online.",
     image: "/assets/resend-gumroad.jpg",
     openable: true,
     about: { name: "Tipping.", intro: "Adding tips to Gumroad's checkout.", kind: "Gumroad", meta: [] },
@@ -216,15 +228,23 @@ const CARDS: Card[] = [
       {
         figures: [
           { image: "/assets/tipping/coffee-product-2.png", caption: "Discarded: a coffee product added to the cart." },
-          { image: "/assets/tipping/interstitial-3.png", caption: "Discarded: a separate screen after clicking Pay." },
+          { image: "/assets/tipping/interstitial-4.png", caption: "Discarded: a separate screen after clicking Pay." },
         ],
       },
       {
         figures: [
           {
+            image: "/assets/tipping/interstitial-creators-3.png",
+            caption: "Discarded: the same screen, with a tip for each creator.",
+          },
+          {
             image: "/assets/tipping/multiple-creators-3.png",
             caption: "Explored: a separate tip for each creator, above Pay.",
           },
+        ],
+      },
+      {
+        figures: [
           {
             image: "/assets/tipping/first-launch-2.png",
             caption: "Shipped: one tip, split across the cart by each product's price.",
@@ -256,10 +276,9 @@ const CARDS: Card[] = [
       },
       {
         heading: "Moving the tip, a year later",
-        body: ["I designed changes based on feedback, and reviewed the PR:"],
+        body: ["I designed changes based on feedback:"],
         points: [
-          ["Next to the total.", "Above Pay, you had to look back left to see what you'd pay."],
-          ["No jumps.", "A “Tip” line used to appear in the summary only once you picked one."],
+          ["Position", "Above Pay, you had to look back left to see what you'd pay."],
           ["“No tip” instead of 0%.", ""],
           ["15, 20 and 25%,", "so the middle options feel fair."],
         ],
@@ -275,7 +294,7 @@ const CARDS: Card[] = [
         body: ["At the same time, I redesigned the rest of the payment form and built it myself:"],
         points: [["Payment method above Pay.", "Contact details first, then how you pay."]],
       },
-      { figures: [{ image: "/assets/tipping/payment-4.png", caption: "Payment form.", bleed: true }] },
+      { figures: [{ image: "/assets/tipping/payment-5.png", caption: "Payment form.", bleed: true }] },
       {
         heading: "Looking back",
         points: [
@@ -331,7 +350,7 @@ const CARDS: Card[] = [
         ],
       },
       {
-        heading: "Pasting a pull request",
+        heading: "Writing the invoice",
         body: [
           "A contractor pastes a pull request link, and the line turns into the repo, the title and the bounty. While the pull request loads, the line says so, and if GitHub doesn't answer, there's a retry.",
         ],
@@ -342,7 +361,7 @@ const CARDS: Card[] = [
         ],
       },
       {
-        heading: "From labels to a dot",
+        heading: "Reviewing the invoice",
         body: ["Every pull request had a label. Now only the ones that need a look get a dot:"],
         points: [
           ["Already paid", "on another invoice."],
@@ -363,7 +382,7 @@ const CARDS: Card[] = [
       {
         heading: "The card behind the dot",
         body: [
-          "The card holds everything about the pull request: title, author, status and whether it was already paid. On hover it waits a moment before opening, so it doesn't keep popping up as your cursor crosses the invoice. On mobile there's no hover, so a long press opens it, like on GitHub.",
+          "The card holds everything about the pull request: title, author, status and whether it was already paid. On hover it waits a moment before opening, so it doesn't keep popping up as your cursor crosses the invoice. On mobile there's no hover, so a long press opens it.",
         ],
       },
       { figures: [{ image: "/assets/flexile/cards-7.png", caption: "The card in four states.", bleed: true }] },
@@ -373,7 +392,84 @@ const CARDS: Card[] = [
           "Admins no longer check every pull request by hand, only the ones with a dot. The admins, the CEO and part of the team, told us in Slack it was a game changer. Contributors shared theirs in our Telegram group.",
         ],
       },
+      {
+        heading: "Looking back",
+        points: [
+          ["Show it when it's needed.", "Contractors find GitHub the moment they paste a pull request."],
+          ["Less is more.", "A dot only where admins need to look, not a label on everything."],
+        ],
+      },
     ],
+  },
+  {
+    title: "More from Gumroad",
+    body: "A quick mix of other things I worked on.",
+    image: "/assets/resend-gumroad-more.jpg",
+    openable: true,
+    about: { name: "More from Gumroad.", intro: "A quick mix of other things I worked on.", kind: "Gumroad", meta: [] },
+    sections: [
+      {
+        tiles: [
+          {
+            name: "Design system",
+            note: "Synced Figma and Storybook with a designer and an engineer, then made it public.",
+            images: [],
+            full: true,
+            embed:
+              "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/community/file/1405573618937136138",
+          },
+          {
+            name: "Per-page analytics",
+            note: "Views for each page of a product, in the content editor. An exploration, it didn't ship.",
+            images: [],
+            full: true,
+            embed:
+              "https://embed.figma.com/design/mAfg1ZQrFsGx14FUNmirjP/Content-Editor-Per-Page-view-analytics?node-id=0-1&embed-host=share&page-selector=true&footer=false",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Personal projects",
+    body: "Things I make on my own, for fun.",
+    image: "/assets/resend-personal.png",
+    openable: true,
+    about: { name: "Personal projects.", intro: "Things I make on my own, for fun.", kind: "Personal", meta: [] },
+    sections: [
+      {
+        tiles: [
+          {
+            name: "Habits",
+            note: "A simple weekly habit tracker that lives in the Mac menu bar.",
+            images: ["/assets/personal/habits-2.png"],
+            full: true,
+          },
+        ],
+      },
+      {
+        tiles: [{ name: "Meno", note: "A family meal planner.", images: ["/assets/personal/meno-4.mp4"], full: true }],
+      },
+      {
+        tiles: [
+          {
+            name: "Freia",
+            note: "A fertility tracker: cycle, symptoms and meals.",
+            images: ["/assets/personal/freia-4.mp4"],
+            full: true,
+            phone: true,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Q&A",
+    body: "Thank you! Happy to answer any questions.",
+    image: "/assets/resend-qa-2.png",
+    openable: true,
+    about: { kind: "Q&A", meta: [] },
+    closing: true,
   },
 ];
 
@@ -460,8 +556,9 @@ function TweetEmbed({ url }: { url: string }) {
 }
 
 // A video in a story waits on its first frame until it's played, so it starts when the talk gets to
-// it. Clicking it, or its button, plays or pauses it; it loops, muted.
-function StoryVideo({ src, className }: { src: string; className: string }) {
+// it. Its button plays or pauses it; clicking the video does too, or opens it large when it can `expand`.
+// It loops, muted.
+function StoryVideo({ src, className, expand }: { src: string; className: string; expand?: () => void }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const toggle = () => {
@@ -479,7 +576,11 @@ function StoryVideo({ src, className }: { src: string; className: string }) {
         muted
         loop
         playsInline
-        onClick={toggle}
+        onClick={() => {
+          if (!expand) return toggle();
+          ref.current?.pause();
+          expand();
+        }}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         className={`cursor-pointer ${className}`}
@@ -554,6 +655,9 @@ export default function ResendDeck() {
   // Going home straight from a page: the page fades away while the avatar grows back, and the
   // carousel behind it leaves at once, unseen.
   const [homing, setHoming] = useState(false);
+  // The closing page is black, so the name over it turns white the moment the black reaches it.
+  const dark = !homing && !!CARDS[active].closing;
+  const nameRef = useRef<HTMLSpanElement>(null);
   const [vw, setVw] = useState(1440);
   // The intro stagger should only play once, not on every step.
   const [introDone, setIntroDone] = useState(false);
@@ -610,6 +714,15 @@ export default function ResendDeck() {
   const pageOpacity = useTransform(progress, (t) =>
     closing.current ? Math.min(1, Math.max(0, (t - 0.5) / 0.5)) : Math.min(1, t / 0.3),
   );
+  const onBlack = useTransform(progress, (t) => {
+    const name = nameRef.current?.getBoundingClientRect();
+    if (!name || t === 0) return false;
+    if (closing.current) return t > 0.75;
+    const f = from.current;
+    return t >= 0.15 && lerp(f.y, 0, t) <= name.top + name.height / 2 && lerp(f.x, 0, t) <= name.left;
+  });
+  const nameInk = useTransform(onBlack, (b) => (b ? "#fff" : "var(--color-ink)"));
+  const nameBody = useTransform(onBlack, (b) => (b ? "rgba(255, 255, 255, 0.6)" : "var(--color-body)"));
   const logoT = useTransform(progress, (t) =>
     closing.current ? t : Math.min(1, Math.max(0, (t - LOGO_HOLD) / (LOGO_LAND - LOGO_HOLD))),
   );
@@ -629,9 +742,7 @@ export default function ResendDeck() {
     const all: { src: string; name?: string; note?: string }[] = [
       ...(sections ?? []).flatMap((sec) => sec.tiles.flatMap((t) => t.images.map((src) => ({ src, ...t })))),
       ...(story ?? []).flatMap((b) =>
-        "figures" in b
-          ? b.figures.flatMap((f) => (f.image && !f.image.endsWith(".mp4") ? [{ src: f.image, note: f.caption }] : []))
-          : [],
+        "figures" in b ? b.figures.flatMap((f) => (f.image ? [{ src: f.image, note: f.caption }] : [])) : [],
       ),
     ];
     return all.filter((z, i) => all.findIndex((o) => o.src === z.src) === i);
@@ -655,7 +766,10 @@ export default function ResendDeck() {
   }, []);
   const measureIcon = useCallback(() => {
     const icon = iconRef.current?.getBoundingClientRect();
-    if (icon) to.current = { x: icon.left, y: icon.top, size: icon.width };
+    // A page with no header icon (the closing one) takes the logo into the middle of the screen until it's gone.
+    to.current = icon
+      ? { x: icon.left, y: icon.top, size: icon.width }
+      : { x: window.innerWidth / 2, y: window.innerHeight / 2, size: 0 };
   }, []);
 
   const enter = useCallback(() => {
@@ -801,8 +915,16 @@ export default function ResendDeck() {
               exit={{ opacity: 0, transition: { duration: 0.12 } }}
               className="flex flex-col leading-tight"
             >
-              <span className="text-base font-semibold text-ink">Laura</span>
-              <span className="text-sm text-body">Lagos, Portugal</span>
+              <motion.span
+                ref={nameRef}
+                style={dark ? { color: nameInk } : undefined}
+                className="text-base font-semibold text-ink"
+              >
+                Laura
+              </motion.span>
+              <motion.span style={dark ? { color: nameBody } : undefined} className="text-sm text-body">
+                Lagos, Portugal
+              </motion.span>
             </motion.span>
           ) : (
             <motion.span
@@ -944,7 +1066,8 @@ export default function ResendDeck() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.2, delay: OPEN_S * 0.7 } }}
             exit={{ opacity: 0, transition: { duration: 0.1 } }}
-            className="fixed right-6 top-6 z-30 flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors duration-200 hover:bg-surface"
+            // The closing page is black, so its close button turns white.
+            className={`fixed right-6 top-6 z-30 flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-200 ${CARDS[active].closing ? "text-white hover:bg-white/10" : "text-ink hover:bg-surface"}`}
           >
             <span aria-hidden>✕</span>
           </motion.button>
@@ -964,7 +1087,7 @@ export default function ResendDeck() {
             ref={pageRef}
             style={{ clipPath, opacity: pageOpacity }}
             // The carousel behind is dragged, so it can't be selected; this page is read, so it can.
-            className={`fixed inset-0 z-10 bg-white select-text ${landed ? "overflow-y-auto" : "overflow-y-hidden"}`}
+            className={`fixed inset-0 z-10 select-text transition-colors duration-300 ${CARDS[active].closing ? "bg-[#000]" : "bg-white"} ${landed ? "overflow-y-auto" : "overflow-y-hidden"}`}
           >
             <AnimatePresence mode="wait" custom={dir} onExitComplete={() => pageRef.current?.scrollTo({ top: 0 })}>
               <motion.div
@@ -976,7 +1099,21 @@ export default function ResendDeck() {
                 exit="exit"
                 className="mx-auto max-w-7xl px-6 pb-24 pt-[88px] md:px-10"
               >
-                {about && (
+                {CARDS[active].closing && (
+                  <div className="flex min-h-[calc(100dvh-184px)] flex-col items-center justify-center gap-10 text-center">
+                    <motion.div
+                      custom={0}
+                      variants={content}
+                      initial="hidden"
+                      animate={landed ? "shown" : "hidden"}
+                      className="flex flex-col gap-2"
+                    >
+                      <p className="text-2xl text-white">Thank you!</p>
+                      <p className="text-base text-white/60">Happy to answer any questions.</p>
+                    </motion.div>
+                  </div>
+                )}
+                {about && !CARDS[active].closing && (
                   <header className="mb-16 flex max-w-md flex-col gap-6">
                     <div
                       ref={iconRef}
@@ -1051,25 +1188,47 @@ export default function ResendDeck() {
                               className={`flex flex-col gap-4 ${t.full ? "col-span-3" : t.wide ? "col-span-2" : ""}`}
                             >
                               <div
-                                className={`flex flex-col items-center gap-6 overflow-hidden rounded-[32px] bg-bg ${t.bottom ? "justify-end" : "justify-center"} ${t.full ? "p-16" : `p-8 ${t.bottom ? "pb-0" : ""} ${t.wide ? "aspect-[11/4]" : "aspect-[4/3]"}`}`}
+                                className={`flex flex-col items-center gap-6 overflow-hidden rounded-[32px] bg-bg ${t.bottom ? "justify-end" : "justify-center"} ${t.embed ? "" : t.full ? "p-16" : `p-8 ${t.bottom ? "pb-0" : ""} ${t.wide ? "aspect-[11/4]" : "aspect-[4/3]"}`}`}
                               >
-                                {t.images.length === 0 && <span className="text-sm text-faint">Image</span>}
-                                {t.images.map((src) => (
-                                  <motion.img
-                                    key={src}
-                                    layoutId={`zoom:${src}`}
-                                    transition={zoomMotion}
-                                    srcSet={`${src} 2x`}
-                                    alt=""
-                                    draggable={false}
-                                    onClick={() => openZoom(src)}
-                                    className={
-                                      t.full
-                                        ? "w-full cursor-pointer"
-                                        : "min-h-0 max-w-full cursor-pointer object-contain"
-                                    }
+                                {t.embed && (
+                                  <iframe
+                                    src={t.embed}
+                                    title={t.name}
+                                    allowFullScreen
+                                    className="aspect-video w-full"
                                   />
-                                ))}
+                                )}
+                                {t.images.length === 0 && !t.embed && <span className="text-sm text-faint">Image</span>}
+                                {t.images.map((src) =>
+                                  src.endsWith(".mp4") ? (
+                                    t.phone ? (
+                                      <div key={src} className="w-fit">
+                                        <StoryVideo
+                                          src={src}
+                                          className="h-[680px] w-auto"
+                                          expand={() => openZoom(src)}
+                                        />
+                                      </div>
+                                    ) : (
+                                      <StoryVideo key={src} src={src} className="w-full" expand={() => openZoom(src)} />
+                                    )
+                                  ) : (
+                                    <motion.img
+                                      key={src}
+                                      layoutId={`zoom:${src}`}
+                                      transition={zoomMotion}
+                                      srcSet={`${src} 2x`}
+                                      alt=""
+                                      draggable={false}
+                                      onClick={() => openZoom(src)}
+                                      className={
+                                        t.full
+                                          ? "w-full cursor-pointer"
+                                          : "min-h-0 max-w-full cursor-pointer object-contain"
+                                      }
+                                    />
+                                  ),
+                                )}
                               </div>
                               <figcaption className="flex flex-col gap-1 text-base">
                                 <span className="text-ink">{t.name}</span>
@@ -1096,6 +1255,7 @@ export default function ResendDeck() {
                               ) : f.image.endsWith(".mp4") ? (
                                 <StoryVideo
                                   src={f.image}
+                                  expand={() => openZoom(f.image!)}
                                   className={
                                     f.bleed || f.plain ? "w-full" : "max-h-full min-h-0 max-w-full object-contain"
                                   }
@@ -1228,18 +1388,35 @@ export default function ResendDeck() {
             exit={zoomMoved ? { opacity: 0, transition: { duration: reduce ? 0 : 0.2 } } : { opacity: 1 }}
             className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center px-10 pb-28 pt-10"
           >
-            <motion.img
-              key={zoom}
-              layoutId={zoomMoved ? undefined : `zoom:${zoom}`}
-              initial={zoomMoved ? { opacity: 0 } : false}
-              animate={{ opacity: 1 }}
-              transition={zoomMoved ? { duration: reduce ? 0 : 0.2 } : zoomMotion}
-              src={zoom}
-              alt=""
-              draggable={false}
-              onClick={() => setZoom(null)}
-              className="pointer-events-auto max-h-full max-w-full cursor-pointer object-contain"
-            />
+            {zoom.endsWith(".mp4") ? (
+              // A video opens large from its start, looping; clicking it closes it like an image.
+              <motion.video
+                key={zoom}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: reduce ? 0 : 0.2 }}
+                src={zoom}
+                autoPlay
+                loop
+                muted
+                playsInline
+                onClick={() => setZoom(null)}
+                className="pointer-events-auto max-h-full max-w-full cursor-pointer object-contain"
+              />
+            ) : (
+              <motion.img
+                key={zoom}
+                layoutId={zoomMoved ? undefined : `zoom:${zoom}`}
+                initial={zoomMoved ? { opacity: 0 } : false}
+                animate={{ opacity: 1 }}
+                transition={zoomMoved ? { duration: reduce ? 0 : 0.2 } : zoomMotion}
+                src={zoom}
+                alt=""
+                draggable={false}
+                onClick={() => setZoom(null)}
+                className="pointer-events-auto max-h-full max-w-full cursor-pointer object-contain"
+              />
+            )}
           </motion.div>
         )}
         {zoomed && (zoomed.name || zoomed.note) && (
