@@ -2,10 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { LexiconStory } from "./lexicon";
 
 const LINE = "I love designing and building things.";
 
-type Card = { title: string; body: string; image: string };
+// `detail` is a case-study entry shown under the title and line when the card is opened.
+type Card = { title: string; body: string; image: string; detail?: React.ReactNode };
 
 const CARDS: Card[] = [
   {
@@ -37,6 +39,7 @@ const CARDS: Card[] = [
     title: "Lexicon",
     body: "My first job as a designer was at Liferay, working on Lexicon, their design system.",
     image: "/assets/resend-lexicon.jpg",
+    detail: <LexiconStory />,
   },
   {
     title: "Beezy",
@@ -301,7 +304,8 @@ export default function FredrinPage() {
         )}
       </AnimatePresence>
 
-      {/* An opened card: the image large, with its title and line. */}
+      {/* An opened card: the image large, with its title and line. A card with a detail opens smaller and
+          scrolls, so its case study reads underneath. */}
       <AnimatePresence>
         {opened !== null && (
           <motion.div
@@ -313,14 +317,14 @@ export default function FredrinPage() {
             animate={{ opacity: 1, transition: t(0.25) }}
             exit={{ opacity: 0, transition: t(0.2) }}
             onClick={() => setOpened(null)}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-[#111111]/90 px-6 backdrop-blur-md"
+            className={`fixed inset-0 z-40 flex flex-col items-center gap-8 bg-[#111111]/90 px-6 backdrop-blur-md ${CARDS[opened].detail ? "overflow-y-auto py-24" : "justify-center"}`}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1, transition: t(0.45) }}
               exit={{ scale: 0.95, opacity: 0, transition: t(0.2) }}
               onClick={(e) => e.stopPropagation()}
-              className="h-[min(34rem,70vw,62vh)] w-[min(34rem,70vw,62vh)] overflow-hidden rounded-[22%] shadow-[0_40px_80px_-24px_rgba(0,0,0,0.7)]"
+              className={`shrink-0 overflow-hidden rounded-[22%] shadow-[0_40px_80px_-24px_rgba(0,0,0,0.7)] ${CARDS[opened].detail ? "h-[min(20rem,60vw)] w-[min(20rem,60vw)]" : "h-[min(34rem,70vw,62vh)] w-[min(34rem,70vw,62vh)]"}`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={CARDS[opened].image} alt="" className="h-full w-full object-cover" draggable={false} />
@@ -334,12 +338,22 @@ export default function FredrinPage() {
               <p className="text-lg">{CARDS[opened].title}</p>
               <p className="text-base leading-relaxed text-[#8b8b8b] [text-wrap:balance]">{CARDS[opened].body}</p>
             </motion.div>
+            {CARDS[opened].detail && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0, transition: t(0.4, 0.25) }}
+                onClick={(e) => e.stopPropagation()}
+                className="flex w-full justify-center pt-6 select-text"
+              >
+                {CARDS[opened].detail}
+              </motion.div>
+            )}
             <button
               type="button"
               aria-label="Close"
               autoFocus
               onClick={() => setOpened(null)}
-              className="fixed right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full text-[#ededed] transition-colors duration-200 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/60"
+              className="fixed right-6 top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#1c1c1c] text-[#ededed] transition-colors duration-200 hover:bg-[#2a2a2a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/60"
             >
               <span aria-hidden>✕</span>
             </button>
