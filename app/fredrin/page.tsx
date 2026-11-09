@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const EASE = [0.25, 0.1, 0.25, 1] as const;
 
-// Placeholder copy: the line under the heading and the opened content are still to be written.
-const LINE = "[Placeholder] One line about me goes here.";
+// Placeholder copy: the opened content is still to be written.
+const LINE = "I love designing and building things.";
 const ABOUT = [
   "[Placeholder] A short paragraph about who I am and what I care about as a designer.",
   "[Placeholder] A short paragraph about what I've worked on and how I like to work.",
@@ -24,7 +24,7 @@ export default function FredrinPage() {
         aria-expanded={open}
         aria-label={open ? "Hide the rest of About Me" : "Open the rest of About Me"}
         onClick={() => setOpen((o) => !o)}
-        className="group h-40 w-40 overflow-hidden rounded-[22%] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#ededed]/40 focus-visible:ring-offset-4 focus-visible:ring-offset-[#111111] sm:h-48 sm:w-48"
+        className="group h-[min(26rem,48vh)] w-[min(26rem,48vh)] overflow-hidden rounded-[22%] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#ededed]/40 focus-visible:ring-offset-4 focus-visible:ring-offset-[#111111]"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
