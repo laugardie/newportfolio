@@ -5,7 +5,9 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const LINE = "I love designing and building things.";
 
-type Card = { title: string; body: string; image: string };
+// `path` is a short career path, shown in order when the card is opened.
+type Step = { role: string; detail: string };
+type Card = { title: string; body: string; image: string; path?: Step[] };
 
 const CARDS: Card[] = [
   {
@@ -32,6 +34,10 @@ const CARDS: Card[] = [
     title: "From teaching to design",
     body: "Before getting into design, I was a primary school teacher for four years.",
     image: "/assets/resend-liferay.jpg",
+    path: [
+      { role: "Primary school teacher", detail: "Four years" },
+      { role: "Design System Designer", detail: "Liferay" },
+    ],
   },
   {
     title: "Lexicon",
@@ -333,6 +339,23 @@ export default function FredrinPage() {
             >
               <p className="text-lg">{CARDS[opened].title}</p>
               <p className="text-base leading-relaxed text-[#8b8b8b] [text-wrap:balance]">{CARDS[opened].body}</p>
+              {CARDS[opened].path && (
+                <ol className="mt-4 flex items-center justify-center gap-4 text-sm">
+                  {CARDS[opened].path!.map((s, i) => (
+                    <li key={s.role} className="flex items-center gap-4">
+                      {i > 0 && (
+                        <span aria-hidden className="text-[#5a5a5a]">
+                          →
+                        </span>
+                      )}
+                      <span className="flex flex-col">
+                        <span>{s.role}</span>
+                        <span className="text-[#8b8b8b]">{s.detail}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              )}
             </motion.div>
             <button
               type="button"
