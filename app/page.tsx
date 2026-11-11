@@ -500,7 +500,7 @@ export default function Home() {
               </span>
             </a>
             <a
-              href="/cv - laura garcia.pdf"
+              href="/Laura-Garcia-Dieguez-CV-2026.pdf"
               className="group flex items-center gap-2.5"
               style={{ textDecoration: "none" }}
             >
